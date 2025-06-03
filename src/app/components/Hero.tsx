@@ -34,7 +34,7 @@ export default function Hero() {
               <div className={styles.statLabel}>Happy Clients</div>
             </div>
             <div className={styles.statItem}>
-              <div className={styles.statNumber}>98%</div>
+              <div className={styles.statNumber}>100%</div>
               <div className={styles.statLabel}>Satisfaction</div>
             </div>
             <div className={styles.statItem}>

@@ -55,6 +55,13 @@
   transition: all 0.3s;
 }
 
+.links a.active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+  color: var(--primary);
+}
+
 @media (max-width: 768px) {
   .links {
     position: fixed;

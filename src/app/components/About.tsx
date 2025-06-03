@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 // src/components/About.tsx
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
@@ -160,7 +161,7 @@ export default function About() {
             </h3>
             <div className={styles.description}>
               <p>
-                At Mbowen IT, we're more than a technology company - we're your strategic 
+                At Mboweezy IT, we're more than a technology company - we're your strategic 
                 partner in digital transformation.
               </p>
             </div>

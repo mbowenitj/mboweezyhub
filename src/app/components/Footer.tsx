@@ -75,7 +75,7 @@ export default function Footer() {
               whileTap={{ scale: 0.95 }}
             >
               <a
-                href="https://wa.me/27658998701"
+                href="https://wa.me/2780550474"
                 target="_blank"
                 aria-label="Chat with us on WhatsApp"
                 rel="noreferrer"

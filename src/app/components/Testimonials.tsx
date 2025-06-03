@@ -3,22 +3,22 @@ import styles from '../styles/components/Testimonials.module.css';
 
 const testimonials = [
   {
-    name: 'John Smith',
-    company: 'ABC Corp',
-    text: 'MBowen IT transformed our online presence completely. Their team delivered exceptional results on time and within budget.',
+    name: 'Eugene M',
+    company: 'Offload App',
+    text: 'Mboweezy IT transformed our online presence completely. Their team delivered exceptional results on time and within budget.',
     rating: 5
   },
   {
-    name: 'Sarah Johnson',
+    name: 'Phinda R',
     company: 'XYZ Inc',
-    text: 'The mobile app developed by MBowen IT exceeded our expectations. User engagement has increased by 300%.',
+    text: 'The mobile app developed by Mboweezy IT exceeded our expectations. User engagement has increased by 300%.',
     rating: 5
   },
   {
-    name: 'Michael Brown',
-    company: '123 Enterprises',
+    name: 'Thoko S',
+    company: 'Magona Media',
     text: 'Reliable service and excellent support throughout our project. Will definitely work with them again.',
-    rating: 4
+    rating: 5
   }
 ];
 

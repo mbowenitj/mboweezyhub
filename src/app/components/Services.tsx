@@ -18,7 +18,7 @@ export default function Services() {
     <section id="services" className={styles.services}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.sectionTitle}>Our <span>Services</span></h2>
+          <h2 className={styles.sectionTitle}><span>Our Services</span></h2>
           <p className={styles.sectionSubtitle}>Comprehensive solutions to elevate your digital presence</p>
         </div>
         

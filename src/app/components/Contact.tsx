@@ -1,4 +1,3 @@
-// src/components/Contact.tsx
 'use client';
 
 import { useRef, useState } from 'react';
@@ -63,12 +62,14 @@ export default function Contact() {
           <div className={styles.checkmark}>✓</div>
           <h2>Message Sent Successfully!</h2>
           <p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
-          <button
+          <motion.button
             onClick={() => setSubmitSuccess(false)}
             className={styles.successButton}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             Send Another Message
-          </button>
+          </motion.button>
         </div>
       </motion.section>
     );
@@ -108,7 +109,6 @@ export default function Contact() {
               <div>
                 <h4>Email Us</h4>
                 <p>info@mboweezy.co.za</p>
-                <p>support@mboweezy.co.za</p>
               </div>
             </div>
 
@@ -120,7 +120,7 @@ export default function Contact() {
               </div>
               <div>
                 <h4>Call Us</h4>
-                <p>+1 (555) 123-4567</p>
+                <p>+27 780 550474</p>
                 <p>Mon-Fri: 9am-5pm EST</p>
               </div>
             </div>
@@ -133,10 +133,8 @@ export default function Contact() {
               </div>
               <div>
                 <h4>Visit Us</h4>
-                <p>123 Tech Street, Muizenberg, Cape Town, 7950</p>
-
+                <p>Muizenberg, Cape Town, 7950</p>
               </div>
-
             </div>
           </motion.div>
 
@@ -209,7 +207,6 @@ export default function Contact() {
                 'Send Message'
               )}
             </motion.button>
-
           </motion.form>
         </div>
       </div>
