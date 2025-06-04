@@ -1,4 +1,8 @@
-/* src/styles/components/Services.module.css */
+/*////////////////////////////////////////////////////
+//////////////// OUR SERVICES STYLING ////////////////
+/////////////////////////////////////////////////////
+*/
+
 .services {
   padding: 6rem 2rem;
   background: linear-gradient(to bottom, #f9fafe 0%, #ffffff 100%);

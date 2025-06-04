@@ -1,7 +1,17 @@
+/* eslint-disable react/no-unescaped-entities */
+'use client';
+
 import Image from 'next/image'
 import Lottie from "lottie-react";
 import animationData from '../../../public/animations/tech-wave.json';
 import styles from '../styles/components/Hero.module.css'
+
+const scrollToContact = () => {
+  const contactSection = document.getElementById('contact');
+  if (contactSection) {
+    contactSection.scrollIntoView({ behavior: 'smooth' });
+  }
+};
 
 export default function Hero() {
   return (
@@ -15,12 +25,15 @@ export default function Hero() {
             <span>Transform Your Business</span> with Next-Gen <span>Digital Solutions</span>
           </h1>
           <p className={styles.subtitle}>
-            We craft <strong>high-performance</strong> websites and <strong>scalable</strong> mobile apps that drive 
+            We craft <strong>high-performance</strong> websites and <strong>scalable</strong> mobile apps that drive
             real business growth and customer engagement.
           </p>
           <div className={styles.ctaContainer}>
-            <button className={`${styles.ctaButton} ${styles.primary}`}>
-              Get Started - It's Free
+            <button
+              onClick={scrollToContact}
+              className={`${styles.ctaButton} ${styles.primary}`}
+            >
+              Get Started
               <span className={styles.arrow}>→</span>
             </button>
             <button className={`${styles.ctaButton} ${styles.secondary}`}>

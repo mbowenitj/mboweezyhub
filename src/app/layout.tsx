@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import BackgroundParticles from './components/BackgroundParticles'
 import ParallaxLayers from './components/ParallaxLayers'
+import ScrollToTop from './components/ScrollToTop'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <BackgroundParticles />
         <ParallaxLayers />
+        <ScrollToTop/>
         {children}
       </body>
     </html>
