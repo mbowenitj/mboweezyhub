@@ -1,19 +1,43 @@
-// src/components/Navbar.tsx
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import styles from '../styles/components/Navbar.module.css';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const pathname = usePathname();
+  const [activeSection, setActiveSection] = useState('');
 
-  // Helper function to determine if a link is active
-  const isActive = (href: string) => {
-    return pathname === href;
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setActiveSection(sectionId); // Immediately set active section on click
+    }
+    setIsOpen(false);
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['home', 'services', 'about', 'testimonials', 'faq', 'contact'];
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+      for (const sectionId of sections) {
+        const section = document.getElementById(sectionId);
+        if (!section) continue;
+
+        const { offsetTop, offsetHeight } = section;
+        if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+          setActiveSection(sectionId);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial check
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <nav className={styles.navbar}>
@@ -21,46 +45,26 @@ export default function Navbar() {
         <Link href="/" className={styles.logo}>
           Mboweezy Trading Solutions
         </Link>
-        
+
         <div className={`${styles.links} ${isOpen ? styles.open : ''}`}>
-          <Link 
-            href="/" 
-            onClick={() => setIsOpen(false)}
-            className={isActive('/') ? styles.active : ''}
-          >
-            Home
-          </Link>
-          <Link 
-            href="/services" 
-            onClick={() => setIsOpen(false)}
-            className={isActive('/services') ? styles.active : ''}
-          >
-            Services
-          </Link>
-          <Link 
-            href="/about" 
-            onClick={() => setIsOpen(false)}
-            className={isActive('/about') ? styles.active : ''}
-          >
-            About
-          </Link>
-          <Link 
-            href="/testimonials" 
-            onClick={() => setIsOpen(false)}
-            className={isActive('/testimonials') ? styles.active : ''}
-          >
-            Testimonials
-          </Link>
-          <Link 
-            href="/contact" 
-            onClick={() => setIsOpen(false)}
-            className={isActive('/contact') ? styles.active : ''}
-          >
-            Contact
-          </Link>
+          {['home', 'services', 'about', 'testimonials', 'faq', 'contact'].map((section) => (
+            <a
+              key={section}
+              href={`#${section}`}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection(section);
+              }}
+              className={`${styles.navLink} ${
+                activeSection === section ? styles.active : ''
+              }`}
+            >
+              {section.charAt(0).toUpperCase() + section.slice(1)}
+            </a>
+          ))}
         </div>
 
-        <button 
+        <button
           className={styles.toggle}
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"

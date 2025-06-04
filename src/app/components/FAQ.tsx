@@ -39,7 +39,7 @@ export default function FAQ() {
       <div className={styles.decorativeTop}></div>
       <div className={styles.container}>
         <h2 className={styles.sectionTitle}>
-          <span className={styles.titleDecorator}>//</span> Frequently Asked Questions
+          <span className={styles.titleDecorator}></span> Frequently Asked Questions
         </h2>
         <p className={styles.subtitle}>Find quick answers to common inquiries about our services</p>
         

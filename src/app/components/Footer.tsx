@@ -96,7 +96,7 @@ export default function Footer() {
           >
             <h3>Quick Links</h3>
             <ul>
-              {['Home', 'Services', 'About', 'Testimonials', 'Contact'].map((link, index) => (
+              {['Home', 'Services', 'About', 'Testimonials', 'Contact', 'FAQ'].map((link, index) => (
                 <motion.li
                   key={link}
                   whileHover={{ x: 5 }}

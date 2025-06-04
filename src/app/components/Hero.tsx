@@ -11,7 +11,6 @@ export default function Hero() {
       </div>
       <div className={styles.container}>
         <div className={styles.heroContent}>
-          {/* <div className={styles.badge}>🚀 Featured by TechCrunch</div> */}
           <h1>
             <span>Transform Your Business</span> with Next-Gen <span>Digital Solutions</span>
           </h1>
