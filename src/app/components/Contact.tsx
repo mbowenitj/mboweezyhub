@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 'use client';
 
 import { useRef, useState } from 'react';
@@ -6,22 +7,27 @@ import styles from '../styles/components/Contact.module.css';
 import emailjs from '@emailjs/browser';
 
 export default function Contact() {
+  const [showForm, setShowForm] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
 
+  const toggleForm = () => setShowForm(!showForm);
+
+  const resetForm = () => {
+    setSubmitSuccess(false);
+    setShowForm(false);
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -36,9 +42,8 @@ export default function Contact() {
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         formRef.current,
-        process.env.NEXT_PUBLIC_EMAILJS_USER_ID!
+        process.env.NEXT_PUBLIC_EMAILJS_USER_ID!,
       );
-
       setSubmitSuccess(true);
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
@@ -63,7 +68,7 @@ export default function Contact() {
           <h2>Message Sent Successfully!</h2>
           <p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
           <motion.button
-            onClick={() => setSubmitSuccess(false)}
+            onClick={resetForm}
             className={styles.successButton}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -75,15 +80,37 @@ export default function Contact() {
     );
   }
 
+  if (!showForm) {
+    return (
+      <section id="contact" className={styles.ctaSection}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2>Are you ready to scale your business?</h2>
+          <p>Get in touch and let us build something amazing together!</p>
+          <motion.button
+            onClick={toggleForm}
+            className={styles.ctaButton}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Send a message →
+          </motion.button>
+        </motion.div>
+      </section>
+    );
+  }
+
   return (
     <section id="contact" className={styles.contact}>
       <div className={styles.container}>
         <motion.div
           className={styles.header}
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
         >
           <span className={styles.subtitle}>Get In Touch</span>
           <h2 className={styles.title}>Let's Build Something Amazing</h2>

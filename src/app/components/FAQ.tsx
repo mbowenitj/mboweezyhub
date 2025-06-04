@@ -36,10 +36,15 @@ export default function FAQ() {
 
   return (
     <section className={styles.faqSection} id="faq">
-      <div className={styles.decorativeTop}></div>
+      <div className={styles.backgroundAnimation}></div>
+      <div className={styles.floatingOrbs}>
+        <div className={styles.orb1}></div>
+        <div className={styles.orb2}></div>
+        <div className={styles.orb3}></div>
+      </div>
       <div className={styles.container}>
         <h2 className={styles.sectionTitle}>
-          <span className={styles.titleDecorator}></span> Frequently Asked Questions
+          <span className={styles.titleDecorator}>❖</span> Frequently Asked Questions
         </h2>
         <p className={styles.subtitle}>Find quick answers to common inquiries about our services</p>
         
@@ -74,7 +79,6 @@ export default function FAQ() {
           ))}
         </div>
       </div>
-      <div className={styles.decorativeBottom}></div>
     </section>
   );
 }
