@@ -5,13 +5,13 @@ const testimonials = [
   {
     name: 'Eugene M',
     company: 'Offload App',
-    text: 'Mboweezy IT transformed our online presence completely. Their team delivered exceptional results on time and within budget.',
+    text: 'Mboweni Trading Solutions transformed our online presence completely. Their team delivered exceptional results on time and within budget.',
     rating: 5
   },
   {
     name: 'Phinda R',
-    company: 'XYZ Inc',
-    text: 'The mobile app developed by Mboweezy IT exceeded our expectations. User engagement has increased by 300%.',
+    company: '-',
+    text: 'The mobile app developed by Mboweni Trading Solutions exceeded our expectations. User engagement has increased by 300%.',
     rating: 5
   },
   {

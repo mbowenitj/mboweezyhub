@@ -161,7 +161,7 @@ export default function About() {
             </h3>
             <div className={styles.description}>
               <p>
-                At Mboweezy IT, we're more than a technology company - we're your strategic 
+                At Mboweni Trading Solutions, we're more than a technology company - we're your strategic 
                 partner in digital transformation.
               </p>
             </div>

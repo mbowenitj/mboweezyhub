@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 'use client';
 import Link from 'next/link';
 import styles from '../styles/components/Footer.module.css';
@@ -6,13 +7,45 @@ import { CiPhone, CiMail } from 'react-icons/ci';
 import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram, FaWhatsapp, FaArrowUp } from 'react-icons/fa';
 import { IoLocationSharp } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Copyright from './Copyright';
+
+// Pre-defined navigation links to avoid dynamic string manipulation
+const NAV_LINKS = [
+  { name: 'Home', path: '#home' },
+  { name: 'Services', path: '#services' },
+  { name: 'Portfolio', path: '#portfolio' },
+  { name: 'About', path: '#about' },
+  { name: 'Testimonials', path: '#testimonials' },
+  { name: 'Contact', path: '#contact' }
+];
+
+// Pre-defined legal links
+const LEGAL_LINKS = [
+  { name: 'Privacy Policy', path: '/privacy-policy' },
+  { name: 'Terms', path: '/terms' },
+  { name: 'Cookies', path: '/cookies' },
+  { name: 'Refund Policy', path: '/refund-policy' }
+];
+
+// Social media links
+const SOCIAL_LINKS = [
+  { icon: <FaFacebook />, color: '#3b5998', url: '#' },
+  { icon: <FaTwitter />, color: '#1da1f2', url: '#' },
+  { icon: <FaLinkedin />, color: '#0077b5', url: '#' },
+  { icon: <FaInstagram />, color: '#e1306c', url: '#' },
+  { icon: <FaWhatsapp />, color: '#25d366', url: '#' }
+];
 
 export default function Footer() {
-
   const [isClient, setIsClient] = useState(false);
+  const [showCookieNotice, setShowCookieNotice] = useState(true);
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
+    // Safely check localStorage only on client
+    setShowCookieNotice(localStorage.getItem('cookieConsent') !== 'true');
   }, []);
 
   const scrollToTop = () => {
@@ -20,6 +53,11 @@ export default function Footer() {
       top: 0,
       behavior: 'smooth'
     });
+  };
+
+  const handleAccept = () => {
+    setShowCookieNotice(false);
+    localStorage.setItem('cookieConsent', 'true');
   };
 
   return (
@@ -41,25 +79,27 @@ export default function Footer() {
         </svg>
       </div>
 
-      {/* Floating particles */}
-      <div className={styles.particles}>
-        {isClient && [...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className={styles.particle}
-            initial={{ y: 0, x: Math.random() * 100 }}
-            animate={{
-              y: [0, -50, 0],
-              x: [0, Math.random() * 20 - 10, 0]
-            }}
-            transition={{
-              duration: 5 + Math.random() * 10,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-        ))}
-      </div>
+      {/* Floating particles - client only */}
+      {isClient && (
+        <div className={styles.particles}>
+          {[...Array(15)].map((_, i) => (
+            <motion.div
+              key={i}
+              className={styles.particle}
+              initial={{ y: 0, x: Math.random() * 100 }}
+              animate={{
+                y: [0, -50, 0],
+                x: [0, Math.random() * 20 - 10, 0]
+              }}
+              transition={{
+                duration: 5 + Math.random() * 10,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       <div className={styles.container}>
         {/* 3-column grid */}
@@ -113,10 +153,14 @@ export default function Footer() {
               transition={{ type: 'spring', stiffness: 300 }}
             >
               <div className={styles.mapOverlay}></div>
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52862.376619419796!2d18.442867240715973!3d-34.09773957351889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc4102f81ee711%3A0xa36d9fb33bc0e165!2sMuizenberg%2C%20Cape%20Town%2C%207950!5e0!3m2!1sen!2sza!4v1748960998851!5m2!1sen!2sza"
-                loading="lazy"
-              ></iframe>
+              {/* Replace iframe with static map image */}
+              <Image
+                src="/images/map.png"
+                alt="Team collaborating"
+                width={600}
+                height={500}
+                className={styles.mapImage}
+              />
             </motion.div>
           </motion.div>
 
@@ -130,14 +174,14 @@ export default function Footer() {
           >
             <h3>Explore</h3>
             <ul>
-              {['Home', 'Services', 'Portfolio', 'About', 'Testimonials', 'Contact'].map((item) => (
+              {NAV_LINKS.map(({ name, path }) => (
                 <motion.li
-                  key={item}
+                  key={path}
                   whileHover={{ x: 5 }}
                   transition={{ type: 'spring', stiffness: 500 }}
                 >
-                  <Link href={`#${item.toLowerCase()}`}>
-                    <span className={styles.linkDecorator}>→</span> {item}
+                  <Link href={path}>
+                    <span className={styles.linkDecorator}>→</span> {name}
                   </Link>
                 </motion.li>
               ))}
@@ -176,16 +220,10 @@ export default function Footer() {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              {[
-                { icon: <FaFacebook />, color: '#3b5998' },
-                { icon: <FaTwitter />, color: '#1da1f2' },
-                { icon: <FaLinkedin />, color: '#0077b5' },
-                { icon: <FaInstagram />, color: '#e1306c' },
-                { icon: <FaWhatsapp />, color: '#25d366' }
-              ].map((social, i) => (
+              {SOCIAL_LINKS.map((social, i) => (
                 <motion.a
                   key={i}
-                  href="#"
+                  href={social.url}
                   className={styles.socialIcon}
                   style={{ '--hover-color': social.color } as React.CSSProperties}
                   variants={{
@@ -250,26 +288,57 @@ export default function Footer() {
               </motion.div>
             </motion.div>
 
-            {/* Newsletter with floating animation */}
             <motion.div
-              className={styles.newsletter}
+              className={styles.callToAction}
               whileHover={{ y: -3 }}
               transition={{ type: 'spring', stiffness: 300 }}
             >
-              <h4>Get Updates</h4>
-              <form>
-                <input type="email" placeholder="Your email address" />
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Subscribe
-                </motion.button>
-              </form>
+              <h4>Ready to Transform Your Business?</h4>
+              <motion.a
+                href="https://calendly.com/mbowenitshepo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.actionButton}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <CiPhone className={styles.buttonIcon} />
+                Schedule a Call
+              </motion.a>
             </motion.div>
           </motion.div>
         </div>
+
+        {/* Cookie Notice - client only */}
+        {isClient && showCookieNotice && (
+          <motion.div
+            className={styles.cookieBar}
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            transition={{ type: "spring", damping: 25 }}
+            role="alert"
+            aria-live="polite"
+          >
+            <div className={styles.cookieContent}>
+              <p className={styles.cookieText}>
+                By continuing to use the site, you agree to our use of cookies®.
+                <Link href="/privacy-policy" className={styles.cookieLink}>
+                  See our privacy policy
+                </Link>
+              </p>
+
+              <motion.button
+                onClick={handleAccept}
+                className={styles.agreeButton}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                Continue
+              </motion.button>
+            </div>
+          </motion.div>
+        )}
 
         {/* Copyright section */}
         <motion.div
@@ -279,12 +348,12 @@ export default function Footer() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <p>© {new Date().getFullYear()} Mboweni Trading Solutions. All rights reserved.</p>
+          <Copyright />
 
           <div className={styles.legalLinks}>
-            {['Privacy Policy', 'Terms', 'Cookies', 'Refund Policy'].map((item) => (
-              <Link key={item} href={`/${item.toLowerCase().replace(' ', '-')}`}>
-                {item}
+            {LEGAL_LINKS.map(({ name, path }) => (
+              <Link key={path} href={path}>
+                {name}
               </Link>
             ))}
           </div>
@@ -292,16 +361,18 @@ export default function Footer() {
       </div>
 
       {/* Floating back-to-top button */}
-      <motion.button
-        className={styles.backToTop}
-        onClick={scrollToTop}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        whileHover={{ y: -5, scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <FaArrowUp />
-      </motion.button>
+      {isClient && (
+        <motion.button
+          className={styles.backToTop}
+          onClick={scrollToTop}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          whileHover={{ y: -5, scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <FaArrowUp />
+        </motion.button>
+      )}
     </footer>
   );
 }

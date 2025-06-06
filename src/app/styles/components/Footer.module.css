@@ -129,21 +129,27 @@
   margin-top: auto;
 }
 
+.mapImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .mapOverlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(79, 70, 229, 0.2) 0%, transparent 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(79, 70, 229, 0.2) 0%,
+    transparent 100%
+  );
   z-index: 1;
 }
 
-.mapContainer iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
+
 
 /* Links Column Styles */
 .linksColumn h3,
@@ -157,7 +163,7 @@
 
 .linksColumn h3::after,
 .contactColumn h3::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -381,7 +387,7 @@
 }
 
 .legalLinks a::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 0;
@@ -418,40 +424,151 @@
   z-index: 100;
   font-size: 1.2rem;
 }
+/* For Option 1 */
+.callToAction {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+   /* background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  display: flex;
+  gap: 1.5rem;
+  align-items: center; */
+
+.callToAction h4 {
+  color: #e0e7ff;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.actionButton {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.buttonIcon {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+/* Cookie Notice Styles */
+/* Fixed Cookie Bar */
+.cookieBar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #1e293b;
+  border-top: 1px solid rgba(99, 102, 241, 0.3);
+  padding: 1rem 2rem;
+  z-index: 1000;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cookieContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.cookieText {
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.cookieLink {
+  color: #818cf8;
+  margin-left: 4px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.cookieLink:hover {
+  text-decoration: underline;
+}
+
+.agreeButton {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.8rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+
+.agreeButton:hover {
+  background: #4338ca;
+}
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .footer {
     padding: 6rem 0 2rem;
   }
-  
+
   .grid {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
-  
+
   .waveContainer {
     height: 100px;
   }
-  
+
   .contactChips {
     flex-direction: column;
   }
-  
+
   .hoursCard {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .legalLinks {
     gap: 1rem;
   }
-  
+
   .backToTop {
     width: 45px;
     height: 45px;
     bottom: 1.5rem;
     right: 1.5rem;
+  }
+  .cookieBar {
+    padding: 0.8rem 1rem;
+  }
+
+  .cookieContent {
+    flex-direction: column;
+    gap: 0.8rem;
+    text-align: center;
+  }
+
+  .agreeButton {
+    width: 100%;
+    padding: 0.5rem;
   }
 }
 
@@ -459,20 +576,20 @@
   .container {
     padding: 0 1.5rem;
   }
-  
+
   .logo {
     font-size: 1.6rem;
   }
-  
+
   .linksColumn h3,
   .contactColumn h3 {
     font-size: 1.3rem;
   }
-  
+
   .newsletter form {
     height: 45px;
   }
-  
+
   .newsletter button {
     padding: 0 1.2rem;
   }
