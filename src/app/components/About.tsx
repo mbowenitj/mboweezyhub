@@ -162,8 +162,9 @@ export default function About() {
             <div className={styles.description}>
               <p>
                 At Mboweni Trading Solutions, we're more than a technology company - we're your strategic 
-                partner in digital transformation.
+                partner in digital transformation. 
               </p>
+              <p>We help businesses stand out with a full suite of design, development, and marketing services tailored to meet modern needs. Whether you're a startup, growing brand, or established enterprise, we craft solutions that communicate your vision and drive results.</p>
             </div>
             <div className={styles.features}>
               {features.map((feature, index) => (
