@@ -47,9 +47,9 @@ body {
   margin: 0 auto;
 }
 
-section {
-  padding: 5rem 0;
-}
+/* section {
+  padding: 0rem 0;
+} */
 
 .section-title {
   text-align: center;

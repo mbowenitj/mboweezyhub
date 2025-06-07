@@ -52,7 +52,7 @@ export default function CookiePolicy() {
 
         <section>
           <h2>6. Contact Us</h2>
-          <p>If you have any questions about our use of cookies, please contact us at privacy@yourcompany.com.</p>
+          <p>If you have any questions about our use of cookies, please contact us at info@mboweezy.co.za</p>
         </section>
       </div>
     </div>

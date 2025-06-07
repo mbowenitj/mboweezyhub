@@ -7,7 +7,7 @@
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
   color: white;
   min-height: 100vh;
-  padding: 4rem 2rem;
+  padding: 6rem 2rem;
   position: relative;
   overflow: hidden;
 }
@@ -85,6 +85,10 @@
   margin-left: 10px;
   color: #64748b;
 }
+.section{
+  padding: 0 0;
+}
+
 @media (max-width: 768px) {
   .legalContainer {
     padding: 3rem 1.5rem;

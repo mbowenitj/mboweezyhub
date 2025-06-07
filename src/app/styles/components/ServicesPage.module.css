@@ -1,0 +1,119 @@
+.servicesPage {
+  --primary: #4361ee;
+  --primary-dark: #3a0ca3;
+  --secondary: #f72585;
+  --dark: #1a1a2e;
+  --light: #f8f9fa;
+}
+
+/* Hero Section */
+.heroSection {
+  height: 70vh;
+  min-height: 600px;
+  background: linear-gradient(135deg, var(--dark) 0%, #16213e 100%);
+  display: flex;
+  align-items: center;
+  padding: 0 5%;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroContainer {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.heroTitle {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.titleGradient {
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.heroSubtitle {
+  font-size: 1.25rem;
+  color: rgba(255,255,255,0.9);
+  max-width: 600px;
+}
+
+/* Services Grid */
+.servicesGrid {
+  padding: 6rem 5%;
+  background: var(--light);
+}
+
+.gridContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 3rem;
+}
+
+/* CTA Section */
+.ctaSection {
+  padding: 6rem 5%;
+  background: linear-gradient(135deg, var(--dark) 0%, #16213e 100%);
+  text-align: center;
+  color: white;
+}
+
+.ctaContainer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ctaContainer h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.ctaContainer p {
+  font-size: 1.25rem;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+.ctaButton {
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px rgba(67,97,238,0.4);
+}
+
+.ctaButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(67,97,238,0.5);
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    height: auto;
+    padding: 8rem 5%;
+  }
+  
+  .gridContainer {
+    grid-template-columns: 1fr;
+  }
+  
+  .ctaContainer h2 {
+    font-size: 2rem;
+  }
+}

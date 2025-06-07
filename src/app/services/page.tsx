@@ -12,7 +12,7 @@ export default function ServicesPage() {
         const element = document.getElementById(hash);
         if (element) {
           setTimeout(() => {
-            element.scrollIntoView({ 
+            element.scrollIntoView({
               behavior: 'smooth',
               block: 'start'
             });
@@ -26,7 +26,7 @@ export default function ServicesPage() {
 
     // Handle back/forward navigation
     window.addEventListener('hashchange', handleHash);
-    
+
     return () => {
       window.removeEventListener('hashchange', handleHash);
     };
@@ -37,11 +37,12 @@ export default function ServicesPage() {
       {services.map((service, index) => {
         const serviceId = service.title.toLowerCase().replace(/\s+/g, '-');
         return (
-          <ServiceDetailCard 
+          <ServiceDetailCard
             key={serviceId}
             service={service}
             index={index}
             id={serviceId}
+            sectionTitle="Our Services"
           />
         );
       })}

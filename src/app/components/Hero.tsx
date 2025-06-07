@@ -25,8 +25,8 @@ export default function Hero() {
             <span>Transform Your Business</span> with Next-Gen <span>Digital Solutions</span>
           </h1>
           <p className={styles.subtitle}>
-            We craft <strong>high-performance</strong> websites and <strong>scalable</strong> mobile apps that drive
-            real business growth and customer engagement.
+            We build <strong>custom-tailored</strong> websites and mobile apps with
+            <strong> dedicated attention</strong> to each client's unique needs and goals.
           </p>
           <div className={styles.ctaContainer}>
             <button
@@ -36,18 +36,18 @@ export default function Hero() {
               Get Started
               <span className={styles.arrow}>→</span>
             </button>
-            <button className={`${styles.ctaButton} ${styles.secondary}`}>
+            {/* <button className={`${styles.ctaButton} ${styles.secondary}`}>
               See Our Work
-            </button>
+            </button> */}
           </div>
           <div className={styles.stats}>
             <div className={styles.statItem}>
-              <div className={styles.statNumber}>250+</div>
-              <div className={styles.statLabel}>Happy Clients</div>
+              <div className={styles.statNumber}>1:1</div>
+              <div className={styles.statLabel}>Partner Attention</div>
             </div>
             <div className={styles.statItem}>
               <div className={styles.statNumber}>100%</div>
-              <div className={styles.statLabel}>Satisfaction</div>
+              <div className={styles.statLabel}>On-Time Delivery</div>
             </div>
             <div className={styles.statItem}>
               <div className={styles.statNumber}>24/7</div>
