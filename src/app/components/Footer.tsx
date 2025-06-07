@@ -29,9 +29,9 @@ const LEGAL_LINKS = [
 
 // Social media links
 const SOCIAL_LINKS = [
-  { icon: <FaFacebook />, color: '#3b5998', url: '#' },
+  { icon: <FaFacebook />, color: '#3b5998', url: 'https://www.facebook.com/profile.php?id=100054287916480' },
   { icon: <FaTwitter />, color: '#1da1f2', url: '#' },
-  { icon: <FaLinkedin />, color: '#0077b5', url: '#' },
+  { icon: <FaLinkedin />, color: '#0077b5', url: 'https://www.linkedin.com/company/mboweezy-trading-solutions' },
   { icon: <FaInstagram />, color: '#e1306c', url: '#' },
   { icon: <FaWhatsapp />, color: '#25d366', url: '#' }
 ];
