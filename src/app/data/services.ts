@@ -1,25 +1,26 @@
-import { IconType } from "react-icons";
+import { IconType } from "react-icons"
 import {
   FaLaptopCode,
   FaPaintBrush,
   FaPrint,
   FaTshirt,
   FaMugHot,
-} from "react-icons/fa";
+  FaCloud,
+} from "react-icons/fa"
 
 export interface Service {
-  icon: IconType;
-  title: string;
-  subtitle: string;
-  description: string;
-  longDescription: string;
-  category: "tech" | "design";
-  link?: string;
-  features?: string[];
-  imagePath: string;
+  icon: IconType
+  title: string
+  subtitle: string
+  description: string
+  longDescription: string
+  category: "tech" | "design"
+  link?: string
+  features?: string[]
+  imagePath: string
 }
 
-const servicesData: Omit<Service, 'link'>[] = [
+const servicesData: Omit<Service, "link">[] = [
   // 1. Tech Solution
   {
     icon: FaLaptopCode,
@@ -33,12 +34,29 @@ const servicesData: Omit<Service, 'link'>[] = [
       "Mobile apps",
       "Performance optimized",
       "Ongoing maintenance",
-      "Cross-platform"
+      "Cross-platform",
     ],
-    imagePath: "/images/services/web-development.jpg"
+    imagePath: "/images/services/web-development.jpg",
+  },
+  // 2. Cloud Solution
+  {
+    icon: FaCloud,
+    title: "Cloud Hosting",
+    subtitle: "Reliable web hosting solutions",
+    description: "Secure and scalable cloud infrastructure",
+    longDescription: `We provide robust cloud hosting solutions with high availability, automatic scaling, and 24/7 monitoring.`,
+    category: "tech",
+    features: [
+      "99.9% uptime guarantee",
+      "Automatic scaling",
+      "SSL certificates",
+      "Daily backups",
+      "24/7 monitoring",
+    ],
+    imagePath: "/images/services/cloud-hosting.jpg",
   },
 
-  // 2. Brand Identity
+  // 3. Brand Identity
   {
     icon: FaPaintBrush,
     title: "Logo & Branding",
@@ -51,12 +69,12 @@ const servicesData: Omit<Service, 'link'>[] = [
       "Brand style guide",
       "Business cards",
       "Stationery designs",
-      "Full copyright ownership"
+      "Full copyright ownership",
     ],
-    imagePath: "/images/services/business-cards.jpg"
+    imagePath: "/images/services/business-cards.jpg",
   },
 
-  // 3. Print & Marketing
+  // 4. Print & Marketing
   {
     icon: FaPrint,
     title: "Print & Marketing Materials",
@@ -69,12 +87,12 @@ const servicesData: Omit<Service, 'link'>[] = [
       "Brochures",
       "Flyers",
       "Posters",
-      "Print-ready files"
+      "Print-ready files",
     ],
-    imagePath: "/images/services/print-designs.jpg"
+    imagePath: "/images/services/print-designs.jpg",
   },
 
-  // 4. Digital Media
+  // 5. Digital Media
   {
     icon: FaPrint,
     title: "Digital Presentations",
@@ -87,12 +105,12 @@ const servicesData: Omit<Service, 'link'>[] = [
       "Investor decks",
       "Academic slides",
       "Branded templates",
-      "Animation effects"
+      "Animation effects",
     ],
-    imagePath: "/images/services/presentation.png"
+    imagePath: "/images/services/presentation.png",
   },
 
-  // 5. Apparel Design
+  // 6. Apparel Design
   {
     icon: FaTshirt,
     title: "Apparel Design",
@@ -105,12 +123,12 @@ const servicesData: Omit<Service, 'link'>[] = [
       "Hoodie prints",
       "Event merchandise",
       "Branded wearables",
-      "Print-ready files"
+      "Print-ready files",
     ],
-    imagePath: "/images/services/apparel.jpg"
+    imagePath: "/images/services/apparel.jpg",
   },
 
-  // 6. Promotional Products
+  // 7. Promotional Products
   {
     icon: FaMugHot,
     title: "Promotional Products",
@@ -123,13 +141,13 @@ const servicesData: Omit<Service, 'link'>[] = [
       "Branded calendars",
       "Drinkware designs",
       "Corporate gifts",
-      "Print-ready files"
+      "Print-ready files",
     ],
-    imagePath: "/images/services/calendar.jpg"
-  }
-];
+    imagePath: "/images/services/calendar.jpg",
+  },
+]
 
-export const services: Service[] = servicesData.map(service => ({
+export const services: Service[] = servicesData.map((service) => ({
   ...service,
-  link: `/services#${service.title.toLowerCase().replace(/\s+/g, '-')}`
-}));
+  link: `/services#${service.title.toLowerCase().replace(/\s+/g, "-")}`,
+}))
