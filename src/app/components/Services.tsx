@@ -43,12 +43,12 @@ export default function Services() {
           >
             Design Services
           </button>
-          <button
+          {/* <button
             className={`${styles.filterButton} ${activeFilter === 'media' ? styles.active : ''}`}
             onClick={() => handleFilterClick('media')}
           >
             Media Production
-          </button>
+          </button> */}
         </div>
 
         <div className={styles.grid}>

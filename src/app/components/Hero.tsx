@@ -5,6 +5,8 @@ import Image from 'next/image'
 import Lottie from "lottie-react";
 import animationData from '../../../public/animations/tech-wave.json';
 import styles from '../styles/components/Hero.module.css'
+import { motion } from 'framer-motion';
+import AnimatedNumber from './AnimatedNumber';
 
 const scrollToContact = () => {
   const contactSection = document.getElementById('contact');
@@ -12,6 +14,10 @@ const scrollToContact = () => {
     contactSection.scrollIntoView({ behavior: 'smooth' });
   }
 };
+
+{/* <button className={`${styles.ctaButton} ${styles.secondary}`}>
+              See Our Work
+            </button> */}
 
 export default function Hero() {
   return (
@@ -36,22 +42,47 @@ export default function Hero() {
               Get Started
               <span className={styles.arrow}>→</span>
             </button>
-            {/* <button className={`${styles.ctaButton} ${styles.secondary}`}>
-              See Our Work
-            </button> */}
           </div>
-          <div className={styles.stats}>
-            <div className={styles.statItem}>
-              <div className={styles.statNumber}>1:1</div>
-              <div className={styles.statLabel}>Partner Attention</div>
-            </div>
-            <div className={styles.statItem}>
-              <div className={styles.statNumber}>100%</div>
-              <div className={styles.statLabel}>On-Time Delivery</div>
-            </div>
-            <div className={styles.statItem}>
-              <div className={styles.statNumber}>24/7</div>
-              <div className={styles.statLabel}>Support</div>
+          
+          {/* Stats section moved here and wrapped in a container */}
+          <div className={styles.statsContainer}>
+            <div className={styles.stats}>
+              {/* Happy Clients */}
+              <motion.div
+                className={styles.statItem}
+                whileHover={{ y: -3 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                <div className={styles.statIcon}>👥</div>
+                <div className={styles.statNumber}>10+</div>
+                <div className={styles.statLabel}>Happy Clients</div>
+              </motion.div>
+
+              {/* Years Experience */}
+              <motion.div
+                className={styles.statItem}
+                whileHover={{ y: -3 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                <div className={styles.statIcon}>📅</div>
+                <div className={styles.statNumber}>
+                 <AnimatedNumber value={15} />
+
+                </div>
+               
+                <div className={styles.statLabel}>Years Experience</div>
+              </motion.div>
+
+              {/* Satisfaction Rate */}
+              <motion.div
+                className={styles.statItem}
+                whileHover={{ y: -3 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                <div className={styles.statIcon}>💯</div>
+                <div className={styles.statNumber}>100%</div>
+                <div className={styles.statLabel}>Satisfaction</div>
+              </motion.div>
             </div>
           </div>
         </div>

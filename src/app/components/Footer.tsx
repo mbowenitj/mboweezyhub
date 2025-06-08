@@ -24,7 +24,7 @@ const NAV_LINKS = [
 const LEGAL_LINKS = [
   { name: 'Privacy Policy', path: '/privacy-policy' },
   { name: 'Terms and Conditions', path: '/terms-conditions' },
-  { name: 'Cookies', path: '/cookie-policy' },
+  { name: 'Cookies Policy', path: '/cookie-policy' },
 ];
 
 // Social media links
@@ -33,7 +33,10 @@ const SOCIAL_LINKS = [
   { icon: <FaTwitter />, color: '#1da1f2', url: '#' },
   { icon: <FaLinkedin />, color: '#0077b5', url: 'https://www.linkedin.com/company/mboweezy-trading-solutions' },
   { icon: <FaInstagram />, color: '#e1306c', url: '#' },
-  { icon: <FaWhatsapp />, color: '#25d366', url: '#' }
+  {
+    icon: <FaWhatsapp />, color: '#25d366', url: 'https://wa.me/27780550474?text=Hello%20Mboweni%20Trading%20Solutions,%20I%20would%20like%20to%20inquire%20about...', target: '_blank',
+    rel: 'noopener noreferrer'
+  }
 ];
 
 // Pre-generated particle animations (consistent between server and client)
@@ -226,6 +229,8 @@ export default function Footer() {
                   href={social.url}
                   className={styles.socialIcon}
                   style={{ '--hover-color': social.color } as React.CSSProperties}
+                  target={social.target || '_self'}  
+                  rel={social.rel || ''}  
                   variants={{
                     hidden: { opacity: 0, y: 20 },
                     visible: {
@@ -322,7 +327,7 @@ export default function Footer() {
           >
             <div className={styles.cookieContent}>
               <p className={styles.cookieText}>
-                We use cookies to enhance your experience. 
+                We use cookies to enhance your experience.
                 <Link href="/cookie-policy" className={styles.cookieLink}>
                   Learn more
                 </Link>
@@ -337,7 +342,7 @@ export default function Footer() {
                 >
                   Cancel
                 </motion.button>
-                
+
                 <motion.button
                   onClick={handleAccept}
                   className={styles.cookieButtonPrimary}

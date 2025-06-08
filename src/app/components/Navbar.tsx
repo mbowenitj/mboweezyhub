@@ -1,5 +1,5 @@
 'use client';
-
+import Image from 'next/image'
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -55,7 +55,14 @@ export default function Navbar() {
     <nav className={styles.navbar}>
       <div className={`container ${styles.container}`}>
         <Link href="/" className={styles.logo}>
-          Mboweezy IT
+          <Image
+            src="/images/logo.svg"
+            alt="Mboweezy logo"
+            width={100}
+            height={100}
+            priority
+            className={styles.floating}
+          />
         </Link>
 
         <div className={`${styles.links} ${isOpen ? styles.open : ''}`}>
@@ -67,9 +74,8 @@ export default function Navbar() {
                 e.preventDefault();
                 handleNavigation(section);
               }}
-              className={`${styles.navLink} ${
-                activeSection === section ? styles.active : ''
-              }`}
+              className={`${styles.navLink} ${activeSection === section ? styles.active : ''
+                }`}
             >
               {section.charAt(0).toUpperCase() + section.slice(1)}
             </a>
