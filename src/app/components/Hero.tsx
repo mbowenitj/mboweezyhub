@@ -54,8 +54,8 @@ export default function Hero() {
                 transition={{ type: "spring", stiffness: 400 }}
               >
                 <div className={styles.statIcon}>👥</div>
-                <div className={styles.statNumber}>10+</div>
-                <div className={styles.statLabel}>Happy Clients</div>
+                <div className={styles.statNumber}>50K+</div>
+                <div className={styles.statLabel}>Lines of M-Code</div>
               </motion.div>
 
               {/* Years Experience */}
