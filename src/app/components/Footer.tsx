@@ -29,10 +29,22 @@ const LEGAL_LINKS = [
 
 // Social media links
 const SOCIAL_LINKS = [
-  { icon: <FaFacebook />, color: '#3b5998', url: 'https://www.facebook.com/profile.php?id=100054287916480' },
-  { icon: <FaTwitter />, color: '#1da1f2', url: '#' },
-  { icon: <FaLinkedin />, color: '#0077b5', url: 'https://www.linkedin.com/company/mboweezy-trading-solutions' },
-  { icon: <FaInstagram />, color: '#e1306c', url: '#' },
+  {
+    icon: <FaFacebook />, color: '#3b5998', url: 'https://www.facebook.com/mboweezyhub/', target: '_blank',
+    rel: 'noopener noreferrer'
+  },
+  {
+    icon: <FaTwitter />, color: '#1da1f2', url: '#', target: '_blank',
+    rel: 'noopener noreferrer'
+  },
+  {
+    icon: <FaLinkedin />, color: '#0077b5', url: 'https://www.linkedin.com/company/mboweezy-hub/about/', target: '_blank',
+    rel: 'noopener noreferrer'
+  },
+  {
+    icon: <FaInstagram />, color: '#e1306c', url: 'https://www.instagram.com/mboweeezy?igsh=MXRwZWN6cDJrd3B5eg%3D%3D&utm_source=qr', target: '_blank',
+    rel: 'noopener noreferrer'
+  },
   {
     icon: <FaWhatsapp />, color: '#25d366', url: 'https://wa.me/27780550474?text=Hello%20Mboweni%20Trading%20Solutions,%20I%20would%20like%20to%20inquire%20about...', target: '_blank',
     rel: 'noopener noreferrer'
@@ -116,12 +128,32 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <motion.div
-              className={styles.logo}
-              whileHover={{ scale: 1.03 }}
-            >
-              <span className={styles.logoHighlight}>Mboweni</span> Trading Solutions
-            </motion.div>
+            <div className={styles.brandHeader}>
+              <motion.div className={styles.logo}
+                whileHover={{ scale: 1.03 }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (window.location.pathname === '/') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  } else {
+                    window.location.href = '/';
+                  }
+                }}
+                style={{ cursor: 'pointer' }}
+              >
+                <Image
+                  src="/images/logo.svg"
+                  alt="Mboweezy Hub logo"
+                  width={50}
+                  height={50}
+                  priority
+                  className={styles.logo}
+                />
+                <h1 className={styles.logoText}>
+                  <span className={styles.logoHighlight}>Mboweni</span> Hub
+                </h1>
+              </motion.div>
+            </div>
 
             <p className={styles.tagline}>
               Transforming businesses through cutting-edge digital solutions since 2025.
@@ -130,7 +162,7 @@ export default function Footer() {
             {/* Animated contact chips */}
             <div className={styles.contactChips}>
               <motion.a
-                href="mailto:info@mboweezy.co.za"
+                href="mailto:info@mboweezyhub.co.za"
                 className={styles.contactChip}
                 whileHover={{ y: -3, backgroundColor: '#4f46e5' }}
                 transition={{ type: 'spring', stiffness: 400 }}
@@ -229,8 +261,8 @@ export default function Footer() {
                   href={social.url}
                   className={styles.socialIcon}
                   style={{ '--hover-color': social.color } as React.CSSProperties}
-                  target={social.target || '_self'}  
-                  rel={social.rel || ''}  
+                  target={social.target || '_self'}
+                  rel={social.rel || ''}
                   variants={{
                     hidden: { opacity: 0, y: 20 },
                     visible: {
@@ -289,7 +321,7 @@ export default function Footer() {
                 }}
               >
                 <CiMail className={styles.contactIcon} />
-                <a href="mailto:info@mbowenitradingsolutions.co.za">info@mboweezy.co.za</a>
+                <a href="mailto:info@mboweezyhub.co.za">info@mboweezyhub.co.za</a>
               </motion.div>
             </motion.div>
 

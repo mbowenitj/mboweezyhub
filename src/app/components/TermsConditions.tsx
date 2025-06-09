@@ -126,7 +126,7 @@ export default function TermsConditions() {
           <p>
             If you have any questions, concerns, or complaints regarding these Terms, you may contact us at:
           </p>
-          <p>Email: <a href="mailto:info@mboweezy.co.za">info@mboweezy.co.za</a></p>
+          <p>Email: <a href="mailto:info@mboweezyhub.co.za">info@mboweezyhub.co.za</a></p>
         </section>
       </div>
     </div>

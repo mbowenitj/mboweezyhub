@@ -85,7 +85,7 @@ export default function About() {
       <div className={styles.backgroundDesign}></div>
 
       <div className={styles.header}>
-        <motion.h2 
+        <motion.h2
           className={styles.sectionTitle}
           initial="hidden"
           whileInView="visible"
@@ -94,7 +94,7 @@ export default function About() {
         >
           Who <span>We Are</span>
         </motion.h2>
-        <motion.p 
+        <motion.p
           className={styles.sectionSubtitle}
           initial="hidden"
           whileInView="visible"
@@ -107,7 +107,7 @@ export default function About() {
       </div>
 
       <div className={styles.container}>
-        <motion.div 
+        <motion.div
           className={styles.imageCollage}
           initial="hidden"
           whileInView="visible"
@@ -133,8 +133,8 @@ export default function About() {
               className={styles.secondaryImage}
             />
           </div>
-          
-          <div 
+
+          <div
             ref={containerRef}
             className={styles.tertiaryImageWrapper}
           >
@@ -161,14 +161,15 @@ export default function About() {
             </h3>
             <div className={styles.description}>
               <p>
-                At Mboweni Trading Solutions, we're more than a technology company - we're your strategic 
-                partner in digital transformation. 
+                At Mboweezy Hub, we're more than a technology company — we're your strategic partner in digital transformation.
               </p>
-              <p>We help businesses stand out with a full suite of design, development, and marketing services tailored to meet modern needs. Whether you're a startup, growing brand, or established enterprise, we craft solutions that communicate your vision and drive results.</p>
+              <p>
+                We empower businesses to stand out with a comprehensive suite of design, development, and marketing services tailored to meet the demands of today’s digital landscape. From custom websites and mobile apps to eye-catching branding, print materials, and digital marketing, we deliver smart, creative solutions that bring your vision to life and drive measurable growth—whether you’re launching a startup, scaling a brand, or leading an enterprise.
+              </p>
             </div>
             <div className={styles.features}>
               {features.map((feature, index) => (
-                <motion.div 
+                <motion.div
                   key={index}
                   className={styles.featureCard}
                   initial="hidden"

@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import ServiceDetailCard from '../components/ServiceDetailCard';
 import { services } from '../data/services';
+import Head from 'next/head';
 
 export default function ServicesPage() {
   useEffect(() => {
@@ -33,19 +34,26 @@ export default function ServicesPage() {
   }, []);
 
   return (
-    <div className="services-page">
-      {services.map((service, index) => {
-        const serviceId = service.title.toLowerCase().replace(/\s+/g, '-');
-        return (
-          <ServiceDetailCard
-            key={serviceId}
-            service={service}
-            index={index}
-            id={serviceId}
-            sectionTitle="Our Services"
-          />
-        );
-      })}
-    </div>
+    <><Head>
+      <title>Our Services | Mboweezy Hub</title>
+      <meta
+        name="description"
+        content="Explore professional web development, branding, cloud hosting, print marketing, and digital solutions tailored for modern business growth. Powered by Mboweezy Hub." />
+      <meta name="keywords" content="web development, branding, cloud hosting, print design, digital marketing South Africa" />
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href="https://www.mboweezyhub.coza/services" />
+    </Head><div className="services-page">
+        {services.map((service, index) => {
+          const serviceId = service.title.toLowerCase().replace(/\s+/g, '-');
+          return (
+            <ServiceDetailCard
+              key={serviceId}
+              service={service}
+              index={index}
+              id={serviceId}
+              sectionTitle="Our Services" />
+          );
+        })}
+      </div></>
   );
 }

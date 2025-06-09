@@ -16,7 +16,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 1.5rem 0; */
 }
 
 .logo {
@@ -36,7 +35,6 @@
 .navLink:hover {
   color: var(--primary);
 }
-
 
 .active {
   text-decoration: underline;

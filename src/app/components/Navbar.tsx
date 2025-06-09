@@ -56,8 +56,8 @@ export default function Navbar() {
       <div className={`container ${styles.container}`}>
         <Link href="/" className={styles.logo}>
           <Image
-            src="/images/logo.svg"
-            alt="Mboweezy logo"
+            src="/images/logo-white.svg"
+            alt="Mboweezy Hub logo"
             width={100}
             height={100}
             priority

@@ -192,7 +192,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4>Email Us</h4>
-                  <p>info@mboweezy.co.za</p>
+                  <p>info@mboweezyhub.co.za</p>
                 </div>
               </div>
 

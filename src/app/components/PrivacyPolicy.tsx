@@ -141,7 +141,7 @@ export default function PrivacyPolicy() {
             If you have any questions, concerns, or requests related to this privacy policy or your data,
             please contact us at:
           </p>
-          <p>Email: <a href="mailto:info@mboweezy.co.za">info@mboweezy.co.za</a></p>
+          <p>Email: <a href="mailto:info@mboweezyhub.co.za">info@mboweezyhub.co.za</a></p>
           <p>We are based in South Africa and comply with the Protection of Personal Information Act (POPIA).</p>
         </section>
       </div>
