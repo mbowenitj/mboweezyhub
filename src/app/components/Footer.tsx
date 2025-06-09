@@ -34,7 +34,7 @@ const SOCIAL_LINKS = [
     rel: 'noopener noreferrer'
   },
   {
-    icon: <FaTwitter />, color: '#1da1f2', url: '#', target: '_blank',
+    icon: <FaTwitter />, color: '#1da1f2', url: 'https://x.com/mboweezyhub', target: '_blank',
     rel: 'noopener noreferrer'
   },
   {
@@ -150,13 +150,13 @@ export default function Footer() {
                   className={styles.logo}
                 />
                 <h1 className={styles.logoText}>
-                  <span className={styles.logoHighlight}>Mboweni</span> Hub
+                  <span className={styles.logoHighlight}>Mboweezy</span> Hub
                 </h1>
               </motion.div>
             </div>
 
             <p className={styles.tagline}>
-              Transforming businesses through cutting-edge digital solutions since 2025.
+              Transforming businesses through cutting-edge digital solutions.
             </p>
 
             {/* Animated contact chips */}

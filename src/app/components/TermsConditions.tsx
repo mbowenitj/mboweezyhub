@@ -12,7 +12,7 @@ export default function TermsConditions() {
           <h2>1. Introduction</h2>
           <p>
             These Terms and Conditions (“Terms”) govern your access to and use of our website, mobile services,
-            and related offerings (collectively, the “Services”) provided by Mboweni Trading Solutions. By accessing
+            and related offerings (collectively, the “Services”) provided by Mboweni Trading Solutions, trading as Mboweezy Hub. By accessing
             or using the Services, you agree to be bound by these Terms and our Privacy Policy.
           </p>
           <p>
@@ -32,7 +32,7 @@ export default function TermsConditions() {
           <h2>3. Intellectual Property</h2>
           <p>
             All content, design, text, graphics, images, logos, icons, and software on the Services are the property
-            of Mboweni Trading Solutions or its licensors and are protected by copyright, trademark, and other
+            of Mboweni Trading Solutions, trading as Mboweezy Hub or its licensors and are protected by copyright, trademark, and other
             intellectual property laws.
           </p>
           <p>
@@ -72,7 +72,7 @@ export default function TermsConditions() {
         <section>
           <h2>7. Limitation of Liability</h2>
           <p>
-            To the fullest extent permitted by applicable law, Mboweni Trading Solutions shall not be liable for any
+            To the fullest extent permitted by applicable law, Mboweni Trading Solutions, trading as Mboweezy Hub shall not be liable for any
             indirect, incidental, special, consequential, or punitive damages, including loss of profits, data,
             goodwill, or other intangible losses arising out of your access to or use of the Services.
           </p>
@@ -90,7 +90,7 @@ export default function TermsConditions() {
         <section>
           <h2>9. Indemnification</h2>
           <p>
-            You agree to indemnify and hold harmless Mboweni Trading Solutions and its affiliates, directors, officers,
+            You agree to indemnify and hold harmless Mboweni Trading Solutions, trading as Mboweezy Hub and its affiliates, directors, officers,
             employees, and agents from and against any claims, liabilities, damages, losses, and expenses arising
             out of or in connection with your use of the Services or violation of these Terms.
           </p>
