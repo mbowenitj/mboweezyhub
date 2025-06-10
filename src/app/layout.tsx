@@ -6,6 +6,7 @@ import Footer from './components/Footer'
 import BackgroundParticles from './components/BackgroundParticles'
 import ParallaxLayers from './components/ParallaxLayers'
 import ScrollToTop from './components/ScrollToTop'
+import { GoogleAnalytics } from "nextjs-google-analytics";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,7 +22,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head />
       <body className={`${inter.className} flex flex-col min-h-screen`}>
+        {/* Google Analytics Script */}
+        <GoogleAnalytics trackPageViews />
+
         <BackgroundParticles />
         <ParallaxLayers />
         <Navbar />
@@ -29,7 +34,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        <ScrollToTop/>
+        <ScrollToTop />
       </body>
     </html>
   )
