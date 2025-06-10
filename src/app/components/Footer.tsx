@@ -17,7 +17,7 @@ const NAV_LINKS = [
   { name: 'Services', path: '#services' },
   { name: 'About', path: '#about' },
   { name: 'Testimonials', path: '#testimonials' },
-  { name: 'Contact', path: '#contact' }
+  { name: 'Contact', path: '#contact', offset: -100 }
 ];
 
 // Pre-defined legal links
@@ -30,6 +30,10 @@ const LEGAL_LINKS = [
 // Social media links
 const SOCIAL_LINKS = [
   {
+    icon: <FaLinkedin />, color: '#0077b5', url: 'https://www.linkedin.com/company/mboweezy-hub/about/', target: '_blank',
+    rel: 'noopener noreferrer'
+  },
+  {
     icon: <FaFacebook />, color: '#3b5998', url: 'https://www.facebook.com/mboweezyhub/', target: '_blank',
     rel: 'noopener noreferrer'
   },
@@ -37,16 +41,13 @@ const SOCIAL_LINKS = [
     icon: <FaTwitter />, color: '#1da1f2', url: 'https://x.com/mboweezyhub', target: '_blank',
     rel: 'noopener noreferrer'
   },
-  {
-    icon: <FaLinkedin />, color: '#0077b5', url: 'https://www.linkedin.com/company/mboweezy-hub/about/', target: '_blank',
-    rel: 'noopener noreferrer'
-  },
+
   {
     icon: <FaInstagram />, color: '#e1306c', url: 'https://www.instagram.com/mboweeezy?igsh=MXRwZWN6cDJrd3B5eg%3D%3D&utm_source=qr', target: '_blank',
     rel: 'noopener noreferrer'
   },
   {
-    icon: <FaWhatsapp />, color: '#25d366', url: 'https://wa.me/27780550474?text=Hello%20Mboweni%20Trading%20Solutions,%20I%20would%20like%20to%20inquire%20about...', target: '_blank',
+    icon: <FaWhatsapp />, color: '#25d366', url: 'https://wa.me/27607006456?text=Hello%20Mboweni%20Trading%20Solutions,%20I%20would%20like%20to%20inquire%20about...', target: '_blank',
     rel: 'noopener noreferrer'
   }
 ];
@@ -85,6 +86,21 @@ export default function Footer() {
   const handleReject = () => {
     localStorage.setItem('cookieConsent', 'rejected');
     setShowCookieNotice(false);
+  };
+
+  const scrollToSection = (path: string, offset = 0) => {
+    if (path.startsWith('#')) {
+      const id = path.substring(1);
+      const element = document.getElementById(id);
+      if (element) {
+        window.scrollTo({
+          top: element.offsetTop + offset,
+          behavior: 'smooth'
+        });
+      }
+    } else {
+      window.location.href = path;
+    }
   };
 
   return (
@@ -172,7 +188,7 @@ export default function Footer() {
               </motion.a>
 
               <motion.a
-                href="tel:+27780550474"
+                href="tel:+27607006456"
                 className={styles.contactChip}
                 whileHover={{ y: -3, backgroundColor: '#10b981' }}
                 transition={{ type: 'spring', stiffness: 400 }}
@@ -209,13 +225,19 @@ export default function Footer() {
           >
             <h3>Explore</h3>
             <ul>
-              {NAV_LINKS.map(({ name, path }) => (
+              {NAV_LINKS.map(({ name, path, offset }) => (
                 <motion.li
                   key={path}
                   whileHover={{ x: 5 }}
                   transition={{ type: 'spring', stiffness: 500 }}
                 >
-                  <Link href={path}>
+                  <Link
+                    href={path}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(path, offset);
+                    }}
+                  >
                     <span className={styles.linkDecorator}>→</span> {name}
                   </Link>
                 </motion.li>
@@ -310,7 +332,7 @@ export default function Footer() {
                 }}
               >
                 <CiPhone className={styles.contactIcon} />
-                <a href="tel:+27780550474">+27 78 0550 474</a>
+                <a href="tel:+27607006456">+27 60 700 6456</a>
               </motion.div>
 
               <motion.div

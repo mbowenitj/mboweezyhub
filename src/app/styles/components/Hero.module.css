@@ -137,7 +137,7 @@
   background-clip: text;
   color: transparent;
   margin: 0.2rem 0;
-  display: inline-block; 
+  display: inline-block;
 }
 
 .statItem:hover {
@@ -182,7 +182,11 @@
   position: absolute;
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0) 70%);
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.4) 0%,
+    rgba(59, 130, 246, 0) 70%
+  );
   filter: blur(40px);
   z-index: 1;
   top: 50%;
@@ -232,19 +236,19 @@
     text-align: left;
     align-items: flex-start;
   }
-  
+
   .heroContent {
     text-align: left;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .subtitle {
     margin-left: 0;
     margin-right: auto;
   }
-  
+
   .stats {
     justify-content: flex-start;
   }
@@ -254,57 +258,107 @@
   .hero {
     padding: 80px 20px;
   }
-  
+
   .heroContent h1 {
     font-size: 2.5rem;
   }
-  
+
   .subtitle {
     font-size: 1.1rem;
   }
-  
+
   .ctaButton {
     padding: 14px 24px;
     font-size: 1rem;
   }
-  
+
   .stats {
     gap: 1rem;
   }
-  
+
   .statItem {
     padding: 1rem 0.8rem;
-    min-width: 100px;
   }
-  
+
   .statNumber {
     font-size: 1.5rem;
   }
-  
+
   .statLabel {
     font-size: 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
+  .hero {
+    padding: 60px 16px;
+  }
+
+  .container {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    top: 30px;
+  }
+
   .heroContent h1 {
-    font-size: 2rem;
+    font-size: 1.75rem;
+    line-height: 1.3;
+    margin-bottom: 20px;
+    text-align: center;
   }
-  
+
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .ctaContainer {
+    align-items: center;
+    width: 100%;
+  }
+
+  .ctaButton {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+  }
+
   .stats {
-    gap: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* center the items */
+    gap: 1.5rem;
+    max-width: 1000px; /* optional: limits the total width */
+    margin: 0 auto; /* centers the container itself */
   }
-  
+
   .statItem {
-    padding: 0.8rem 0.5rem;
-    min-width: 80px;
+    flex: 1 1 250px; /* grow/shrink as needed, minimum 250px */
+    max-width: 300px;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
   }
-  
-  .statNumber {
-    font-size: 1.3rem;
-  }
-  
+
   .statLabel {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
+  }
+
+  .heroImage img {
+    width: 100%;
+    max-width: 300px;
+  }
+  .glow {
+    width: 200px;
+    height: 200px;
+    filter: blur(30px);
   }
 }

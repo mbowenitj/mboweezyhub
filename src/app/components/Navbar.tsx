@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from '../styles/components/Navbar.module.css';
 
-const sections = ['home', 'services', 'about', 'testimonials', 'faq', 'contact'];
+const sections = ['home', 'services', 'about', 'testimonials', 'FAQ', 'contact'];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,14 +14,20 @@ export default function Navbar() {
 
   const handleNavigation = (sectionId: string) => {
     if (pathname === '/') {
-      // On home page, scroll to section
       const element = document.getElementById(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        const navbarHeight = 100; // Adjust this to match your navbar height
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - navbarHeight;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+
         setActiveSection(sectionId);
       }
     } else {
-      // On other pages, navigate to home with hash
       window.location.href = `/#${sectionId}`;
     }
     setIsOpen(false);

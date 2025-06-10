@@ -89,8 +89,7 @@
     width: 100%;
     background: white;
     flex-direction: column;
-    align-items: center;
-    padding: 2rem 0;
+    padding: 2rem 36px;  
     gap: 1.5rem;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     transform: translateY(-150%);
@@ -101,6 +100,9 @@
     transform: translateY(0);
   }
 
+  .floating {
+    width: 68px;
+  }
   .toggle {
     display: block;
   }

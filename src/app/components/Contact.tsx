@@ -10,9 +10,10 @@ export default function Contact() {
   const [showForm, setShowForm] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    user_name: '',
+    user_email: '',
     message: '',
+    subject: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -45,7 +46,7 @@ export default function Contact() {
         process.env.NEXT_PUBLIC_EMAILJS_USER_ID!,
       );
       setSubmitSuccess(true);
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ user_name: '', user_email: '', subject: '', message: '' });
     } catch (error) {
       console.error('Failed to send message:', error);
       setSubmitError('Failed to send message. Please try again later.');
@@ -243,9 +244,9 @@ export default function Contact() {
                 <input
                   type="text"
                   id="name"
-                  name="name"
-                  placeholder="John Doe"
-                  value={formData.name}
+                  name="user_name"
+                  placeholder="Enter your name"
+                  value={formData.user_name}
                   onChange={handleChange}
                   required
                 />
@@ -258,9 +259,24 @@ export default function Contact() {
                 <input
                   type="email"
                   id="email"
-                  name="email"
-                  placeholder="john@example.com"
-                  value={formData.email}
+                  name="user_email"
+                  placeholder="Enter your email address"
+                  value={formData.user_email}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="subject">
+                <span>Subject</span>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  placeholder="Enter subject"
+                  value={formData.subject}
                   onChange={handleChange}
                   required
                 />

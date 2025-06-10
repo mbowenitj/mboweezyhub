@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 'use client';
 
-import Image from 'next/image'
+import Image from 'next/image';
 import Lottie from "lottie-react";
 import animationData from '../../../public/animations/tech-wave.json';
-import styles from '../styles/components/Hero.module.css'
+import styles from '../styles/components/Hero.module.css';
 import { motion } from 'framer-motion';
 import AnimatedNumber from './AnimatedNumber';
 
@@ -14,10 +14,6 @@ const scrollToContact = () => {
     contactSection.scrollIntoView({ behavior: 'smooth' });
   }
 };
-
-{/* <button className={`${styles.ctaButton} ${styles.secondary}`}>
-              See Our Work
-            </button> */}
 
 export default function Hero() {
   return (
@@ -32,7 +28,7 @@ export default function Hero() {
           </h1>
           <p className={styles.subtitle}>
             We build <strong>custom-tailored</strong> websites and mobile apps with
-            <strong> dedicated attention</strong> to each client's unique needs and goals.
+            <strong> dedicated attention</strong> to each client's unique needs.
           </p>
           <div className={styles.ctaContainer}>
             <button
@@ -43,22 +39,21 @@ export default function Hero() {
               <span className={styles.arrow}>→</span>
             </button>
           </div>
-          
-          {/* Stats section moved here and wrapped in a container */}
+
           <div className={styles.statsContainer}>
             <div className={styles.stats}>
-              {/* Happy Clients */}
               <motion.div
                 className={styles.statItem}
                 whileHover={{ y: -3 }}
                 transition={{ type: "spring", stiffness: 400 }}
               >
-                <div className={styles.statIcon}>👥</div>
-                <div className={styles.statNumber}>50K+</div>
-                <div className={styles.statLabel}>Lines of M-Code</div>
+                <div className={styles.statIcon}>💻</div>
+                <div className={styles.statNumber}>
+                  <AnimatedNumber value={50} />
+                </div>
+                <div className={styles.statLabel}>Projects</div>
               </motion.div>
 
-              {/* Years Experience */}
               <motion.div
                 className={styles.statItem}
                 whileHover={{ y: -3 }}
@@ -66,14 +61,11 @@ export default function Hero() {
               >
                 <div className={styles.statIcon}>📅</div>
                 <div className={styles.statNumber}>
-                 <AnimatedNumber value={15} />
-
+                  <AnimatedNumber value={15} />
                 </div>
-               
-                <div className={styles.statLabel}>Years Experience</div>
+                <div className={styles.statLabel}>Years</div>
               </motion.div>
 
-              {/* Satisfaction Rate */}
               <motion.div
                 className={styles.statItem}
                 whileHover={{ y: -3 }}

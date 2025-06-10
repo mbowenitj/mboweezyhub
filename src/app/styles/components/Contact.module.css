@@ -3,6 +3,9 @@
 /////////////////////////////////////////////////////
 */
 
+#contact {
+  scroll-margin-top: 100px; /* Adjust this value based on your navbar height */
+}
 .contact {
   position: relative;
   padding: 8rem 0;
@@ -26,7 +29,11 @@
   right: -100px;
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(106, 17, 203, 0.08) 0%, rgba(106, 17, 203, 0) 70%);
+  background: radial-gradient(
+    circle,
+    rgba(106, 17, 203, 0.08) 0%,
+    rgba(106, 17, 203, 0) 70%
+  );
   border-radius: 50%;
 }
 
@@ -37,7 +44,11 @@
   left: -150px;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(37, 117, 252, 0.08) 0%, rgba(37, 117, 252, 0) 70%);
+  background: radial-gradient(
+    circle,
+    rgba(37, 117, 252, 0.08) 0%,
+    rgba(37, 117, 252, 0) 70%
+  );
   border-radius: 50%;
 }
 
@@ -232,6 +243,7 @@
   font-size: 1rem;
   transition: all 0.3s ease;
   background: #f9fafb;
+  color: #000;
 }
 
 .formGroup input:focus,
@@ -245,6 +257,7 @@
 .formGroup textarea {
   resize: vertical;
   min-height: 160px;
+  color: #000;
 }
 
 .submitButton {
@@ -289,13 +302,13 @@
   animation: spin 1s ease-in-out infinite;
 }
 
-/* Success Section */
+/* Success Section - Updated for centering */
 .contactSuccess {
   background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
   color: white;
   padding: 8rem 2rem;
   text-align: center;
-  min-height: 70vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -318,6 +331,8 @@
   margin: 0 auto;
   position: relative;
   z-index: 2;
+  width: 100%;
+  padding: 2rem;
 }
 
 .checkmarkContainer {
@@ -335,7 +350,8 @@
   stroke: #fff;
   stroke-miterlimit: 10;
   box-shadow: 0 0 0 rgba(106, 17, 203, 0.4);
-  animation: checkmarkFill 0.4s ease-in-out 0.4s forwards, checkmarkScale 0.3s ease-in-out 0.9s both;
+  animation: checkmarkFill 0.4s ease-in-out 0.4s forwards,
+    checkmarkScale 0.3s ease-in-out 0.9s both;
 }
 
 .checkmarkCircle {
@@ -366,6 +382,9 @@
   margin-bottom: 2.5rem;
   opacity: 0.9;
   line-height: 1.6;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .successButton {
@@ -417,7 +436,11 @@
   right: -100px;
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(79, 70, 229, 0.1) 0%, rgba(79, 70, 229, 0) 70%);
+  background: radial-gradient(
+    circle,
+    rgba(79, 70, 229, 0.1) 0%,
+    rgba(79, 70, 229, 0) 70%
+  );
   border-radius: 50%;
 }
 
@@ -428,7 +451,11 @@
   left: -150px;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0) 70%);
+  background: radial-gradient(
+    circle,
+    rgba(99, 102, 241, 0.1) 0%,
+    rgba(99, 102, 241, 0) 70%
+  );
   border-radius: 50%;
 }
 
@@ -510,7 +537,8 @@
 }
 
 @keyframes checkmarkScale {
-  0%, 100% {
+  0%,
+  100% {
     transform: none;
   }
   50% {
@@ -529,7 +557,7 @@
   .contact {
     padding: 6rem 0;
   }
-  
+
   .title {
     font-size: 2.4rem;
   }
@@ -539,29 +567,29 @@
   .contact {
     padding: 5rem 0;
   }
-  
+
   .title {
     font-size: 2rem;
   }
-  
+
   .grid {
     grid-template-columns: 1fr;
   }
-  
+
   .info,
   .form {
     padding: 2.5rem;
   }
-  
+
   .ctaSection {
     padding: 4rem 2rem;
     margin: 2rem auto;
   }
-  
+
   .ctaSection h2 {
     font-size: 2rem;
   }
-  
+
   .ctaSection p {
     font-size: 1.1rem;
   }
@@ -571,22 +599,52 @@
   .contact {
     padding: 4rem 0;
   }
-  
+
   .title {
     font-size: 1.8rem;
   }
-  
+
   .info,
   .form {
     padding: 2rem;
   }
-  
+
   .ctaSection h2 {
     font-size: 1.8rem;
   }
-  
+
   .ctaButton {
     padding: 0.9rem 1.8rem;
     font-size: 1rem;
+  }
+
+  /* Responsive adjustments for success section */
+  .contactSuccess {
+    padding: 4rem 1.5rem;
+  }
+
+  .successContent h2 {
+    font-size: 2rem;
+  }
+
+  .successContent p {
+    font-size: 1rem;
+    max-width: 90%;
+  }
+
+  .checkmarkContainer {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1.5rem;
+  }
+  .ctaBackground{
+     z-index: 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    width: calc(100% - 2 * 2%);
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 2%;
+    margin: 0 auto;
   }
 }
