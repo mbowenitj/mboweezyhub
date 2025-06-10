@@ -27,7 +27,6 @@
   justify-content: space-between;
   gap: 50px;
   position: relative;
-  z-index: 1;
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -273,7 +272,7 @@
   }
 
   .stats {
-    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .statItem {
@@ -302,14 +301,14 @@
   }
 
   .heroContent h1 {
-    font-size: 1.75rem;
+    font-size: 25px;
     line-height: 1.3;
     margin-bottom: 20px;
     text-align: center;
   }
 
   .subtitle {
-    font-size: 1rem;
+    font-size: 17px;
     margin-bottom: 30px;
     text-align: center;
   }
@@ -327,20 +326,16 @@
   }
 
   .stats {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* center the items */
-    gap: 1.5rem;
-    max-width: 1000px; /* optional: limits the total width */
-    margin: 0 auto; /* centers the container itself */
+    display: grid;
+    gap: 1rem;
+    padding: 0 10px;
   }
 
   .statItem {
-    flex: 1 1 250px; /* grow/shrink as needed, minimum 250px */
-    max-width: 300px;
-    align-items: center;
+    flex: 1 1 120px;
+    max-width: 150px;
     text-align: center;
-    padding: 1.5rem 1rem;
+    padding: 1rem;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.1);

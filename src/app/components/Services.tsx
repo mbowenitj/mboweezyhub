@@ -21,6 +21,7 @@ export default function Services() {
       <div className={styles.container}>
         <div className={styles.header}>
           <h2 className={styles.sectionTitle}><span>Our Services</span></h2>
+          <div className={styles.divider}></div>
           <p className={styles.sectionSubtitle}>Comprehensive solutions to elevate your digital presence</p>
         </div>
 
@@ -58,9 +59,9 @@ export default function Services() {
               const Icon = service.icon;
               return <Icon className={className} />;
             };
-            
+
             const serviceId = service.title.toLowerCase().replace(/\s+/g, '-');
-            
+
             return (
               <div key={index} className={styles.card} data-category={service.category}>
                 <div className={styles.iconWrapper}>
@@ -70,7 +71,7 @@ export default function Services() {
                 </div>
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
-                <Link 
+                <Link
                   href={`/services#${serviceId}`}
                   scroll={false}
                   passHref

@@ -10,14 +10,22 @@
   overflow: hidden;
 }
 
+.divider {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, #4f46e5, #ec4899);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
 .services::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('/images/services-bg-pattern.svg') no-repeat;
+  background: url("/images/services-bg-pattern.svg") no-repeat;
   background-position: right top;
   opacity: 0.05;
   z-index: 0;
@@ -27,19 +35,17 @@
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
-  z-index: 1;
 }
 
 .header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 
 .sectionTitle {
   font-size: 2.8rem;
   font-weight: 700;
   color: #1a1a1a;
-  margin-bottom: 1rem;
 }
 
 .sectionTitle span {
@@ -53,6 +59,7 @@
   color: #64748b;
   max-width: 600px;
   margin: 0 auto;
+  padding-top: 15px;
 }
 
 .filterButtons {
@@ -75,7 +82,8 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.filterButton:hover, .filterButton.active {
+.filterButton:hover,
+.filterButton.active {
   background: #3b82f6;
   color: white;
   border-color: #3b82f6;
@@ -101,7 +109,7 @@
 }
 
 .card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -192,24 +200,24 @@
   .services {
     padding: 4rem 1.5rem;
   }
-  
+
   .sectionTitle {
     font-size: 2.2rem;
   }
-  
+
   .sectionSubtitle {
     font-size: 1rem;
   }
-  
+
   .filterButtons {
     gap: 0.5rem;
   }
-  
+
   .filterButton {
     padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
   }
-  
+
   .grid {
     grid-template-columns: 1fr;
   }

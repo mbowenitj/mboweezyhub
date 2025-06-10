@@ -118,6 +118,7 @@ export default function Contact() {
           className={styles.ctaContent}
         >
           <h2>Ready to Elevate Your Business?</h2>
+           <div className={styles.divider}></div>
           <p>Let's create something extraordinary together</p>
           <motion.button
             onClick={toggleForm}

@@ -46,6 +46,7 @@ export default function FAQ() {
         <h2 className={styles.sectionTitle}>
           <span className={styles.titleDecorator}>❖</span> Frequently Asked Questions
         </h2>
+         <div className={styles.divider}></div>
         <p className={styles.subtitle}>Find quick answers to common inquiries about our services</p>
         
         <div className={styles.faqContainer}>

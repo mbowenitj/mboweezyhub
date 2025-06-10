@@ -1,13 +1,6 @@
-// components/BackgroundParticles.tsx
 'use client';
 import { useRef, useEffect } from 'react';
 
-export default function BackgroundParticles() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number>(0);
-  const particlesRef = useRef<Particle[]>([]);
-
-// Move Particle class outside the component
 class Particle {
   x: number;
   y: number;
@@ -43,6 +36,11 @@ class Particle {
   }
 }
 
+export default function BackgroundParticles() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationRef = useRef<number>(0);
+  const particlesRef = useRef<Particle[]>([]);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -50,36 +48,33 @@ class Particle {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Set initial canvas size
     const updateCanvasSize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
     updateCanvasSize();
 
-    // Create particles
     const particleCount = window.innerWidth < 768 ? 30 : 80;
     particlesRef.current = Array.from({ length: particleCount }, () => new Particle(canvas));
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      // Update and draw particles
+
       particlesRef.current.forEach((particle) => {
         particle.update();
         particle.draw(ctx);
       });
 
-      // Draw connections between particles
+      // Draw lines between close particles
       for (let i = 0; i < particlesRef.current.length; i++) {
         for (let j = i + 1; j < particlesRef.current.length; j++) {
           const dx = particlesRef.current[i].x - particlesRef.current[j].x;
           const dy = particlesRef.current[i].y - particlesRef.current[j].y;
           const distance = Math.sqrt(dx * dx + dy * dy);
-          
+
           if (distance < 100) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(255, 255, 255, ${1 - distance/100})`;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${1 - distance / 100})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(particlesRef.current[i].x, particlesRef.current[i].y);
             ctx.lineTo(particlesRef.current[j].x, particlesRef.current[j].y);
@@ -87,7 +82,7 @@ class Particle {
           }
         }
       }
-      
+
       animationRef.current = requestAnimationFrame(animate);
     };
 
@@ -95,7 +90,6 @@ class Particle {
 
     const handleResize = () => {
       updateCanvasSize();
-      // Recreate particles on resize to maintain density
       particlesRef.current = Array.from({ length: particleCount }, () => new Particle(canvas));
     };
 
@@ -107,8 +101,8 @@ class Particle {
   }, []);
 
   return (
-    <canvas 
-      ref={canvasRef} 
+    <canvas
+      ref={canvasRef}
       className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
     />
   );

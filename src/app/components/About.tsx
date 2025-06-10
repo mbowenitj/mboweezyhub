@@ -1,5 +1,4 @@
 /* eslint-disable react/no-unescaped-entities */
-// src/components/About.tsx
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
@@ -42,8 +41,7 @@ export default function About() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleMouseDown = (e: React.MouseEvent) => {
-    if (dotsRef.current && containerRef.current) {
-      const containerRect = containerRef.current.getBoundingClientRect();
+    if (dotsRef.current) {
       const dotsRect = dotsRef.current.getBoundingClientRect();
 
       setOffset({
@@ -59,6 +57,7 @@ export default function About() {
       if (!isDragging || !containerRef.current) return;
 
       const containerRect = containerRef.current.getBoundingClientRect();
+
       const newX = Math.max(0, Math.min(e.clientX - containerRect.left - offset.x, containerRect.width - 30));
       const newY = Math.max(0, Math.min(e.clientY - containerRect.top - offset.y, containerRect.height - 30));
 
@@ -93,6 +92,7 @@ export default function About() {
           variants={fadeIn}
         >
           Who <span>We Are</span>
+        <div className={styles.divider}></div>
         </motion.h2>
         <motion.p
           className={styles.sectionSubtitle}
@@ -137,6 +137,7 @@ export default function About() {
           <div
             ref={containerRef}
             className={styles.tertiaryImageWrapper}
+            style={{ position: 'relative' }}
           >
             <Image
               src="/images/technology.svg"
@@ -144,6 +145,25 @@ export default function About() {
               width={300}
               height={150}
               className={styles.tertiaryImage}
+            />
+
+            {/* Draggable dot */}
+            <div
+              ref={dotsRef}
+              onMouseDown={handleMouseDown}
+              style={{
+                position: 'absolute',
+                left: position.x,
+                top: position.y,
+                width: 30,
+                height: 30,
+                borderRadius: '50%',
+                backgroundColor: 'rgba(255, 0, 0, 0.6)',
+                cursor: 'grab',
+                userSelect: 'none',
+                zIndex: 10
+              }}
+              aria-label="Draggable indicator"
             />
           </div>
         </motion.div>

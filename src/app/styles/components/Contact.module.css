@@ -11,6 +11,13 @@
   padding: 8rem 0;
   overflow: hidden;
 }
+.divider {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, #4f46e5, #ec4899);
+  margin: 0 auto;
+  border-radius: 2px;
+}
 
 .contactBackground {
   position: absolute;
@@ -461,7 +468,6 @@
 
 .ctaContent {
   position: relative;
-  z-index: 2;
   max-width: 700px;
   margin: 0 auto;
 }
@@ -479,6 +485,7 @@
   margin-bottom: 2.5rem;
   color: #4b5563;
   line-height: 1.6;
+  padding-top: 15px;
 }
 
 .ctaButton {
@@ -610,7 +617,7 @@
   }
 
   .ctaSection h2 {
-    font-size: 1.8rem;
+    font-size: 25px;
   }
 
   .ctaButton {

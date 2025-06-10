@@ -1,4 +1,3 @@
-// src/components/Testimonials.tsx
 import styles from '../styles/components/Testimonials.module.css';
 
 const testimonials = [
@@ -34,7 +33,7 @@ export default function Testimonials() {
         <div className={styles.grid}>
           {testimonials.map((testimonial, index) => (
             <div key={index} className={styles.card}>
-              <div className={styles.quoteMark}>"</div>
+              <div className={styles.quoteMark}>&quot;</div>
               <p className={styles.text}>{testimonial.text}</p>
               <div className={styles.rating}>
                 {Array.from({ length: 5 }).map((_, i) => (

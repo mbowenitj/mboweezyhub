@@ -11,6 +11,14 @@
   color: white;
 }
 
+.divider {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, #4f46e5, #ec4899);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
 .backgroundAnimation {
   position: absolute;
   top: 0;
@@ -85,12 +93,11 @@
   margin: 0 auto;
   padding: 0 2rem;
   position: relative;
-  z-index: 2;
 }
 
 .sectionTitle {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   font-size: 2.75rem;
   font-weight: 800;
   background: linear-gradient(90deg, #ffffff 0%, #c7d2fe 100%);
@@ -124,6 +131,7 @@
   margin: 0 auto 4rem;
   line-height: 1.6;
   font-weight: 300;
+  padding-top: 15px;
 }
 
 .faqContainer {
@@ -214,7 +222,7 @@
   }
   
   .sectionTitle {
-    font-size: 2.25rem;
+    font-size: 25px;
   }
   
   .faqQuestion {
