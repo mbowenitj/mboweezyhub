@@ -1,5 +1,4 @@
 /* eslint-disable react/no-unescaped-entities */
-// src/components/PrivacyPolicy.tsx
 import styles from '../styles/components/LegalPage.module.css';
 
 export default function PrivacyPolicy() {

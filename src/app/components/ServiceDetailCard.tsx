@@ -5,6 +5,9 @@ import { FaArrowRight, FaCheck } from 'react-icons/fa';
 import { Service } from '../data/services';
 import styles from '../styles/components/ServiceDetailCard.module.css';
 import Link from 'next/link';
+import { useEffect } from 'react';
+import { scrollToContact } from '../utils/scroll';
+import { useRouter } from 'next/navigation';
 
 interface ServiceCardProps {
   service: Service;
@@ -21,6 +24,7 @@ export default function ServiceDetailCard({
   sectionTitle,
   sectionDescription
 }: ServiceCardProps) {
+  const router = useRouter();
   const isEven = index % 2 === 0;
   const hasFeatures = service.features && service.features.length > 0;
 
@@ -31,6 +35,25 @@ export default function ServiceDetailCard({
     marketing: styles.marketingService,
     consulting: styles.consultingService
   }[service.category] || styles.defaultService;
+
+  useEffect(() => {
+    // Initialize scroll handler when component mounts
+    const timeout = setTimeout(() => {
+      if (window.location.hash === '#contact') {
+        scrollToContact();
+      }
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+  const handleContactClick = () => {
+    const scrolled = scrollToContact();
+
+    if (!scrolled) {
+      router.push('/#contact');
+    }
+  }
 
   return (
     <>
@@ -102,11 +125,11 @@ export default function ServiceDetailCard({
                 </ul>
               </div>
             )}
-
             <div className={styles.ctaContainer}>
               <Link
                 href="/#contact"
                 className={styles.primaryButton}
+                onClick={handleContactClick}
                 scroll={false}
               >
                 Get Started <FaArrowRight className={styles.arrowIcon} />

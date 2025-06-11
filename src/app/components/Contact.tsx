@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from '../styles/components/Contact.module.css';
 import emailjs from '@emailjs/browser';
@@ -55,10 +55,29 @@ export default function Contact() {
     }
   };
 
+  useEffect(() => {
+  const handleScrollToContact = () => {
+    if (window.location.hash === '#contact') {
+      const contactSection = document.querySelector('#contact');
+      if (contactSection) {
+        const yOffset = -100;
+        const y = contactSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }
+  };
+
+  // Run on mount
+  handleScrollToContact();
+
+  // Add event listener
+  window.addEventListener('hashchange', handleScrollToContact);
+  return () => window.removeEventListener('hashchange', handleScrollToContact);
+}, []);
   if (submitSuccess) {
     return (
       <motion.section
-        id="contact"
+        id="contact-success"
         className={styles.contactSuccess}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -140,7 +159,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className={styles.contact}>
+    <section id="contact-form" className={styles.contact}>
       <div className={styles.contactBackground}></div>
       <div className={styles.container}>
         <motion.div

@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 
 'use client';
+
 import Link from 'next/link';
 import styles from '../styles/components/Footer.module.css';
 import { motion } from 'framer-motion';
