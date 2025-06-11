@@ -419,7 +419,6 @@ export default function Footer() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <Copyright />
 
           <div className={styles.legalLinks}>
             {LEGAL_LINKS.map(({ name, path }) => (
@@ -428,6 +427,8 @@ export default function Footer() {
               </Link>
             ))}
           </div>
+          <br/>
+           <Copyright />
         </motion.div>
       </div>
 

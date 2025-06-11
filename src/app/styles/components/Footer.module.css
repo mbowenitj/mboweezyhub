@@ -149,16 +149,16 @@
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  margin: 0; 
+  margin: 0;
   border-radius: 50px;
 }
 
 .brandHeader {
-  margin-bottom: 2rem; 
+  margin-bottom: 2rem;
 }
 
 .logoText {
-  margin: 0; 
+  margin: 0;
   font-size: 1.5rem;
   font-weight: 700;
   background: linear-gradient(90deg, #ffffff 0%, #c7d2fe 100%);
@@ -472,9 +472,10 @@
   transition: all 0.3s;
   font-size: 0.9rem;
   position: relative;
+  text-decoration: underline;
 }
 
-.legalLinks a::after {
+/* .legalLinks a::after {
   content: "";
   position: absolute;
   bottom: -2px;
@@ -483,7 +484,7 @@
   height: 1px;
   background: #4f46e5;
   transition: width 0.3s;
-}
+} */
 
 .legalLinks a:hover {
   color: white;
@@ -598,10 +599,6 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .footer {
-    padding: 6rem 0 2rem;
-  }
-
   .grid {
     grid-template-columns: 1fr;
     gap: 3rem;

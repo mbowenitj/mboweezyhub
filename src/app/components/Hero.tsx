@@ -5,7 +5,7 @@ import Lottie from "lottie-react";
 import animationData from '../../../public/animations/tech-wave.json';
 import styles from '../styles/components/Hero.module.css';
 import { motion } from 'framer-motion';
-import AnimatedNumber from './AnimatedNumber';
+// import AnimatedNumber from './AnimatedNumber';
 
 const scrollToContact = () => {
   const contactSection = document.getElementById('contact');
@@ -21,6 +21,20 @@ export default function Hero() {
         <Lottie animationData={animationData} loop={true} />
       </div>
       <div className={styles.container}>
+        {/* Mobile Image - At the very top on mobile */}
+        <div className={styles.mobileHeroImage}>
+          <Image
+            src="/images/banner1.svg"
+            alt="Digital Solutions Illustration"
+            width={600}
+            height={500}
+            priority
+            className={styles.floating}
+          />
+          <div className={styles.glow}></div>
+        </div>
+
+        {/* Left Column - Content */}
         <div className={styles.heroContent}>
           <h1>
             <span>Transform Your Business</span> with Next-Gen <span>Digital Solutions</span>
@@ -29,6 +43,7 @@ export default function Hero() {
             We build <strong>custom-tailored</strong> websites and mobile apps with
             <strong> dedicated attention</strong> to each client's unique needs.
           </p>
+
           <div className={styles.ctaContainer}>
             <button
               onClick={scrollToContact}
@@ -73,7 +88,9 @@ export default function Hero() {
             </div>
           </div>
         </div>
-        <div className={styles.heroImage}>
+
+        {/* Desktop Image - Right Side */}
+        <div className={styles.desktopHeroImage}>
           <Image
             src="/images/banner1.svg"
             alt="Digital Solutions Illustration"
