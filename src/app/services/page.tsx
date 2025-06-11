@@ -38,7 +38,7 @@ export default function ServicesPage() {
       <title>Our Services | Mboweezy Hub</title>
       <meta
         name="description"
-        content="Explore professional web development, branding, cloud hosting, print marketing, and digital solutions tailored for modern business growth. Powered by Mboweezy Hub." />
+        content="Explore professional web development, branding, cloud hosting, print marketing, and digital solutions tailored for modern business growth. Powered by Mboweezy Hub (Pty) Ltd." />
       <meta name="keywords" content="web development, branding, cloud hosting, print design, digital marketing South Africa" />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://www.mboweezyhub.coza/services" />

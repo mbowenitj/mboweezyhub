@@ -11,5 +11,5 @@ export default function Copyright() {
 
   if (!year) return null; // Optional: Return a loader or empty state
 
-  return <p>© {year} Mboweezy Hub – Division of Mboweni Trading Solutions (Pty) Ltd. All rights reserved.</p>;
+  return <p>© {year} Mboweezy Hub - A Division of Mboweni Trading Solutions (Pty) Ltd. All rights reserved.</p>;
 }

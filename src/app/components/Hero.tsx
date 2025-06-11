@@ -46,11 +46,9 @@ export default function Hero() {
                 whileHover={{ y: -3 }}
                 transition={{ type: "spring", stiffness: 400 }}
               >
-                <div className={styles.statIcon}>💻</div>
-                <div className={styles.statNumber}>
-                  <AnimatedNumber value={50} />
-                </div>
-                <div className={styles.statLabel}>Projects</div>
+                <div className={styles.statIcon}>🌱</div>
+                <div className={styles.statNumber}>Growing</div>
+                <div className={styles.statLabel}>Digital Impact</div>
               </motion.div>
 
               <motion.div
@@ -58,11 +56,9 @@ export default function Hero() {
                 whileHover={{ y: -3 }}
                 transition={{ type: "spring", stiffness: 400 }}
               >
-                <div className={styles.statIcon}>📅</div>
-                <div className={styles.statNumber}>
-                  <AnimatedNumber value={15} />
-                </div>
-                <div className={styles.statLabel}>Years</div>
+                <div className={styles.statIcon}>⭐</div>
+                <div className={styles.statNumber}>High</div>
+                <div className={styles.statLabel}>Client Satisfaction</div>
               </motion.div>
 
               <motion.div
@@ -70,9 +66,9 @@ export default function Hero() {
                 whileHover={{ y: -3 }}
                 transition={{ type: "spring", stiffness: 400 }}
               >
-                <div className={styles.statIcon}>💯</div>
-                <div className={styles.statNumber}>100%</div>
-                <div className={styles.statLabel}>Satisfaction</div>
+                <div className={styles.statIcon}>💡</div>
+                <div className={styles.statNumber}>Driven</div>
+                <div className={styles.statLabel}>By Innovation</div>
               </motion.div>
             </div>
           </div>

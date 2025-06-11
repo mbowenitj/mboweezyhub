@@ -109,23 +109,27 @@
 
 /* Stats Container */
 .stats {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* default: 3 in a row */
   gap: 1.5rem;
-  justify-content: flex-start;
-  flex-wrap: wrap;
 }
 
 .statItem {
+  padding: 1rem 0.8rem;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 1.5rem 1rem;
+  align-items: center;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  min-width: 120px;
   transition: all 0.3s ease;
+  text-align: center;
+  min-height: 150px;
+}
+
+.statIcon {
+  font-size: 2rem;
 }
 
 .statNumber {
@@ -137,6 +141,11 @@
   color: transparent;
   margin: 0.2rem 0;
   display: inline-block;
+}
+
+.statLabel {
+  font-size: 0.9rem;
+  opacity: 0.85;
 }
 
 .statItem:hover {
