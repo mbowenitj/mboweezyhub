@@ -19,10 +19,12 @@ export default function Services() {
   return (
     <section id="services" className={styles.services}>
       <div className={styles.container}>
-        <div className={styles.header}>
-          <h2 className={styles.sectionTitle}><span>Our Services</span></h2>
-          <div className={styles.divider}></div>
-          <p className={styles.sectionSubtitle}>Comprehensive solutions to elevate your digital presence</p>
+        <div className={styles.headerBanner}>
+          <div className={styles.header}>
+            <h2 className={styles.sectionTitle}><span>Our Services</span></h2>
+            <div className={styles.divider}></div>
+            <p className={styles.sectionSubtitle}>Comprehensive solutions to elevate your digital presence</p>
+          </div>
         </div>
 
         <div className={styles.filterButtons}>
@@ -72,8 +74,8 @@ export default function Services() {
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
                 <Link
-                  href={`/services#${serviceId}`}
-                  scroll={false}
+                  href={service.title === "Web & Mobile Development" ? "/services" : `/services#${serviceId}`}
+                  scroll={true}
                   passHref
                 >
                   <button className={styles.learnMore}>Learn more →</button>

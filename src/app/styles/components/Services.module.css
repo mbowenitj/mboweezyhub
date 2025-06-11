@@ -3,6 +3,42 @@
 /////////////////////////////////////////////////////
 */
 
+.headerBanner {
+  background: #3b82f61a;
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* backdrop-filter: blur(10px); */
+  position: relative;
+  overflow: hidden;
+}
+
+.headerBanner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(59, 130, 246, 0.15) 0%,
+    transparent 70%
+  );
+  animation: rotateGradient 15s linear infinite;
+  z-index: -1;
+}
+
+@keyframes rotateGradient {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .services {
   padding: 4rem 2rem;
   background: linear-gradient(to bottom, #f9fafe 0%, #ffffff 100%);
@@ -197,6 +233,10 @@
 }
 /* Responsive */
 @media (max-width: 768px) {
+    .headerBanner {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
   .services {
     padding: 4rem 1.5rem;
   }
@@ -221,4 +261,7 @@
   .grid {
     grid-template-columns: 1fr;
   }
+  
 }
+
+

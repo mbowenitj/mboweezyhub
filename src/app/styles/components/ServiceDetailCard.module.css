@@ -3,12 +3,52 @@
 /////////////////////////////////////////////////////
 */
 
+.headerBanner {
+  /* background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.1) 0%,
+    rgba(139, 92, 246, 0.1) 100%
+  ); */
+  background: url("/images/banner-service.svg") no-repeat;
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.headerBanner::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(59, 130, 246, 0.15) 0%,
+    transparent 70%
+  );
+  animation: rotateGradient 15s linear infinite;
+  z-index: -1;
+}
+
+@keyframes rotateGradient {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .sectionHeaderWrapper {
   width: 100%;
   display: flex;
   justify-content: center;
   padding-top: 50px;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
   position: relative;
   overflow: hidden;
 }
@@ -23,10 +63,12 @@
 }
 
 .sectionHeader {
-  text-align: center;
-  max-width: 1200px;
+  background: url("/images/banner-hub-services.svg") no-repeat;
+  position: relative;
+  background-size: cover;
+  background-position: center;
   width: 100%;
-  padding: 4rem 2rem;
+  padding: 20rem 2rem;
   position: relative;
   z-index: 1;
 }
@@ -52,6 +94,7 @@
   -webkit-text-fill-color: transparent;
   background: linear-gradient(90deg, #3b82f6, #8b5cf6);
   -webkit-background-clip: text;
+  display: none;
 }
 
 .sectionTitle .titleText::after {
@@ -436,7 +479,11 @@
 }
 
 @media (max-width: 768px) {
-  .sectionHeaderWrapper{
+  .headerBanner {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .sectionHeaderWrapper {
     padding-top: 90px;
   }
   .sectionHeader {
@@ -476,6 +523,10 @@
 }
 
 @media (max-width: 480px) {
+  .headerBanner {
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
   .imageColumn {
     height: 250px;
   }
