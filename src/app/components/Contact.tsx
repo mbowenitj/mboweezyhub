@@ -128,7 +128,8 @@ export default function Contact() {
 
   if (!showForm) {
     return (
-      <section id="contact" className={styles.ctaSection}>
+      <div id="contact"> 
+      <section className={styles.ctaSection}>
         <div className={styles.ctaBackground}></div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -155,6 +156,7 @@ export default function Contact() {
           </motion.button>
         </motion.div>
       </section>
+      </div>
     );
   }
 

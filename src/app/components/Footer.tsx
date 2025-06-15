@@ -1,5 +1,4 @@
 /* eslint-disable react/no-unescaped-entities */
-
 'use client';
 
 import Link from 'next/link';
@@ -12,16 +11,16 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Copyright from './Copyright';
 
-// Pre-defined navigation links
+// Navigation links (removed offsets)
 const NAV_LINKS = [
   { name: 'Home', path: '#home' },
   { name: 'Services', path: '#services' },
   { name: 'About', path: '#about' },
   { name: 'Testimonials', path: '#testimonials' },
-  { name: 'Contact', path: '#contact', offset: -100 }
+  { name: 'Contact', path: '#contact' }
 ];
 
-// Pre-defined legal links
+// Legal links
 const LEGAL_LINKS = [
   { name: 'Privacy Policy', path: '/privacy-policy' },
   { name: 'Terms and Conditions', path: '/terms-conditions' },
@@ -31,35 +30,34 @@ const LEGAL_LINKS = [
 // Social media links
 const SOCIAL_LINKS = [
   {
-    icon: <FaLinkedin />, color: '#0077b5', url: 'https://www.linkedin.com/company/mboweezy-hub/about/', target: '_blank',
-    rel: 'noopener noreferrer'
+    icon: <FaLinkedin />, color: '#0077b5', url: 'https://www.linkedin.com/company/mboweezy-hub/about/', 
+    target: '_blank', rel: 'noopener noreferrer'
   },
   {
-    icon: <FaFacebook />, color: '#3b5998', url: 'https://www.facebook.com/mboweezyhub/', target: '_blank',
-    rel: 'noopener noreferrer'
+    icon: <FaFacebook />, color: '#3b5998', url: 'https://www.facebook.com/mboweezyhub/', 
+    target: '_blank', rel: 'noopener noreferrer'
   },
   {
-    icon: <FaTwitter />, color: '#1da1f2', url: 'https://x.com/mboweezyhub', target: '_blank',
-    rel: 'noopener noreferrer'
-  },
-
-  {
-    icon: <FaInstagram />, color: '#e1306c', url: 'https://www.instagram.com/mboweeezyhub/', target: '_blank',
-    rel: 'noopener noreferrer'
+    icon: <FaTwitter />, color: '#1da1f2', url: 'https://x.com/mboweezyhub', 
+    target: '_blank', rel: 'noopener noreferrer'
   },
   {
-    icon: <FaWhatsapp />, color: '#25d366', url: 'https://wa.me/27607006456', target: '_blank',
-    rel: 'noopener noreferrer'
+    icon: <FaInstagram />, color: '#e1306c', url: 'https://www.instagram.com/mboweeezyhub/', 
+    target: '_blank', rel: 'noopener noreferrer'
+  },
+  {
+    icon: <FaWhatsapp />, color: '#25d366', url: 'https://wa.me/27607006456', 
+    target: '_blank', rel: 'noopener noreferrer'
   }
 ];
 
-// Pre-generated particle animations (consistent between server and client)
+// Particle animations
 const PARTICLE_ANIMATIONS = Array.from({ length: 25 }, (_, i) => ({
   id: `particle-${i}`,
-  size: 2 + (i % 6), // Deterministic size based on index
-  delay: (i % 5), // Deterministic delay
-  duration: 10 + (i % 15), // Deterministic duration
-  left: (i * 4) % 100 // Deterministic position
+  size: 2 + (i % 6),
+  delay: (i % 5),
+  duration: 10 + (i % 15),
+  left: (i * 4) % 100
 }));
 
 export default function Footer() {
@@ -89,24 +87,25 @@ export default function Footer() {
     setShowCookieNotice(false);
   };
 
-  const scrollToSection = (path: string, offset = 0) => {
-    if (path.startsWith('#')) {
-      const id = path.substring(1);
-      const element = document.getElementById(id);
-      if (element) {
-        window.scrollTo({
-          top: element.offsetTop + offset,
-          behavior: 'smooth'
-        });
-      }
-    } else {
-      window.location.href = path;
+  // Updated scroll function - scrolls to exact top of section
+const scrollToSection = (path: string) => {
+  if (path.startsWith('#')) {
+    const id = path.substring(1);
+    const element = document.getElementById(id); // Directly target the section
+    if (element) {
+      // Add slight offset if you have a fixed header
+      const offset = 80; // Adjust this value to match your header height
+      window.scrollTo({
+        top: element.offsetTop - offset,
+        behavior: 'smooth'
+      });
     }
-  };
+  }
+};
 
   return (
     <footer className={styles.footer}>
-      {/* Floating particles - using pre-determined values */}
+      {/* Floating particles */}
       <div className={styles.particles}>
         {PARTICLE_ANIMATIONS.map((anim) => (
           <motion.div
@@ -146,16 +145,10 @@ export default function Footer() {
             viewport={{ once: true }}
           >
             <div className={styles.brandHeader}>
-              <motion.div className={styles.logo}
+              <motion.div 
+                className={styles.logo}
                 whileHover={{ scale: 1.03 }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (window.location.pathname === '/') {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  } else {
-                    window.location.href = '/';
-                  }
-                }}
+                onClick={() => scrollToTop()}
                 style={{ cursor: 'pointer' }}
               >
                 <Image
@@ -164,7 +157,6 @@ export default function Footer() {
                   width={50}
                   height={50}
                   priority
-                  className={styles.logo}
                 />
                 <h1 className={styles.logoText}>
                   <span className={styles.logoHighlight}>Mboweezy</span> Hub
@@ -176,7 +168,6 @@ export default function Footer() {
               Transforming businesses through cutting-edge digital solutions.
             </p>
 
-            {/* Animated contact chips */}
             <div className={styles.contactChips}>
               <motion.a
                 href="mailto:info@mboweezyhub.co.za"
@@ -199,7 +190,6 @@ export default function Footer() {
               </motion.a>
             </div>
 
-            {/* 3D map placeholder */}
             <motion.div
               className={styles.mapContainer}
               whileHover={{ scale: 1.02 }}
@@ -208,7 +198,7 @@ export default function Footer() {
               <div className={styles.mapOverlay}></div>
               <Image
                 src="/images/map.png"
-                alt="Team collaborating"
+                alt="Location map"
                 width={600}
                 height={500}
                 className={styles.mapImage}
@@ -226,7 +216,7 @@ export default function Footer() {
           >
             <h3>Explore</h3>
             <ul>
-              {NAV_LINKS.map(({ name, path, offset }) => (
+              {NAV_LINKS.map(({ name, path }) => (
                 <motion.li
                   key={path}
                   whileHover={{ x: 5 }}
@@ -236,7 +226,7 @@ export default function Footer() {
                     href={path}
                     onClick={(e) => {
                       e.preventDefault();
-                      scrollToSection(path, offset);
+                      scrollToSection(path);
                     }}
                   >
                     <span className={styles.linkDecorator}>→</span> {name}
@@ -245,7 +235,6 @@ export default function Footer() {
               ))}
             </ul>
 
-            {/* Working hours with animated clock */}
             <div className={styles.hoursCard}>
               <div className={styles.clockIcon}>
                 <div className={styles.clockHandHour}></div>
@@ -284,8 +273,8 @@ export default function Footer() {
                   href={social.url}
                   className={styles.socialIcon}
                   style={{ '--hover-color': social.color } as React.CSSProperties}
-                  target={social.target || '_self'}
-                  rel={social.rel || ''}
+                  target={social.target}
+                  rel={social.rel}
                   variants={{
                     hidden: { opacity: 0, y: 20 },
                     visible: {
@@ -305,7 +294,6 @@ export default function Footer() {
               ))}
             </motion.div>
 
-            {/* Contact items with staggered animation */}
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -369,16 +357,13 @@ export default function Footer() {
           </motion.div>
         </div>
 
-        {/* Cookie Notice - only shown after mount */}
+        {/* Cookie Notice */}
         {isMounted && showCookieNotice && (
           <motion.div
             className={styles.cookieBar}
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
             transition={{ type: "spring", damping: 25 }}
-            role="alert"
-            aria-live="polite"
           >
             <div className={styles.cookieContent}>
               <p className={styles.cookieText}>
@@ -387,7 +372,6 @@ export default function Footer() {
                   Learn more
                 </Link>
               </p>
-
               <div className={styles.cookieButtons}>
                 <motion.button
                   onClick={handleReject}
@@ -397,7 +381,6 @@ export default function Footer() {
                 >
                   Cancel
                 </motion.button>
-
                 <motion.button
                   onClick={handleAccept}
                   className={styles.cookieButtonPrimary}
@@ -411,7 +394,7 @@ export default function Footer() {
           </motion.div>
         )}
 
-        {/* Copyright section */}
+        {/* Copyright */}
         <motion.div
           className={styles.copyright}
           initial={{ opacity: 0 }}
@@ -419,7 +402,6 @@ export default function Footer() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-
           <div className={styles.legalLinks}>
             {LEGAL_LINKS.map(({ name, path }) => (
               <Link key={path} href={path}>
@@ -427,12 +409,12 @@ export default function Footer() {
               </Link>
             ))}
           </div>
-          <br/>
-           <Copyright />
+          <br />
+          <Copyright />
         </motion.div>
       </div>
 
-      {/* Floating back-to-top button - only after mount */}
+      {/* Back-to-top button */}
       {isMounted && (
         <motion.button
           className={styles.backToTop}

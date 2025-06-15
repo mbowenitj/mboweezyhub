@@ -35,7 +35,8 @@ export default function FAQ() {
   };
 
   return (
-    <section className={styles.faqSection} id="FAQ">
+    <div id="FAQ"> 
+    <section className={styles.faqSection}>
       <div className={styles.backgroundAnimation}></div>
       <div className={styles.floatingOrbs}>
         <div className={styles.orb1}></div>
@@ -81,5 +82,6 @@ export default function FAQ() {
         </div>
       </div>
     </section>
+    </div>
   );
 }

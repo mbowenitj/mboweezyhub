@@ -82,7 +82,8 @@ export default function About() {
   }, [isDragging, offset]);
 
   return (
-    <section id="about" className={styles.about}>
+    <div id="about"> 
+    <section className={styles.about}>
       <div className={styles.backgroundDesign}></div>
 
       <div className={styles.header}>
@@ -211,5 +212,6 @@ export default function About() {
         </div>
       </div>
     </section>
+    </div>
   );
 }

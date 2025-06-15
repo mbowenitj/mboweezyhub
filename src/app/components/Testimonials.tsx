@@ -23,7 +23,8 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className={styles.testimonials}>
+    <div id="testimonials"> 
+    <section className={styles.testimonials}>
       <div className={styles.container}>
         <div className={styles.header}>
           <span className={styles.subtitle}>Client Voices</span>
@@ -56,5 +57,6 @@ export default function Testimonials() {
         </div>
       </div>
     </section>
+    </div>
   );
 }

@@ -17,7 +17,8 @@ export default function Services() {
   };
 
   return (
-    <section id="services" className={styles.services}>
+    <div id="services"> 
+    <section className={styles.services}>
       <div className={styles.container}>
         <div className={styles.headerBanner}>
           <div className={styles.header}>
@@ -86,5 +87,6 @@ export default function Services() {
         </div>
       </div>
     </section>
+    </div>
   );
 }
