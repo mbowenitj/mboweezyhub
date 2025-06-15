@@ -5,6 +5,7 @@ import Lottie from "lottie-react";
 import animationData from '../../../public/animations/tech-wave.json';
 import styles from '../styles/components/Hero.module.css';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 // import AnimatedNumber from './AnimatedNumber';
 
 const scrollToContact = () => {
@@ -52,6 +53,14 @@ export default function Hero() {
               Get Started
               <span className={styles.arrow}>→</span>
             </button>
+
+            <Link
+              href="/projects"
+              className={`${styles.ctaButton} ${styles.secondary}`}
+            >
+              See Our Work
+              <span className={styles.arrow}>→</span>
+            </Link>
           </div>
 
           <div className={styles.statsContainer}>

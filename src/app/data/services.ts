@@ -177,5 +177,5 @@ const servicesData: Omit<Service, "link">[] = [
 
 export const services: Service[] = servicesData.map((service) => ({
   ...service,
-  link: `/services#${service.title.toLowerCase().replace(/\s+/g, "-")}`,
+  link: `/services/${service.title.toLowerCase().replace(/\s+/g, "-")}`
 }))

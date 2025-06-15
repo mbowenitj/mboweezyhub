@@ -44,11 +44,11 @@ const SOCIAL_LINKS = [
   },
 
   {
-    icon: <FaInstagram />, color: '#e1306c', url: 'https://www.instagram.com/mboweeezy?igsh=MXRwZWN6cDJrd3B5eg%3D%3D&utm_source=qr', target: '_blank',
+    icon: <FaInstagram />, color: '#e1306c', url: 'https://www.instagram.com/mboweeezyhub/', target: '_blank',
     rel: 'noopener noreferrer'
   },
   {
-    icon: <FaWhatsapp />, color: '#25d366', url: 'https://wa.me/27607006456?text=Hello%20Mboweni%20Trading%20Solutions,%20I%20would%20like%20to%20inquire%20about...', target: '_blank',
+    icon: <FaWhatsapp />, color: '#25d366', url: 'https://wa.me/27607006456', target: '_blank',
     rel: 'noopener noreferrer'
   }
 ];

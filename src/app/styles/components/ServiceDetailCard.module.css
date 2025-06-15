@@ -63,14 +63,19 @@
 }
 
 .sectionHeader {
-  background: url("/images/banner-hub-services.svg") no-repeat;
   position: relative;
-  background-size: cover;
-  background-position: center;
   width: 100%;
-  padding: 20rem 2rem;
-  position: relative;
-  z-index: 1;
+  height: 100vh; /* Full viewport height */
+  min-height: 600px; /* Minimum height for content */
+  max-height: 1200px; /* Maximum height for very large screens */
+  background: url(/images/banner-colourful.svg) center/cover no-repeat;
+  background-position: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
 .sectionTitle {
@@ -484,11 +489,13 @@
     margin-bottom: 2rem;
   }
   .sectionHeaderWrapper {
-    padding-top: 90px;
+    padding-top: 65px;
   }
   .sectionHeader {
-    margin-bottom: 2rem;
-    padding: 0 1rem;
+    margin-bottom: 0rem;
+    padding: 6rem 2rem;
+    height: auto;
+    padding: 6rem 1rem;
   }
 
   .sectionTitle {
@@ -537,5 +544,14 @@
 
   .contentColumn {
     padding: 1.25rem;
+  }
+}
+
+@media (max-height: 600px) {
+  /* For shorter viewports */
+  .sectionHeader {
+    height: auto;
+    min-height: 100vh;
+    padding: 4rem 1rem;
   }
 }

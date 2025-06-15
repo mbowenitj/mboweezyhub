@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import styles from '../styles/components/Navbar.module.css';
 
 const sections = ['home', 'services', 'about', 'testimonials', 'FAQ', 'contact'];
@@ -11,6 +11,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const pathname = usePathname();
+  const router = useRouter();
 
   const handleNavigation = (sectionId: string) => {
     if (pathname === '/') {
@@ -28,7 +29,7 @@ export default function Navbar() {
         setActiveSection(sectionId);
       }
     } else {
-      window.location.href = `/#${sectionId}`;
+      router.push(`/#${sectionId}`);
     }
     setIsOpen(false);
   };
@@ -72,20 +73,44 @@ export default function Navbar() {
         </Link>
 
         <div className={`${styles.links} ${isOpen ? styles.open : ''}`}>
-          {sections.map((section) => (
-            <a
-              key={section}
-              href={`#${section}`}
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavigation(section);
-              }}
-              className={`${styles.navLink} ${activeSection === section ? styles.active : ''
-                }`}
-            >
-              {section.charAt(0).toUpperCase() + section.slice(1)}
-            </a>
-          ))}
+          {sections.flatMap((section) => {
+            if (section === 'testimonials') {
+              return [
+                <a
+                  key={section}
+                  href={`#${section}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavigation(section);
+                  }}
+                  className={`${styles.navLink} ${activeSection === section ? styles.active : ''}`}
+                >
+                  {section.charAt(0).toUpperCase() + section.slice(1)}
+                </a>,
+                <Link
+                  key="projects"
+                  href="/projects"
+                  className={styles.navLink}
+                  onClick={() => setIsOpen(false)}
+                >
+                  Projects
+                </Link>
+              ];
+            }
+            return (
+              <a
+                key={section}
+                href={`#${section}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavigation(section);
+                }}
+                className={`${styles.navLink} ${activeSection === section ? styles.active : ''}`}
+              >
+                {section.charAt(0).toUpperCase() + section.slice(1)}
+              </a>
+            );
+          })}
         </div>
 
         <button
