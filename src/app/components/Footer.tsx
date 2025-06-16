@@ -157,6 +157,7 @@ const scrollToSection = (path: string) => {
                   width={50}
                   height={50}
                   priority
+                  className={styles.footerLogo}
                 />
                 <h1 className={styles.logoText}>
                   <span className={styles.logoHighlight}>Mboweezy</span> Hub

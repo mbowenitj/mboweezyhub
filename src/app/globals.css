@@ -4,6 +4,13 @@
 :root {
   --primary: #2563eb;
   --primary-dark: #1d4ed8;
+  --primary-light: #818cf8;
+  --primary-rgb: 99, 102, 241;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --bg-light: #f8fafc;
+  --bg-dark: #0f172a;
+  --card-bg: rgba(255, 255, 255, 0.95);
   --secondary: #1e293b;
   --accent: #f43f5e;
   --light: #f8fafc;
@@ -32,14 +39,20 @@ body {
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
   color: white;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   overflow-x: hidden;
 }
 
 @keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 .container {
   width: 90%;
@@ -60,7 +73,7 @@ body {
 }
 
 .section-title::after {
-  content: '';
+  content: "";
   display: block;
   width: 80px;
   height: 4px;

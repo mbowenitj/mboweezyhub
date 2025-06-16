@@ -183,6 +183,9 @@
   vertical-align: middle;
   border-radius: 50px;
 }
+.footerLogo{
+  border-radius: 50px;
+}
 .logoHighlight {
   font-weight: 800;
 }
