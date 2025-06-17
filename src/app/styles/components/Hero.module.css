@@ -351,9 +351,17 @@
     font-size: 1.1rem;
   }
 
+   .ctaContainer {
+    flex-direction: column; /* This will stack the buttons vertically */
+    gap: 0.8rem; /* Adjust the gap between stacked buttons */
+    width: 100%; /* Make container take full width */
+  }
+
+
   .ctaButton {
     padding: 14px 24px;
     font-size: 1rem;
+    width: 100%;
   }
 
   .statItem {

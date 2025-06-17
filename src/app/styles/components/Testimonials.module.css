@@ -139,11 +139,12 @@
   .testimonials {
     padding: 4rem 0;
   }
-
   .title {
     font-size: 25px;
   }
-
+  .text {
+    font-size: 1rem;
+  }
   .grid {
     grid-template-columns: 1fr;
   }
