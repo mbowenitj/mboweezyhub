@@ -1,5 +1,5 @@
 'use client';
-import Image from 'next/image'
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -10,39 +10,18 @@ const sections = ['home', 'services', 'about', 'testimonials', 'FAQ', 'contact']
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-  const pathname = usePathname();
+  const pathname = usePathname(); // Get current route (e.g., '/projects')
   const router = useRouter();
 
-  const handleNavigation = (sectionId: string) => {
-    if (pathname === '/') {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        const navbarHeight = 100; // Adjust this to match your navbar height
-        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-        const offsetPosition = elementPosition - navbarHeight;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-
-        setActiveSection(sectionId);
-      }
-    } else {
-      router.push(`/#${sectionId}`);
-    }
-    setIsOpen(false);
-  };
-
+  // Update active section based on route or scroll position
   useEffect(() => {
     if (pathname === '/') {
+      // Handle scroll-based active sections (existing logic)
       const handleScroll = () => {
         const scrollPosition = window.scrollY + window.innerHeight / 3;
-
         for (const sectionId of sections) {
           const section = document.getElementById(sectionId);
           if (!section) continue;
-
           const { offsetTop, offsetHeight } = section;
           if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
             setActiveSection(sectionId);
@@ -50,13 +29,32 @@ export default function Navbar() {
           }
         }
       };
-
       window.addEventListener('scroll', handleScroll, { passive: true });
       handleScroll();
-
       return () => window.removeEventListener('scroll', handleScroll);
+    } else if (pathname === '/projects') {
+      // Set activeSection to 'projects' when on the Projects page
+      setActiveSection('projects');
     }
   }, [pathname]);
+
+  const handleNavigation = (sectionId: string) => {
+    if (pathname === '/') {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const navbarHeight = 100;
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+          top: elementPosition - navbarHeight,
+          behavior: 'smooth',
+        });
+        setActiveSection(sectionId);
+      }
+    } else {
+      router.push(`/#${sectionId}`);
+    }
+    setIsOpen(false);
+  };
 
   return (
     <nav className={styles.navbar}>
@@ -83,18 +81,22 @@ export default function Navbar() {
                     e.preventDefault();
                     handleNavigation(section);
                   }}
-                  className={`${styles.navLink} ${activeSection === section ? styles.active : ''}`}
+                  className={`${styles.navLink} ${
+                    activeSection === section ? styles.active : ''
+                  }`}
                 >
                   {section.charAt(0).toUpperCase() + section.slice(1)}
                 </a>,
                 <Link
                   key="projects"
                   href="/projects"
-                  className={styles.navLink}
+                  className={`${styles.navLink} ${
+                    activeSection === 'projects' ? styles.active : ''
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   Projects
-                </Link>
+                </Link>,
               ];
             }
             return (
@@ -105,7 +107,9 @@ export default function Navbar() {
                   e.preventDefault();
                   handleNavigation(section);
                 }}
-                className={`${styles.navLink} ${activeSection === section ? styles.active : ''}`}
+                className={`${styles.navLink} ${
+                  activeSection === section ? styles.active : ''
+                }`}
               >
                 {section.charAt(0).toUpperCase() + section.slice(1)}
               </a>
