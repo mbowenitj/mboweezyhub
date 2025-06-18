@@ -538,11 +538,11 @@
   }
   .sectionHeader {
     height: auto; 
-    min-height: 210px;
+    min-height: 250px;
     background-position: center top;
-    background-size: contain;
+    background-size: cover;
     padding: 1.5rem;
-    border-bottom: solid 3px var(--primary-dark);
+    border-bottom: solid 6px var(--primary-dark);
   }
 }
 
