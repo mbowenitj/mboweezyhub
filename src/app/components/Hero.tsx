@@ -45,7 +45,7 @@ export default function Hero() {
           </h1>
           <p className={styles.subtitle}>
             We build <strong>custom-tailored</strong> websites and mobile apps with
-            <strong> dedicated attention</strong> to each client's unique needs.
+            <strong> dedicated attention</strong> to each client&apos;s unique needs.
           </p>
 
           <div className={styles.ctaContainer}>

@@ -1,40 +1,48 @@
 'use client';
+
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import styles from '../styles/components/Navbar.module.css';
 
-const sections = ['home', 'services', 'about', 'testimonials', 'FAQ', 'contact'];
+const sectionIds = ['home', 'services', 'about', 'testimonials', 'FAQ', 'contact'];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-  const pathname = usePathname(); // Get current route (e.g., '/projects')
+  const pathname = usePathname();
   const router = useRouter();
 
-  // Update active section based on route or scroll position
   useEffect(() => {
     if (pathname === '/') {
-      // Handle scroll-based active sections (existing logic)
       const handleScroll = () => {
         const scrollPosition = window.scrollY + window.innerHeight / 3;
-        for (const sectionId of sections) {
+        for (const sectionId of sectionIds) {
           const section = document.getElementById(sectionId);
           if (!section) continue;
           const { offsetTop, offsetHeight } = section;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
             setActiveSection(sectionId);
             break;
           }
         }
       };
+
       window.addEventListener('scroll', handleScroll, { passive: true });
       handleScroll();
       return () => window.removeEventListener('scroll', handleScroll);
-    } else if (pathname === '/projects') {
-      // Set activeSection to 'projects' when on the Projects page
-      setActiveSection('projects');
+    } else {
+      if (pathname.startsWith('/projects')) {
+        setActiveSection('projects');
+      } else if (pathname.startsWith('/services')) {
+        setActiveSection('services');
+      } else {
+        setActiveSection(''); // fallback
+      }
     }
   }, [pathname]);
 
@@ -43,7 +51,8 @@ export default function Navbar() {
       const element = document.getElementById(sectionId);
       if (element) {
         const navbarHeight = 100;
-        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        const elementPosition =
+          element.getBoundingClientRect().top + window.pageYOffset;
         window.scrollTo({
           top: elementPosition - navbarHeight,
           behavior: 'smooth',
@@ -71,49 +80,35 @@ export default function Navbar() {
         </Link>
 
         <div className={`${styles.links} ${isOpen ? styles.open : ''}`}>
-          {sections.flatMap((section) => {
-            if (section === 'testimonials') {
+          {sectionIds.map((section) => (
+            <a
+              key={section}
+              href={`#${section}`}
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavigation(section);
+              }}
+              className={`${styles.navLink} ${activeSection === section ? styles.active : ''
+                }`}
+            >
+              {section.charAt(0).toUpperCase() + section.slice(1)}
+            </a>
+          )).flatMap((link, index) => {
+            if (sectionIds[index] === 'testimonials') {
               return [
-                <a
-                  key={section}
-                  href={`#${section}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavigation(section);
-                  }}
-                  className={`${styles.navLink} ${
-                    activeSection === section ? styles.active : ''
-                  }`}
-                >
-                  {section.charAt(0).toUpperCase() + section.slice(1)}
-                </a>,
+                link,
                 <Link
                   key="projects"
                   href="/projects"
-                  className={`${styles.navLink} ${
-                    activeSection === 'projects' ? styles.active : ''
-                  }`}
+                  className={`${styles.navLink} ${activeSection === 'projects' ? styles.active : ''
+                    }`}
                   onClick={() => setIsOpen(false)}
                 >
                   Projects
                 </Link>,
               ];
             }
-            return (
-              <a
-                key={section}
-                href={`#${section}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavigation(section);
-                }}
-                className={`${styles.navLink} ${
-                  activeSection === section ? styles.active : ''
-                }`}
-              >
-                {section.charAt(0).toUpperCase() + section.slice(1)}
-              </a>
-            );
+            return link;
           })}
         </div>
 
