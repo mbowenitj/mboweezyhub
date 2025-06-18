@@ -227,7 +227,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4>Call Us</h4>
-                  <p>+27 780 550474</p>
+                  <p>+27 60 700 6456</p>
                   <p>Mon-Fri: 9am-5pm EST</p>
                 </div>
               </div>
