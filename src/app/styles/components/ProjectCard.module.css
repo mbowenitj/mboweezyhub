@@ -2,10 +2,6 @@
 //////////////// PROJECT CARD STYLING ////////////////
 ////////////////////////////////////////////////////*/
 
-/* Modern Color Variables */
-
-
-/* Base Styles */
 .workSection {
   padding: 8rem 1.5rem;
   background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
@@ -207,6 +203,49 @@
   flex: 1;
 } */
 
+/* Slider styles */
+.slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+
+.dots {
+  display: flex;
+  padding: 10px 0;
+  justify-content: center;
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.dot {
+  border: none;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  margin: 0 4px;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: white;
+  width: 12px;
+  height: 12px;
+}
 /* Card Action */
 .cardAction {
   display: inline-flex;

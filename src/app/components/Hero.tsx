@@ -1,12 +1,9 @@
-/* eslint-disable react/no-unescaped-entities */
-
 import Image from 'next/image';
 import Lottie from "lottie-react";
 import animationData from '../../../public/animations/tech-wave.json';
 import styles from '../styles/components/Hero.module.css';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-// import AnimatedNumber from './AnimatedNumber';
 
 const scrollToContact = () => {
   const contactSection = document.getElementById('contact');
@@ -22,17 +19,23 @@ export default function Hero() {
         <Lottie animationData={animationData} loop={true} />
       </div>
       <div className={styles.container}>
-        {/* Mobile Image - At the very top on mobile */}
+        {/* Mobile Image - Full width on mobile */}
         <div className={styles.mobileHeroImage}>
-          <Image
-            src="/images/banner1.svg"
-            alt="Digital Solutions Illustration"
-            width={600}
-            height={500}
-            priority
-            className={styles.floating}
-          />
-          <div className={styles.glow}></div>
+          <div className={styles.mobileImageWrapper}>
+            <Image
+              src="/images/banner1.svg"
+              alt="Digital Solutions Illustration"
+              width={800}  // Increased for better quality
+              height={600} // Adjusted aspect ratio
+              priority
+              className={styles.mobileImage}
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+            />
+            <div className={styles.glow}></div>
+          </div>
         </div>
 
         {/* Left Column - Content */}

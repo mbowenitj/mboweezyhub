@@ -24,6 +24,19 @@
   display: none;
   width: 100%;
   margin-bottom: 2rem;
+  position: relative;
+}
+
+.mobileImageWrapper {
+  width: 100%;
+  position: relative;
+}
+
+.mobileImage {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 .backgroundAnimation {
@@ -120,29 +133,12 @@
   box-shadow: 0 8px 25px rgba(59, 130, 246, 0.7);
 }
 
-
 .arrow {
   transition: transform 0.3s ease;
 }
 
 .primary:hover .arrow {
   transform: translateX(4px);
-}
-
-/* Hero Image */
-.heroImage {
-  flex: 1;
-  min-width: 300px;
-  position: relative;
-  animation: fadeInRight 1s ease-out 0.3s both;
-}
-
-/* Hero Image - Mobile */
-.mobileHeroImage {
-  display: none;
-  width: 100%;
-  margin-top: 2rem;
-  position: relative;
 }
 
 .statsContainer {
@@ -266,83 +262,41 @@
 
 /* Responsive Adjustments */
 @media (max-width: 1024px) {
+  .hero {
+    padding: 8rem 2rem;
+  }
+  
   .container {
     flex-direction: column;
   }
 
   .desktopHeroImage {
-    display: none; /* Hide desktop image on mobile */
+    display: none;
   }
 
   .mobileHeroImage {
-    display: block; /* Show mobile image at the top */
-    order: -1; /* Forces it to appear first */
-    margin-bottom: 1.5rem;
+    display: block;
+    order: -1;
+    margin-bottom: 2rem;
+    width: 100%;
+    padding: 0;
   }
 
   .heroContent {
-    order: 1; /* Content comes after image */
-  }
-
-  .ctaContainer {
-    order: 0;
-  }
-
-  .statsContainer {
     order: 1;
-  }
-
-  .heroImage {
-    display: none;
+    width: 100%;
   }
 
   .stats {
     grid-template-columns: repeat(3, 1fr);
   }
-
-  .heroContent {
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .subtitle {
-    margin-left: 0;
-    margin-right: auto;
-  }
 }
 
 @media (max-width: 768px) {
   .hero {
-    padding: 80px 20px;
-  }
-  .heroContent h1 {
-    font-size: 2.2rem;
-  }
-
-  .statItem {
-    max-width: 100%;
-  }
-   .mobileHeroImage {
-    margin-bottom: 1rem;
+    padding: 6rem 1.5rem;
   }
   
-  .stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .mobileHeroImage img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .glow {
-    width: 150px;
-    height: 150px;
-    filter: blur(25px);
-  }
-
   .heroContent h1 {
     font-size: 2.5rem;
   }
@@ -351,99 +305,56 @@
     font-size: 1.1rem;
   }
 
-   .ctaContainer {
-    flex-direction: column; /* This will stack the buttons vertically */
-    gap: 0.8rem; /* Adjust the gap between stacked buttons */
-    width: 100%; /* Make container take full width */
+  .mobileHeroImage {
+    margin: 0 -1.5rem 1.5rem -1.5rem;
+    width: calc(100% + 3rem);
   }
 
-
-  .ctaButton {
-    padding: 14px 24px;
-    font-size: 1rem;
+  .mobileImageWrapper {
     width: 100%;
   }
 
-  .statItem {
-    padding: 1rem 0.8rem;
+  .mobileImage {
+    width: 100% !important;
+    height: auto !important;
   }
 
-  .statNumber {
-    font-size: 1.5rem;
-  }
-
-  .statLabel {
-    font-size: 0.8rem;
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 480px) {
   .hero {
-    padding: 60px 16px;
-  }
-
-  .container {
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    top: 30px;
+    padding: 4rem 1rem;
   }
 
   .heroContent h1 {
-    font-size: 25px;
-    line-height: 1.3;
-    margin-bottom: 20px;
+    font-size: 2rem;
     text-align: center;
   }
 
   .subtitle {
-    font-size: 17px;
-    margin-bottom: 30px;
+    font-size: 1rem;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .ctaContainer {
-    align-items: center;
-    width: 100%;
-  }
-
-  .ctaButton {
-    width: 100%;
-    justify-content: center;
-    padding: 12px 20px;
-    font-size: 0.95rem;
+    flex-direction: column;
   }
 
   .mobileHeroImage {
-    margin: 1.5rem 0;
+    margin: 0 -1rem 1rem -1rem;
+    width: calc(100% + 2rem);
   }
-  .mobileHeroImage img {
-    max-width: 100%;
+
+  .stats {
+    grid-template-columns: 1fr;
   }
 
   .statItem {
-    flex: 1 1 120px;
-    max-width: 150px;
-    text-align: center;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-  }
-
-  .statLabel {
-    font-size: 0.75rem;
-  }
-
-  .heroImage img {
-    width: 100%;
-    max-width: 300px;
-  }
-  .glow {
-    width: 200px;
-    height: 200px;
-    filter: blur(30px);
+    min-height: 120px;
   }
 }

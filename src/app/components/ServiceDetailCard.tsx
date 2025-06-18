@@ -1,5 +1,4 @@
 'use client';
-
 import Image from 'next/image';
 import { FaArrowRight, FaCheck } from 'react-icons/fa';
 import { Service } from '../data/services';
@@ -28,7 +27,6 @@ export default function ServiceDetailCard({
   const isEven = index % 2 === 0;
   const hasFeatures = service.features && service.features.length > 0;
 
-  // Category-based styling
   const categoryClass = {
     tech: styles.techService,
     design: styles.designService,
@@ -37,22 +35,15 @@ export default function ServiceDetailCard({
   }[service.category] || styles.defaultService;
 
   useEffect(() => {
-    // Initialize scroll handler when component mounts
     const timeout = setTimeout(() => {
-      if (window.location.hash === '#contact') {
-        scrollToContact();
-      }
+      if (window.location.hash === '#contact') scrollToContact();
     }, 300);
-
     return () => clearTimeout(timeout);
   }, []);
 
   const handleContactClick = () => {
     const scrolled = scrollToContact();
-
-    if (!scrolled) {
-      router.push('/#contact');
-    }
+    if (!scrolled) router.push('/#contact');
   }
 
   return (
@@ -60,28 +51,18 @@ export default function ServiceDetailCard({
       {index === 0 && (sectionTitle || sectionDescription) && (
         <div className={styles.sectionHeaderWrapper}>
           <div className={styles.sectionHeader}>
-            {sectionTitle && (
-              <h2 className={styles.sectionTitle}>
-                <span className={styles.titleText}>{sectionTitle}</span>
-              </h2>
-            )}
-            {sectionDescription && (
-              <p className={styles.sectionDescription}>
-                <span className={styles.descriptionText}>{sectionDescription}</span>
-              </p>
-            )}
+            {sectionTitle && <h2 className={styles.sectionTitle}><span className={styles.titleText}>{sectionTitle}</span></h2>}
+            {sectionDescription && <p className={styles.sectionDescription}><span className={styles.descriptionText}>{sectionDescription}</span></p>}
           </div>
         </div>
       )}
 
       <div
         id={id}
-        className={`${styles.serviceCard} ${categoryClass} ${isEven ? styles.leftLayout : styles.rightLayout
-          }`}
+        className={`${styles.serviceCard} ${categoryClass} ${isEven ? styles.leftLayout : styles.rightLayout}`}
         data-aos="fade-up"
         data-aos-delay={index * 100}
       >
-        {/* Image Column */}
         <div className={styles.imageColumn}>
           <div className={styles.imageContainer}>
             <Image
@@ -94,13 +75,10 @@ export default function ServiceDetailCard({
               style={{ objectFit: 'cover' }}
             />
             <div className={styles.imageOverlay}></div>
-            <div className={styles.imageBadge}>
-              <span>0{index + 1}</span>
-            </div>
+            <div className={styles.imageBadge}><span>0{index + 1}</span></div>
           </div>
         </div>
 
-        {/* Content Column */}
         <div className={styles.contentColumn}>
           <div className={styles.contentWrapper}>
             <div className={styles.serviceHeader}>
@@ -114,7 +92,7 @@ export default function ServiceDetailCard({
               <div className={styles.featuresContainer}>
                 <h3 className={styles.featuresTitle}>KEY FEATURES</h3>
                 <ul className={styles.featuresList}>
-                  {service.features?.map((feature, i) => (
+                  {service.features.map((feature, i) => (
                     <li key={i} className={styles.featureItem}>
                       <div className={styles.checkIconWrapper}>
                         <FaCheck className={styles.checkIcon} />
@@ -125,6 +103,7 @@ export default function ServiceDetailCard({
                 </ul>
               </div>
             )}
+
             <div className={styles.ctaContainer}>
               <Link
                 href="/#contact"

@@ -16,7 +16,7 @@ export interface Service {
   longDescription: string
   category: "tech" | "design"
   link?: string
-  features?: string[]
+  features: string[]
   imagePath: string
   seoKeywords: string[]
 }
