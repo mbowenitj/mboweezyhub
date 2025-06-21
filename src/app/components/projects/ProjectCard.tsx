@@ -1,5 +1,5 @@
 'use client';
-import { motion } from 'framer-motion';
+import { motion, TargetAndTransition, Variants } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
@@ -8,17 +8,26 @@ import { Project, projects } from '../../data/projects';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
 
-const cardAnimation = {
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
-  hidden: { opacity: 0, y: 20 }
+const cardAnimation: Variants = {
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeInOut" // replace array with a predefined string
+    }
+  },
+  hidden: {
+    opacity: 0,
+    y: 20
+  }
 };
 
-const hoverEffect = {
+const hoverEffect: TargetAndTransition = {
   scale: 1.03,
   y: -10,
   transition: { type: "spring", stiffness: 400, damping: 10 }
-};
-
+}
 export default function ProjectCard() {
   const [visibleProjects, setVisibleProjects] = useState(4);
   const sectionRef = useRef<HTMLElement>(null);

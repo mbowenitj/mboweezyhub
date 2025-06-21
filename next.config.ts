@@ -6,10 +6,10 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
+  output: 'export',
   images: {
     unoptimized: true, // Required for static exports
   },
-  output: "export",
   trailingSlash: true, // Critical for consistent paths
   // Optional: Generate a sitemap or define all paths statically
 };

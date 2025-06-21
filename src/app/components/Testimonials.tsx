@@ -1,94 +1,110 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import testimonials, { Testimonial } from '../data/testimonials';
+'use client';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { motion, Transition } from 'framer-motion';
+import Image from 'next/image';
 import styles from '../styles/components/Testimonials.module.css';
+import AddReview from './AddReviews';
 
-const Testimonials = () => {
-  const [activeIndices, setActiveIndices] = useState([0, 1, 2]);
+interface Testimonial {
+  name: string;
+  text: string;
+  rating: number;
+  avatarColor: string;
+  company?: string;
+  profile_photo_url?: string;
+}
+
+interface GoogleReview {
+  author_name: string;
+  text: string;
+  rating: number;
+  profile_photo_url?: string;
+  time: number;
+}
+
+// Helpers
+const getRandomColor = () => {
+  const colors = ['#6366f1', '#ec4899', '#10b981', '#f59e0b', '#3b82f6'];
+  return colors[Math.floor(Math.random() * colors.length)];
+};
+
+const mergeReviews = (cached: GoogleReview[], fresh: GoogleReview[]) => {
+  const existingTimes = new Set(cached.map(r => r.time));
+  const merged = [...cached, ...fresh.filter(r => !existingTimes.has(r.time))];
+  return merged.sort((a, b) => b.time - a.time);
+};
+
+const mapReviewsToTestimonials = (reviews: GoogleReview[]): Testimonial[] =>
+  reviews.map(r => ({
+    name: r.author_name,
+    text: r.text,
+    rating: r.rating,
+    avatarColor: getRandomColor(),
+    profile_photo_url: r.profile_photo_url
+  }));
+
+const Testimonials = ({ placeId = process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID }) => {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [activeIndices, setActiveIndices] = useState<[number, number, number]>([0, 1, 2]);
   const [isPaused, setIsPaused] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Enhanced animation variants with 3D tilt effect
-  const cardVariants = {
-    left: { 
-      x: '-75%', 
-      scale: 0.85, 
-      opacity: 0.9, 
-      zIndex: 1,
-      rotateY: -15,
-      boxShadow: '0 15px 30px -10px rgba(0,0,0,0.1)'
-    },
-    center: { 
-      x: '0%', 
-      scale: 1, 
-      opacity: 1, 
-      zIndex: 3,
-      rotateY: 0,
-      boxShadow: '0 25px 50px -15px rgba(79, 70, 229, 0.3)'
-    },
-    right: { 
-      x: '75%', 
-      scale: 0.85, 
-      opacity: 0.9, 
-      zIndex: 1,
-      rotateY: 15,
-      boxShadow: '0 15px 30px -10px rgba(0,0,0,0.1)'
-    }
-  };
-
-  const transition = {
-    type: 'spring',
-    stiffness: 400,
-    damping: 30,
-    mass: 1,
-    duration: 0.6
-  };
-
-  // Auto-rotate every 5 seconds
+  // Load and cache reviews
   useEffect(() => {
-    if (!isPaused && testimonials.length > 3) {
-      intervalRef.current = setInterval(() => {
-        setActiveIndices(prev => [
-          prev[1],
-          prev[2],
-          (prev[2] + 1) % testimonials.length
-        ]);
-      }, 5000);
-    }
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [isPaused]);
+    const loadReviews = async () => {
+      try {
+        const cached = JSON.parse(localStorage.getItem(`reviews-${placeId}`) || '[]') as GoogleReview[];
+        if (cached.length) setTestimonials(mapReviewsToTestimonials(cached));
 
-  const nextSlide = () => {
-    setActiveIndices(prev => [
-      prev[1],
-      prev[2],
-      (prev[2] + 1) % testimonials.length
-    ]);
-    resetTimer();
+        const res = await fetch(`/api/reviews?placeId=${placeId}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.result?.reviews) {
+            const updated = mergeReviews(cached, data.result.reviews);
+            setTestimonials(mapReviewsToTestimonials(updated));
+            localStorage.setItem(`reviews-${placeId}`, JSON.stringify(updated));
+          }
+        }
+      } catch (error) {
+        console.error('Error loading reviews:', error);
+      }
+    };
+
+    loadReviews();
+  }, [placeId]);
+
+  // Rotation timer
+const resetTimer = useCallback(() => {
+  if (intervalRef.current) clearInterval(intervalRef.current);
+  if (!isPaused && testimonials.length > 3) {
+    intervalRef.current = setInterval(() => {
+      setActiveIndices(([, b, c]) => [b, c, (c + 1) % testimonials.length]);
+    }, 5000);
+  }
+}, [isPaused, testimonials.length]);
+
+
+useEffect(() => {
+  resetTimer();
+  return () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+  };
+}, [resetTimer]);
+
+  const nextSlide = (manual = true) => {
+    setActiveIndices(([, b, c]) => [b, c, (c + 1) % testimonials.length]);
+    if (manual) resetTimer();
   };
 
   const prevSlide = () => {
-    setActiveIndices(prev => [
-      (prev[0] - 1 + testimonials.length) % testimonials.length,
-      prev[0],
-      prev[1]
+    setActiveIndices(([a, b]) => [
+      (a - 1 + testimonials.length) % testimonials.length,
+      a,
+      b
     ]);
     resetTimer();
-  };
-
-  const resetTimer = () => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-    if (!isPaused && testimonials.length > 3) {
-      intervalRef.current = setInterval(() => {
-        setActiveIndices(prev => [
-          prev[1],
-          prev[2],
-          (prev[2] + 1) % testimonials.length
-        ]);
-      }, 5000);
-    }
   };
 
   const goToSlide = (index: number) => {
@@ -100,106 +116,59 @@ const Testimonials = () => {
     resetTimer();
   };
 
+  if (testimonials.length < 3) return null;
+
+  const cardVariants = {
+    left: { x: '-75%', scale: 0.85, opacity: 0.9, zIndex: 1, rotateY: -15 },
+    center: { x: '0%', scale: 1, opacity: 1, zIndex: 3, rotateY: 0 },
+    right: { x: '75%', scale: 0.85, opacity: 0.9, zIndex: 1, rotateY: 15 }
+  };
+const transition: Transition = {
+  type: 'spring', // ✅ now TS knows this is one of the allowed values
+  stiffness: 400,
+  damping: 30,
+  duration: 0.6,
+};
+
   return (
-    <section 
-      id="testimonials" 
+    <section
+      id="testimonials"
       className={styles.testimonials}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
       <div className={styles.container}>
         <div className={styles.header}>
-          <motion.span 
-            className={styles.subtitle}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            Client Voices
-          </motion.span>
-          <motion.h2 
-            className={styles.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            Trusted by Businesses Worldwide
-          </motion.h2>
-          <motion.div 
-            className={styles.divider}
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          />
+          <motion.span className={styles.subtitle} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>Client Voices</motion.span>
+          <motion.h2 className={styles.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} viewport={{ once: true }}>Trusted by Businesses Worldwide</motion.h2>
+          <motion.div className={styles.divider} initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} transition={{ duration: 0.8, delay: 0.2 }} viewport={{ once: true }} />
         </div>
 
         <div className={styles.carouselWrapper}>
-          <motion.button 
-            onClick={prevSlide} 
-            className={styles.navButton} 
-            aria-label="Previous testimonial"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+          <motion.button onClick={prevSlide} className={styles.navButton} aria-label="Previous testimonial" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+            <svg width="24" height="24"><path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </motion.button>
 
           <div className={styles.carouselContainer}>
-            {/* Left Card */}
-            <motion.div
-              key={`left-${activeIndices[0]}`}
-              className={`${styles.card} ${styles.left}`}
-              variants={cardVariants}
-              initial="left"
-              animate="left"
-              transition={transition}
-              whileHover={{ scale: 0.95 }}
-            >
-              <CardContent testimonial={testimonials[activeIndices[0]]} />
-            </motion.div>
-
-            {/* Center Card */}
-            <motion.div
-              key={`center-${activeIndices[1]}`}
-              className={`${styles.card} ${styles.center}`}
-              variants={cardVariants}
-              initial="center"
-              animate="center"
-              transition={transition}
-              whileHover={{ scale: 1.02 }}
-            >
-              <CardContent testimonial={testimonials[activeIndices[1]]} />
-            </motion.div>
-
-            {/* Right Card */}
-            <motion.div
-              key={`right-${activeIndices[2]}`}
-              className={`${styles.card} ${styles.right}`}
-              variants={cardVariants}
-              initial="right"
-              animate="right"
-              transition={transition}
-              whileHover={{ scale: 0.95 }}
-            >
-              <CardContent testimonial={testimonials[activeIndices[2]]} />
-            </motion.div>
+            {activeIndices.map((index, pos) => {
+              const variantKey = pos === 0 ? 'left' : pos === 1 ? 'center' : 'right';
+              return (
+                <motion.div
+                  key={index}
+                  className={`${styles.card} ${styles[variantKey]}`}
+                  variants={cardVariants}
+                  initial={variantKey}
+                  animate={variantKey}
+                  transition={transition}
+                >
+                  <CardContent testimonial={testimonials[index]} />
+                </motion.div>
+              );
+            })}
           </div>
 
-          <motion.button 
-            onClick={nextSlide} 
-            className={styles.navButton} 
-            aria-label="Next testimonial"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+          <motion.button onClick={() => nextSlide()} className={styles.navButton} aria-label="Next testimonial" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+            <svg width="24" height="24"><path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </motion.button>
         </div>
 
@@ -215,51 +184,48 @@ const Testimonials = () => {
             />
           ))}
         </div>
+
+        <AddReview placeId={process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID!} />
       </div>
     </section>
   );
 };
 
 const CardContent = ({ testimonial }: { testimonial: Testimonial }) => (
-  <>
-    <div className={styles.quoteMark}>&quot;</div>
-    <div className={styles.cardContent}>
-      <p className={styles.text}>{testimonial.text}</p>
-      <div className={styles.rating}>
-        {Array.from({ length: 5 }).map((_, i) => (
-          <motion.span 
-            key={i} 
-            className={i < testimonial.rating ? styles.starFilled : styles.starEmpty}
-            whileHover={{ scale: 1.2 }}
-          >
-            {i < testimonial.rating ? (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-              </svg>
-            ) : (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-              </svg>
-            )}
-          </motion.span>
-        ))}
-      </div>
-      <div className={styles.client}>
-        <motion.div 
-          className={styles.clientInitial}
-          style={{ background: testimonial.avatarColor }}
-          whileHover={{ rotate: 360, scale: 1.1 }}
-          transition={{ duration: 0.6 }}
-        >
-          {testimonial.name.charAt(0)}
-        </motion.div>
-        <div className={styles.clientInfo}>
+  <div className={styles.cardContent}>
+    <div className={styles.cardHeader}>
+      <div className={styles.clientTop}>
+        {testimonial.profile_photo_url ? (
+          <Image
+            src={testimonial.profile_photo_url}
+            alt={testimonial.name}
+            width={48}
+            height={48}
+            unoptimized
+            onError={(e) => ((e.target as HTMLImageElement).style.display = 'none')}
+          />
+        ) : (
+          <div className={styles.clientInitial} style={{ background: testimonial.avatarColor }}>
+            {testimonial.name.charAt(0)}
+          </div>
+        )}
+        <div className={styles.clientDetails}>
           <h3>{testimonial.name}</h3>
-          <p>{testimonial.company}</p>
+          <div className={styles.rating}>
+            {[...Array(5)].map((_, i) => (
+              <motion.span key={i} className={i < testimonial.rating ? styles.starFilled : styles.starEmpty}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                </svg>
+              </motion.span>
+            ))}
+          </div>
         </div>
       </div>
     </div>
-  </>
+    <div className={styles.quoteMark}>&quot;</div>
+    <p className={styles.text}>{testimonial.text}</p>
+  </div>
 );
 
 export default Testimonials;
