@@ -1,0 +1,121 @@
+.reviewsContainer {
+  padding: 2rem;
+  background: #f9f9f9;
+  text-align: center;
+  position: relative;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.showFormBtn {
+  background-color: #0077ff;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  transition: background 0.3s;
+}
+.showFormBtn:hover {
+  background-color: #005edc;
+}
+
+.carousel {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.reviewCard {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin: 1rem;
+}
+
+.starRating {
+  color: #ffbf00;
+  margin-bottom: 0.5rem;
+}
+
+.star {
+  font-size: 1.3rem;
+  color: #ccc;
+}
+.filled {
+  color: #ffbf00;
+}
+
+.reviewText {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 0.8rem;
+}
+
+.reviewAuthor {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #777;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 20;
+}
+
+.reviewFormModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 30;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.formGroup {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.submitButton {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.submitButton:hover {
+  background: #218838;
+}

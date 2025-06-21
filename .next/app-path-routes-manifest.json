@@ -1,0 +1,11 @@
+{
+  "/favicon.ico/route": "/favicon.ico",
+  "/_not-found/page": "/_not-found",
+  "/cookie-policy/page": "/cookie-policy",
+  "/page": "/",
+  "/projects/page": "/projects",
+  "/refund-policy/page": "/refund-policy",
+  "/services/page": "/services",
+  "/privacy-policy/page": "/privacy-policy",
+  "/terms-conditions/page": "/terms-conditions"
+}

@@ -1,0 +1,48 @@
+/* [project]/src/app/styles/components/ScrollToTop.module.css [app-client] (css) */
+.ScrollToTop-module__10OY7G__scrollToTop {
+  color: #fff;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  transition: all .3s;
+  display: flex;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  transform: translateY(20px);
+  box-shadow: 0 4px 20px #6366f14d;
+}
+
+.ScrollToTop-module__10OY7G__scrollToTop.ScrollToTop-module__10OY7G__visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.ScrollToTop-module__10OY7G__scrollToTop:hover {
+  box-shadow: 0 6px 25px #6366f166;
+  transform: translateY(-5px) !important;
+}
+
+.ScrollToTop-module__10OY7G__scrollToTop svg {
+  width: 24px;
+  height: 24px;
+}
+
+@media (width <= 768px) {
+  .ScrollToTop-module__10OY7G__scrollToTop {
+    width: 45px;
+    height: 45px;
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+}
+
+/*# sourceMappingURL=src_app_styles_components_ScrollToTop_module_css_f9ee138c._.single.css.map*/

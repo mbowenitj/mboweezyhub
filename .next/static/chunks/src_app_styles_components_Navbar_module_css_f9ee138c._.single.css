@@ -1,0 +1,119 @@
+/* [project]/src/app/styles/components/Navbar.module.css [app-client] (css) */
+.Navbar-module__NWPd6q__navbar {
+  z-index: 1000;
+  background: #fff;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  box-shadow: 0 2px 10px #0000001a;
+}
+
+.Navbar-module__NWPd6q__container {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.Navbar-module__NWPd6q__logo {
+  color: var(--primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.Navbar-module__NWPd6q__navLink {
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color .3s;
+}
+
+.Navbar-module__NWPd6q__navLink:hover {
+  color: var(--primary);
+}
+
+.Navbar-module__NWPd6q__active {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.Navbar-module__NWPd6q__links {
+  gap: 2rem;
+  display: flex;
+}
+
+.Navbar-module__NWPd6q__links a {
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color .3s;
+}
+
+.Navbar-module__NWPd6q__links a:hover {
+  color: var(--primary);
+}
+
+.Navbar-module__NWPd6q__toggle {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: .5rem;
+  display: none;
+}
+
+.Navbar-module__NWPd6q__toggle span {
+  background: var(--dark);
+  width: 25px;
+  height: 2px;
+  margin: 5px 0;
+  transition: all .3s;
+  display: block;
+}
+
+.Navbar-module__NWPd6q__links a.Navbar-module__NWPd6q__active {
+  text-underline-offset: 4px;
+  color: var(--primary);
+  text-decoration: underline 2px;
+}
+
+@media (width <= 768px) {
+  .Navbar-module__NWPd6q__links {
+    background: #fff;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    padding: 2rem 36px;
+    transition: transform .3s;
+    position: fixed;
+    top: 72px;
+    left: 0;
+    transform: translateY(-150%);
+    box-shadow: 0 10px 20px #0000001a;
+  }
+
+  .Navbar-module__NWPd6q__links.Navbar-module__NWPd6q__open {
+    transform: translateY(0);
+  }
+
+  .Navbar-module__NWPd6q__floating {
+    width: 68px;
+  }
+
+  .Navbar-module__NWPd6q__toggle {
+    display: block;
+  }
+
+  .Navbar-module__NWPd6q__toggle.Navbar-module__NWPd6q__open span:first-child {
+    transform: rotate(45deg)translate(5px, 5px);
+  }
+
+  .Navbar-module__NWPd6q__toggle.Navbar-module__NWPd6q__open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .Navbar-module__NWPd6q__toggle.Navbar-module__NWPd6q__open span:nth-child(3) {
+    transform: rotate(-45deg)translate(5px, -5px);
+  }
+}
+
+/*# sourceMappingURL=src_app_styles_components_Navbar_module_css_f9ee138c._.single.css.map*/
