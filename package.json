@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build && next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "EXPORT_MODE=true next build && next export",
+    "vercel-build": "next build"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
