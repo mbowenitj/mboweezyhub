@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 'use client';
 
 import Link from 'next/link';
@@ -13,11 +12,11 @@ import Copyright from './Copyright';
 
 // Navigation links (removed offsets)
 const NAV_LINKS = [
-  { name: 'Home', path: '#home' },
-  { name: 'Services', path: '#services' },
-  { name: 'About', path: '#about' },
-  { name: 'Testimonials', path: '#testimonials' },
-  { name: 'Contact', path: '#contact' }
+  { name: 'Home', path: '/#home' },
+  { name: 'Services', path: '/#services' },
+  { name: 'About', path: '/#about' },
+  { name: 'Testimonials', path: '/#testimonials' },
+  { name: 'Contact', path: '/#contact' }
 ];
 
 // Legal links
@@ -30,23 +29,23 @@ const LEGAL_LINKS = [
 // Social media links
 const SOCIAL_LINKS = [
   {
-    icon: <FaLinkedin />, color: '#0077b5', url: 'https://www.linkedin.com/company/mboweezy-hub/about/', 
+    icon: <FaLinkedin />, color: '#0077b5', url: 'https://www.linkedin.com/company/mboweezy-hub/about/',
     target: '_blank', rel: 'noopener noreferrer'
   },
   {
-    icon: <FaFacebook />, color: '#3b5998', url: 'https://www.facebook.com/mboweezyhub/', 
+    icon: <FaFacebook />, color: '#3b5998', url: 'https://www.facebook.com/mboweezyhub/',
     target: '_blank', rel: 'noopener noreferrer'
   },
   {
-    icon: <FaTwitter />, color: '#1da1f2', url: 'https://x.com/mboweezyhub', 
+    icon: <FaTwitter />, color: '#1da1f2', url: 'https://x.com/mboweezyhub',
     target: '_blank', rel: 'noopener noreferrer'
   },
   {
-    icon: <FaInstagram />, color: '#e1306c', url: 'https://www.instagram.com/mboweeezyhub/', 
+    icon: <FaInstagram />, color: '#e1306c', url: 'https://www.instagram.com/mboweeezyhub/',
     target: '_blank', rel: 'noopener noreferrer'
   },
   {
-    icon: <FaWhatsapp />, color: '#25d366', url: 'https://wa.me/27607006456', 
+    icon: <FaWhatsapp />, color: '#25d366', url: 'https://wa.me/27607006456',
     target: '_blank', rel: 'noopener noreferrer'
   }
 ];
@@ -68,6 +67,19 @@ export default function Footer() {
     setIsMounted(true);
     const cookieConsent = localStorage.getItem('cookieConsent');
     setShowCookieNotice(cookieConsent === null);
+
+    // Handle hash links on page load
+    if (window.location.hash) {
+      const element = document.getElementById(window.location.hash.substring(1));
+      if (element) {
+        setTimeout(() => {
+          window.scrollTo({
+            top: element.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }, 300);
+      }
+    }
   }, []);
 
   const scrollToTop = () => {
@@ -87,21 +99,27 @@ export default function Footer() {
     setShowCookieNotice(false);
   };
 
-  // Updated scroll function - scrolls to exact top of section
-const scrollToSection = (path: string) => {
-  if (path.startsWith('#')) {
-    const id = path.substring(1);
-    const element = document.getElementById(id); // Directly target the section
-    if (element) {
-      // Add slight offset if you have a fixed header
-      const offset = 80; // Adjust this value to match your header height
-      window.scrollTo({
-        top: element.offsetTop - offset,
-        behavior: 'smooth'
-      });
+  const scrollToSection = (path: string) => {
+    if (path.startsWith('/#')) {
+      const [basePath, hash] = path.split('#');
+      if (window.location.pathname === basePath) {
+        // On the same page - scroll to section
+        const element = document.getElementById(hash);
+        if (element) {
+          const offset = 80;
+          window.scrollTo({
+            top: element.offsetTop - offset,
+            behavior: 'smooth'
+          });
+          // Update URL without reload
+          window.history.pushState({}, '', path);
+        }
+      } else {
+        // On a different page - navigate to the page with hash
+        window.location.href = path;
+      }
     }
-  }
-};
+  };
 
   return (
     <footer className={styles.footer}>
@@ -145,7 +163,7 @@ const scrollToSection = (path: string) => {
             viewport={{ once: true }}
           >
             <div className={styles.brandHeader}>
-              <motion.div 
+              <motion.div
                 className={styles.logo}
                 whileHover={{ scale: 1.03 }}
                 onClick={() => scrollToTop()}

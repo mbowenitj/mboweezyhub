@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, Transition } from 'framer-motion';
 import Image from 'next/image';
 import styles from '../styles/components/Testimonials.module.css';
-
 import AddReview from './AddReviews';
 
 interface Testimonial {
@@ -23,15 +22,9 @@ interface GoogleReview {
   time: number;
 }
 
-// Helpers
 const getRandomColor = () => {
   const colors = ['#6366f1', '#ec4899', '#10b981', '#f59e0b', '#3b82f6'];
   return colors[Math.floor(Math.random() * colors.length)];
-};
-
-const mergeReviews = (cached: GoogleReview[], fresh: GoogleReview[]) => {
-  const existingTimes = new Set(cached.map(r => r.time));
-  return [...cached, ...fresh.filter(r => !existingTimes.has(r.time))].sort((a, b) => b.time - a.time);
 };
 
 const mapReviewsToTestimonials = (reviews: GoogleReview[]): Testimonial[] =>
@@ -49,37 +42,53 @@ const Testimonials = ({ placeId = process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID }) => 
   const [isPaused, setIsPaused] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Fetch reviews and cache them
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const cacheKey = `reviews-${placeId}`;
-        const cached = JSON.parse(localStorage.getItem(cacheKey) || '[]') as GoogleReview[];
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-        if (cached.length) {
-          setTestimonials(mapReviewsToTestimonials(cached));
-        }
-
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/reviews?placeId=${placeId}`
-        );
-        const data = await res.json();
-
-        if (res.ok && data.result?.reviews) {
-          const updated = mergeReviews(cached, data.result.reviews);
-          localStorage.setItem(cacheKey, JSON.stringify(updated));
-          setTestimonials(mapReviewsToTestimonials(updated));
-        }
-      } catch (err) {
-        console.error('Failed to load Google reviews:', err);
+  const fetchReviews = useCallback(async () => {
+    try {
+      if (!baseUrl || !placeId) {
+        throw new Error(`Missing required parameters:
+          baseUrl: ${baseUrl}
+          placeId: ${placeId}`);
       }
-    };
 
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+
+      const res = await fetch(`${baseUrl}/api/reviews?placeId=${placeId}`, {
+        signal: controller.signal,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!res.ok) {
+        const errorBody = await res.text().catch(() => '');
+        throw new Error(`HTTP ${res.status} - ${res.statusText}\n${errorBody}`);
+      }
+
+      const data = await res.json();
+
+      if (!data.result || !Array.isArray(data.result.reviews)) {
+        console.warn('Unexpected API response structure:', data);
+        return setTestimonials([]);
+      }
+
+      const testimonials = mapReviewsToTestimonials(data.result.reviews);
+      setTestimonials(testimonials);
+
+    } catch (err) {
+      console.error('Fetch error:', err);
+      setTestimonials([]);
+    }
+  }, [baseUrl, placeId]);
+
+  useEffect(() => {
     fetchReviews();
-  }, [placeId]);
+  }, [fetchReviews]);
 
-
-  // Slide rotation
   const resetTimer = useCallback(() => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     if (!isPaused && testimonials.length > 3) {
@@ -119,8 +128,6 @@ const Testimonials = ({ placeId = process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID }) => 
     resetTimer();
   };
 
-  if (testimonials.length < 3) return null;
-
   const cardVariants = {
     left: { x: '-75%', scale: 0.85, opacity: 0.9, zIndex: 1, rotateY: -15 },
     center: { x: '0%', scale: 1, opacity: 1, zIndex: 3, rotateY: 0 },
@@ -143,47 +150,25 @@ const Testimonials = ({ placeId = process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID }) => 
     >
       <div className={styles.container}>
         <div className={styles.header}>
-          <motion.span
-            className={styles.subtitle}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+          <motion.span className={styles.subtitle} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
             Client Voices
           </motion.span>
-          <motion.h2
-            className={styles.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
+          <motion.h2 className={styles.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} viewport={{ once: true }}>
             Trusted by Businesses Worldwide
           </motion.h2>
-          <motion.div
-            className={styles.divider}
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          />
+          <motion.div className={styles.divider} initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} transition={{ duration: 0.8, delay: 0.2 }} viewport={{ once: true }} />
         </div>
 
         <div className={styles.carouselWrapper}>
-          <motion.button
-            onClick={prevSlide}
-            className={styles.navButton}
-            aria-label="Previous testimonial"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
+          <motion.button onClick={prevSlide} className={styles.navButton} aria-label="Previous testimonial" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
             <svg width="24" height="24"><path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </motion.button>
 
           <div className={styles.carouselContainer}>
             {activeIndices.map((index, pos) => {
               const variantKey = pos === 0 ? 'left' : pos === 1 ? 'center' : 'right';
+              const testimonial = testimonials[index];
+              if (!testimonial) return null;
               return (
                 <motion.div
                   key={index}
@@ -193,19 +178,13 @@ const Testimonials = ({ placeId = process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID }) => 
                   animate={variantKey}
                   transition={transition}
                 >
-                  <CardContent testimonial={testimonials[index]} />
+                  <CardContent testimonial={testimonial} />
                 </motion.div>
               );
             })}
           </div>
 
-          <motion.button
-            onClick={() => nextSlide()}
-            className={styles.navButton}
-            aria-label="Next testimonial"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
+          <motion.button onClick={() => nextSlide()} className={styles.navButton} aria-label="Next testimonial" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
             <svg width="24" height="24"><path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </motion.button>
         </div>
@@ -229,47 +208,51 @@ const Testimonials = ({ placeId = process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID }) => 
   );
 };
 
-const CardContent = ({ testimonial }: { testimonial: Testimonial }) => (
-  <div className={styles.cardContent}>
-    <div className={styles.cardHeader}>
-      <div className={styles.clientTop}>
-        {testimonial.profile_photo_url ? (
-          <Image
-            src={testimonial.profile_photo_url}
-            alt={testimonial.name}
-            width={48}
-            height={48}
-            unoptimized
-            onError={(e) => {
-              const img = e.target as HTMLImageElement;
-              img.style.display = 'none';
-            }}
-          />
-        ) : (
-          <div className={styles.clientInitial} style={{ backgroundColor: testimonial.avatarColor }}>
-            {testimonial.name.charAt(0)}
-          </div>
-        )}
-        <div className={styles.clientDetails}>
-          <h3>{testimonial.name}</h3>
-          <div className={styles.rating}>
-            {[...Array(5)].map((_, i) => (
-              <motion.span
-                key={i}
-                className={i < testimonial.rating ? styles.starFilled : styles.starEmpty}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-                </svg>
-              </motion.span>
-            ))}
+const CardContent = ({ testimonial }: { testimonial: Testimonial }) => {
+  if (!testimonial) return null;
+
+  return (
+    <div className={styles.cardContent}>
+      <div className={styles.cardHeader}>
+        <div className={styles.clientTop}>
+          {testimonial.profile_photo_url ? (
+            <Image
+              src={testimonial.profile_photo_url}
+              alt={testimonial.name}
+              width={48}
+              height={48}
+              unoptimized
+              onError={(e) => {
+                const img = e.target as HTMLImageElement;
+                img.style.display = 'none';
+              }}
+            />
+          ) : (
+            <div className={styles.clientInitial} style={{ backgroundColor: testimonial.avatarColor }}>
+              {testimonial.name.charAt(0)}
+            </div>
+          )}
+          <div className={styles.clientDetails}>
+            <h3>{testimonial.name}</h3>
+            <div className={styles.rating}>
+              {[...Array(5)].map((_, i) => (
+                <motion.span
+                  key={i}
+                  className={i < testimonial.rating ? styles.starFilled : styles.starEmpty}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                  </svg>
+                </motion.span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
+      <div className={styles.quoteMark}>&quot;</div>
+      <p className={styles.text}>{testimonial.text}</p>
     </div>
-    <div className={styles.quoteMark}>&quot;</div>
-    <p className={styles.text}>{testimonial.text}</p>
-  </div>
-);
+  );
+};
 
 export default Testimonials;
