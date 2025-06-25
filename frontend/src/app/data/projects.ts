@@ -105,7 +105,7 @@ export const projects: Project[] = [
     linkTarget: "_blank",
     slug: "phulumutsa-team-building",
     aspectRatio: "landscape",
-    isVideo: false, 
+    isVideo: false,
     youtubeId: "",
     slideImages: [
       "/images/projects/phulumutsa-slide1.png",
@@ -241,6 +241,52 @@ We don’t escape the problem — we step into it, together. This is emotional r
     linkTarget: "_blank",
   },
   {
+    id: 15,
+    title: "Inspirational Quotes Booklet",
+    description:
+      "A beautifully designed collection of motivational quotes with elegant typography and thematic visuals.",
+    tags: [
+      "Typography",
+      "Print Design",
+      "Quote Collection",
+      "Inspiration",
+      "Booklet Design",
+      "Minimalist Layout",
+    ],
+    image: "/images/projects/quotes-booklet-thumb.jpg",
+    imagePath: "/images/projects/quotes-booklet-full.jpg",
+    isVideo: true,
+    youtubeId: "bfefUQzI_rw",
+    aspectRatio: "portrait",
+    externalUrl: "",
+    slug: "inspirational-quotes-booklet",
+    content: `
+  This elegant quotes booklet showcases my design approach to typographic layouts and inspirational content presentation.
+
+  Design Features:
+  - Carefully curated selection of motivational quotes
+  - Custom typography treatments for each quote
+  - Thematic visual elements that complement the text
+  - Balanced white space for readability
+  - Cohesive color palette throughout
+
+  Technical Specifications:
+  - Print-ready PDF format
+  - Multiple layout variations
+  - Consistent visual hierarchy
+  - Attention to kerning and readability
+  - Digital and print-optimized versions
+
+  The minimalist design allows the powerful words to take center stage while providing subtle visual enhancements.
+  `,
+    slideImages: [
+      "/images/projects/quotes-booklet-spread1.jpg",
+      "/images/projects/quotes-booklet-spread2.jpg",
+      "/images/projects/quotes-booklet-spread3.jpg",
+      "/images/projects/quotes-booklet-detail1.jpg",
+    ],
+  },
+  {
     id: 10,
     title: "Wedding Invitation Video",
     description:
@@ -301,25 +347,26 @@ We don’t escape the problem — we step into it, together. This is emotional r
   `,
   },
   {
-  id: 13,
-  title: "Professional Profile Video - Koena Mathopa",
-  description: "A compelling personal branding video featuring professional voice-over narration to showcase expertise and personality.",
-  tags: [
-    "Personal Branding",
-    "Voice Over",
-    "Professional Narration",
-    "Video Production",
-    "Profile Video",
-    "Career Highlights"
-  ],
-  image: "/images/projects/koena-profile-thumb.jpg",
-  imagePath: "/images/projects/koena-profile-full.jpg",
-  isVideo: true,
-  youtubeId: "C5mCR4zdV-8",
-  aspectRatio: "landscape", // Keeping landscape for professional videos
-  externalUrl: "",
-  slug: "koena-mathopa-profile-video",
-  content: `
+    id: 13,
+    title: "Professional Profile Video - Koena Mathopa",
+    description:
+      "A compelling personal branding video featuring professional voice-over narration to showcase expertise and personality.",
+    tags: [
+      "Personal Branding",
+      "Voice Over",
+      "Professional Narration",
+      "Video Production",
+      "Profile Video",
+      "Career Highlights",
+    ],
+    image: "/images/projects/koena-profile-thumb.jpg",
+    imagePath: "/images/projects/koena-profile-full.jpg",
+    isVideo: true,
+    youtubeId: "C5mCR4zdV-8",
+    aspectRatio: "landscape", // Keeping landscape for professional videos
+    externalUrl: "",
+    slug: "koena-mathopa-profile-video",
+    content: `
   This professional profile video features my custom voice-over work, perfectly complementing Koena Mathopa's personal brand and career narrative.
 
   Voice-Over Production Highlights:
@@ -338,10 +385,10 @@ We don’t escape the problem — we step into it, together. This is emotional r
 
   The combination of compelling visuals and professional narration creates a powerful personal branding tool that makes a memorable impact.
   `,
-  slideImages: [
-    "/images/projects/koena-profile-slide1.jpg",
-    "/images/projects/koena-profile-slide2.jpg",
-    "/images/projects/koena-profile-slide3.jpg"
-  ]
-}
+    slideImages: [
+      "/images/projects/koena-profile-slide1.jpg",
+      "/images/projects/koena-profile-slide2.jpg",
+      "/images/projects/koena-profile-slide3.jpg",
+    ],
+  },
 ]
