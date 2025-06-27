@@ -70,14 +70,7 @@ const Careers = () => {
 
     return (
         <div className={styles.careersContainer}>
-            {/* Animated Background Elements */}
-            <div className={styles.backgroundElements}>
-                <div className={styles.circle1}></div>
-                <div className={styles.circle2}></div>
-                <div className={styles.circle3}></div>
-            </div>
-
-            {/* Hero Section with 3D Effect */}
+            {/* Hero Section */}
             <div className={styles.heroSection}>
                 <motion.div 
                     initial={{ opacity: 0, y: 50 }}
@@ -85,63 +78,41 @@ const Careers = () => {
                     transition={{ duration: 0.8 }}
                     className={styles.heroContent}
                 >
-                    <motion.h1 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                        className={styles.heroTitle}
-                    >
-                        Shape the Future <span>with Mboweezy Hub</span>
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4 }}
-                        className={styles.heroSubtitle}
-                    >
-                        We&apos;re revolutionizing digital solutions across Africa. Join our mission to empower businesses through technology.
-                    </motion.p>
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.6 }}
-                    >
-                        <button className={styles.heroCta}>
-                            Explore Opportunities
-                            <span className={styles.ctaArrow}>→</span>
-                        </button>
-                    </motion.div>
+                    <h1 className={styles.heroTitle}>Join the Mboweezy Hub Team</h1>
+                    <p className={styles.heroSubtitle}>We&apos;re building the future of digital solutions. Come grow with us.</p>
+                    <button className={styles.heroCta}>Why Work With Us?</button>
                 </motion.div>
-
                 <motion.div 
-                    initial={{ opacity: 0, scale: 0.9, rotateY: 30 }}
-                    animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
                     className={styles.heroImageContainer}
                 >
-                    <div className={styles.imageWrapper}>
-                        <Image
-                            src="/images/team.jpg"
-                            alt="Mboweezy Hub team collaborating"
-                            width={600}
-                            height={400}
-                            className={styles.heroImage}
-                            priority
-                        />
-                        <div className={styles.imageGlow}></div>
-                    </div>
+                    <Image
+                        src="/images/team.jpg"
+                        alt="Mboweezy Hub team collaborating"
+                        width={600}
+                        height={400}
+                        className={styles.heroImage}
+                        priority
+                    />
                 </motion.div>
-            </div>
-
-            {/* Floating Particles Background */}
-            <div className={styles.particles}>
-                {[...Array(20)].map((_, i) => (
-                    <div key={i} className={styles.particle}></div>
-                ))}
             </div>
 
             {/* Job Listings Section */}
             <div className={styles.jobListings}>
+                {/* Futuristic Background Elements */}
+                <div className={styles.jobsBackground}>
+                    <div className={styles.techGrid}></div>
+                    <div className={styles.animatedOrbit}></div>
+                    <div className={styles.floatingShapes}>
+                        <div className={styles.shape1}></div>
+                        <div className={styles.shape2}></div>
+                        <div className={styles.shape3}></div>
+                    </div>
+                    <div className={styles.glowEffect}></div>
+                </div>
+
                 <motion.div 
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -149,7 +120,10 @@ const Careers = () => {
                     viewport={{ once: true }}
                     className={styles.sectionHeader}
                 >
-                    <h2 className={styles.sectionTitle}>Current Openings</h2>
+                    <h2 className={styles.sectionTitle}>
+                        <span className={styles.titleGradient}>Current Openings</span>
+                        <span className={styles.titleShadow} aria-hidden="true">Current Openings</span>
+                    </h2>
                     <p className={styles.sectionSubtitle}>Find your perfect position in our growing team</p>
                 </motion.div>
 
@@ -206,7 +180,7 @@ const Careers = () => {
 
                 {/* Job Cards Grid */}
                 <div className={styles.jobsGrid}>
-                    {filteredJobs.length < 0 ? (
+                    {filteredJobs.length > 0 ? (
                         filteredJobs.map((job, index) => (
                             <motion.div
                                 key={job.id}
@@ -280,7 +254,7 @@ const Careers = () => {
                                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                                     <line x1="14.05" y1="2" x2="14.05" y2="4"></line>
                                     <line x1="20.05" y1="2" x2="20.05" y2="4"></line>
-                                    <line x1="22.05" y1="8" x2="20.05" y1="8"></line>
+                                    <line x1="22.05" y1="8" x2="20.05" y2="8"></line>
                                 </svg>
                             </div>
                             <h3 className={styles.noJobsTitle}>No matching positions found</h3>
@@ -302,7 +276,7 @@ const Careers = () => {
                     viewport={{ once: true }}
                     className={styles.sectionHeader}
                 >
-                    <h2 className={styles.sectionTitle}>Why Join Mboweezy Hub?</h2>
+                    <h2 className={styles.sectionTitle}>Why Join MboweezyHub?</h2>
                     <p className={styles.sectionSubtitle}>We&apos;re building more than software - we&apos;re building a culture</p>
                 </motion.div>
 
@@ -323,7 +297,7 @@ const Careers = () => {
                         { 
                             icon: 'flexibility',
                             title: 'Radical Flexibility', 
-                            text: 'Remote work models and results-focused schedules',
+                            text: 'Hybrid work models and results-focused schedules',
                             color: '#fd79a8'
                         },
                         { 
@@ -373,7 +347,7 @@ const Careers = () => {
                                 {benefit.icon === 'flexibility' && (
                                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                         <circle cx="12" cy="12" r="10"></circle>
-                                        <polyline points="12 6 12 12 15 15"></polyline>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
                                     </svg>
                                 )}
                                 {benefit.icon === 'impact' && (
