@@ -1,0 +1,810 @@
+/* Modern Color Palette */
+:root {
+  --primary: #6c5ce7;
+  --primary-dark: #5649c0;
+  --secondary: #00cec9;
+  --accent: #fd79a8;
+  --success: #00b894;
+  --warning: #fdcb6e;
+  --dark: #2d3436;
+  --light: #f5f6fa;
+  --text-dark: #2d3436;
+  --text-medium: #636e72;
+  --text-light: #b2bec3;
+  --white: #ffffff;
+  --black: #000000;
+}
+
+/* Base Styles */
+.careersContainer {
+  position: relative;
+  overflow: hidden;
+  color: var(--text-dark);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  background-color: var(--white);
+}
+
+/* Animated Background Elements */
+.backgroundElements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.circle1, .circle2, .circle3 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.15;
+}
+
+.circle1 {
+  width: 600px;
+  height: 600px;
+  background: var(--primary);
+  top: -300px;
+  right: -300px;
+  animation: float 20s ease-in-out infinite;
+}
+
+.circle2 {
+  width: 400px;
+  height: 400px;
+  background: var(--secondary);
+  bottom: -200px;
+  left: -200px;
+  animation: float 25s ease-in-out infinite reverse;
+}
+
+.circle3 {
+  width: 300px;
+  height: 300px;
+  background: var(--accent);
+  top: 50%;
+  left: 50%;
+  animation: float 30s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(50px, 50px);
+  }
+}
+
+/* Hero Section */
+.heroSection {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 90vh;
+  padding: 0 5%;
+  margin-bottom: 100px;
+  z-index: 1;
+}
+
+.heroContent {
+  flex: 1;
+  max-width: 600px;
+  z-index: 2;
+}
+
+.heroTitle {
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.heroTitle span {
+  display: block;
+  color: var(--dark);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.heroSubtitle {
+  font-size: 1.25rem;
+  color: var(--text-medium);
+  margin-bottom: 2.5rem;
+  max-width: 500px;
+}
+
+.heroCta {
+  display: inline-flex;
+  align-items: center;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(108, 92, 231, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.heroCta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(108, 92, 231, 0.4);
+}
+
+.heroCta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: all 0.5s ease;
+}
+
+.heroCta:hover::before {
+  left: 100%;
+}
+
+.ctaArrow {
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.heroCta:hover .ctaArrow {
+  transform: translateX(5px);
+}
+
+.heroImageContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+  transform-style: preserve-3d;
+}
+
+.heroImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.imageGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(108, 92, 231, 0.1) 0%, transparent 70%);
+  z-index: 1;
+}
+
+/* Floating Particles */
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  background: var(--primary);
+  border-radius: 50%;
+  opacity: 0.1;
+  animation: floatParticle 15s infinite linear;
+}
+
+.particle:nth-child(1) {
+  width: 10px;
+  height: 10px;
+  top: 10%;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+  width: 15px;
+  height: 15px;
+  top: 30%;
+  left: 80%;
+  animation-delay: 2s;
+}
+
+.particle:nth-child(3) {
+  width: 8px;
+  height: 8px;
+  top: 70%;
+  left: 10%;
+  animation-delay: 4s;
+}
+
+.particle:nth-child(4) {
+  width: 12px;
+  height: 12px;
+  top: 50%;
+  left: 50%;
+  animation-delay: 6s;
+}
+
+.particle:nth-child(5) {
+  width: 6px;
+  height: 6px;
+  top: 80%;
+  left: 70%;
+  animation-delay: 8s;
+}
+
+@keyframes floatParticle {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Job Listings Section */
+.jobListings {
+  position: relative;
+  padding: 100px 5%;
+  background-color: var(--white);
+  z-index: 2;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.sectionTitle {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+  position: relative;
+  display: inline-block;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.sectionSubtitle {
+  font-size: 1.25rem;
+  color: var(--text-medium);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Filters */
+.filtersContainer {
+  margin-bottom: 60px;
+}
+
+.searchContainer {
+  margin-bottom: 30px;
+}
+
+.searchWrapper {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 1rem 1.5rem 1rem 3.5rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  background: var(--light);
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.searchInput:focus {
+  outline: none;
+  box-shadow: 0 5px 20px rgba(108, 92, 231, 0.2);
+  background: var(--white);
+}
+
+.searchIcon {
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+}
+
+.categoryFilters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.categoryButton {
+  position: relative;
+  padding: 0.8rem 1.5rem;
+  background: var(--light);
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  color: var(--text-medium);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.categoryButton:hover {
+  color: var(--primary);
+}
+
+.activeCategory {
+  color: var(--white);
+  background: var(--primary);
+}
+
+.categoryHighlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--primary);
+  border-radius: 50px;
+  z-index: -1;
+}
+
+/* Job Cards Grid */
+.jobsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.jobCard {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+.jobCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.jobCard:hover::before {
+  width: 8px;
+}
+
+.jobBadge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--success);
+  color: var(--white);
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  box-shadow: 0 5px 15px rgba(0, 184, 148, 0.3);
+}
+
+.jobHeader {
+  margin-bottom: 20px;
+}
+
+.jobTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+}
+
+.jobMeta {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: var(--text-medium);
+}
+
+.jobLocation, .jobPosted, .jobSalary {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.jobSalary {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.jobDescription {
+  color: var(--text-medium);
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+.jobSkills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 25px;
+}
+
+.skillTag {
+  background: rgba(108, 92, 231, 0.1);
+  color: var(--primary);
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.jobActions {
+  display: flex;
+  gap: 15px;
+}
+
+.applyButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.applyButton:hover {
+  background: var(--primary-dark);
+}
+
+.detailsButton {
+  flex: 1;
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.detailsButton:hover {
+  background: rgba(108, 92, 231, 0.05);
+}
+
+/* No Jobs Found */
+.noJobsFound {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px;
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.noJobsIcon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  color: var(--text-light);
+}
+
+.noJobsTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+.noJobsText {
+  color: var(--text-medium);
+  margin-bottom: 2rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.noJobsCta {
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.noJobsCta:hover {
+  background: var(--primary-dark);
+}
+
+/* Benefits Section */
+.benefitsSection {
+  position: relative;
+  padding: 100px 5%;
+  background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+  z-index: 2;
+}
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.benefitCard {
+  background: var(--white);
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-top: 4px solid var(--card-accent);
+}
+
+.benefitCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.benefitIconWrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 30px;
+}
+
+.benefitIconBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--card-accent);
+  opacity: 0.1;
+  border-radius: 50%;
+}
+
+.benefitCard svg {
+  position: relative;
+  color: var(--card-accent);
+}
+
+.benefitTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.benefitText {
+  color: var(--text-medium);
+  text-align: center;
+  line-height: 1.7;
+}
+
+/* CTA Section */
+.ctaSection {
+  position: relative;
+  padding: 100px 5%;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: var(--white);
+  overflow: hidden;
+  z-index: 2;
+}
+
+.ctaContent {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 2;
+}
+
+.ctaTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+}
+
+.ctaText {
+  font-size: 1.25rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+}
+
+.ctaButtons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.primaryCta {
+  background: var(--white);
+  color: var(--primary);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.primaryCta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(255,255,255,0.2);
+}
+
+.secondaryCta {
+  background: transparent;
+  color: var(--white);
+  border: 2px solid var(--white);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.secondaryCta:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.ctaPattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/images/pattern.svg') repeat;
+  opacity: 0.1;
+  z-index: 1;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .heroSection {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 120px;
+    padding-bottom: 80px;
+  }
+
+  .heroContent {
+    max-width: 100%;
+    margin-bottom: 60px;
+  }
+
+  .heroTitle {
+    font-size: 3rem;
+  }
+
+  .sectionTitle {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1.1rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .sectionSubtitle {
+    font-size: 1.1rem;
+  }
+
+  .jobsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .benefitsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .ctaTitle {
+    font-size: 2rem;
+  }
+
+  .ctaText {
+    font-size: 1.1rem;
+  }
+
+  .ctaButtons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .primaryCta, .secondaryCta {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .categoryFilters {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .categoryButton {
+    flex-shrink: 0;
+  }
+}

@@ -14,40 +14,43 @@ export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
 
-useEffect(() => {
-  if (!pathname) return;
+  useEffect(() => {
+    if (!pathname) return;
 
-  if (pathname === '/') {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
-      for (const sectionId of sectionIds) {
-        const section = document.getElementById(sectionId);
-        if (!section) continue;
-        const { offsetTop, offsetHeight } = section;
-        if (
-          scrollPosition >= offsetTop &&
-          scrollPosition < offsetTop + offsetHeight
-        ) {
-          setActiveSection(sectionId);
-          break;
+    if (pathname === '/') {
+      const handleScroll = () => {
+        const scrollPosition = window.scrollY + window.innerHeight / 3;
+        for (const sectionId of sectionIds) {
+          const section = document.getElementById(sectionId);
+          if (!section) continue;
+          const { offsetTop, offsetHeight } = section;
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
+            setActiveSection(sectionId);
+            break;
+          }
         }
-      }
-    };
+      };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  } else {
-    if (pathname.startsWith('/projects')) {
-      setActiveSection('projects');
-    } else if (pathname.startsWith('/services')) {
-      setActiveSection('services');
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll();
+      return () => window.removeEventListener('scroll', handleScroll);
     } else {
-      setActiveSection('');
+      if (pathname.startsWith('/projects')) {
+        setActiveSection('projects');
+      }
+      else if (pathname.startsWith('/careers')) {
+        setActiveSection('careers');
+      }
+      else if (pathname.startsWith('/services')) {
+        setActiveSection('services');
+      } else {
+        setActiveSection('');
+      }
     }
-  }
-}, [pathname]);
-
+  }, [pathname]);
 
   const handleNavigation = (sectionId: string) => {
     if (pathname === '/') {
@@ -97,21 +100,37 @@ useEffect(() => {
               {section.charAt(0).toUpperCase() + section.slice(1)}
             </a>
           )).flatMap((link, index) => {
+            const links = [link];
+
+            // Add Projects link after Testimonials
             if (sectionIds[index] === 'testimonials') {
-              return [
-                link,
+              links.push(
                 <Link
                   key="projects"
                   href="/projects"
-                  className={`${styles.navLink} ${activeSection === 'projects' ? styles.active : ''
-                    }`}
+                  className={`${styles.navLink} ${activeSection === 'projects' ? styles.active : ''}`}
                   onClick={() => setIsOpen(false)}
                 >
                   Projects
-                </Link>,
-              ];
+                </Link>
+              );
             }
-            return link;
+
+            // Add Careers link after FAQ
+            if (sectionIds[index] === 'FAQ') {
+              links.push(
+                <Link
+                  key="careers"
+                  href="/careers"
+                  className={`${styles.navLink} ${activeSection === 'careers' ? styles.active : ''}`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  Careers
+                </Link>
+              );
+            }
+
+            return links;
           })}
         </div>
 
