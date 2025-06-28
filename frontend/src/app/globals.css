@@ -27,6 +27,7 @@
 /* SMOOTH SCROLL BEHAVIOR */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Default mobile navbar height */
 }
 body {
   font-family: 'Oswald', sans-serif !important;

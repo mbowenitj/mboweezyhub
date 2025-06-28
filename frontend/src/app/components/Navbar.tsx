@@ -14,6 +14,33 @@ export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
 
+    useEffect(() => {
+    // Store the scroll position when menu opens
+    let scrollPosition = 0;
+    
+    if (isOpen) {
+      scrollPosition = window.scrollY;
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.top = `-${scrollPosition}px`;
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
+      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
+    };
+  }, [isOpen]);
+
   useEffect(() => {
     if (!pathname) return;
 
@@ -48,25 +75,51 @@ export default function Navbar() {
     }
   }, [pathname]);
 
-  const handleNavigation = (sectionId: string) => {
-    if (pathname === '/') {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        const navbarHeight = 100;
-        const elementPosition =
-          element.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({
-          top: elementPosition - navbarHeight,
-          behavior: 'smooth',
-        });
-        setActiveSection(sectionId);
+  // New effect to handle scroll after navigation
+  useEffect(() => {
+    if (pathname === '/' && typeof window !== 'undefined') {
+      const hash = window.location.hash.substring(1);
+      if (hash && sectionIds.includes(hash)) {
+        const element = document.getElementById(hash);
+        if (element) {
+          const navbar = document.querySelector('.navbar');
+          const navbarHeight = navbar?.clientHeight || 80;
+          
+          // Small timeout to ensure DOM is ready
+          setTimeout(() => {
+            window.scrollTo({
+              top: element.offsetTop - navbarHeight,
+              behavior: 'auto' // Instant scroll after page load
+            });
+          }, 50);
+        }
       }
+    }
+  }, [pathname]);
+
+    const handleNavigation = (sectionId: string) => {
+    if (pathname === '/') {
+      setIsOpen(false); // Close menu first
+      
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const navbar = document.querySelector('.navbar');
+          const navbarHeight = navbar?.clientHeight || 80;
+          
+          window.scrollTo({
+            top: element.offsetTop - navbarHeight,
+            behavior: 'smooth'
+          });
+          setActiveSection(sectionId);
+        }
+      }, 300);
     } else {
+      setIsOpen(false);
       router.push(`/#${sectionId}`);
     }
-    setIsOpen(false);
   };
-
+  
   return (
     <nav className={styles.navbar}>
       <div className={`container ${styles.container}`}>
