@@ -66,11 +66,14 @@
 
 .disabledNote {
   margin-top: 0.5rem;
-  font-size: 0.85rem;
-  color: #888;
+  font-size: 12px;
   text-align: center;
+  background: linear-gradient(90deg, #3b82f6, #1e40af);
+  color: #ffffff;
+  font-weight: 600;
+  padding: 2px;
+  
 }
-
 /* Projects Grid */
 .projectsGrid {
   display: grid;
@@ -92,15 +95,15 @@
   background: var(--card-bg);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
-              0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .projectCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
-              0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
 }
 
 /* Media Container */
@@ -117,7 +120,7 @@
 
 .landscape {
   aspect-ratio: 16/9;
-   flex: 0 0 auto;
+  flex: 0 0 auto;
 }
 
 .square {
@@ -328,7 +331,7 @@
   .projectsGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  
+
   .title {
     font-size: 2.5rem;
   }
@@ -338,21 +341,21 @@
   .workSection {
     padding: 6rem 1.25rem;
   }
-  
+
   .title {
     font-size: 2rem;
   }
-  
+
   .subtitle {
     font-size: 1.1rem;
   }
-  
+
   .buttonGroup {
     flex-direction: column;
     width: 100%;
   }
-  
-  .ctaButton, 
+
+  .ctaButton,
   .secondaryButton {
     width: 100%;
     justify-content: center;
@@ -363,7 +366,7 @@
   .projectsGrid {
     grid-template-columns: 1fr;
   }
-  
+
   .title {
     font-size: 1.75rem;
   }

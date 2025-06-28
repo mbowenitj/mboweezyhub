@@ -139,13 +139,13 @@
 @media (max-width: 768px) {
   .links {
     position: fixed;
-    top: 80px;
+    top: 78px;
     left: 0;
     width: 100%;
     background: white;
     flex-direction: column;
     padding: 2rem;
-    gap: 1.5rem;
+    gap: 0.5rem;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     transform: translateY(-150%);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -185,10 +185,7 @@
   font-weight: 600;
 }
 
-/* SMOOTH SCROLL BEHAVIOR */
-html {
-  scroll-behavior: smooth;
-}
+
 
 /* ACCESSIBILITY FOCUS STATES */
 .toggle:focus-visible,

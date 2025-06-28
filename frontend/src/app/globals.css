@@ -24,7 +24,10 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+/* SMOOTH SCROLL BEHAVIOR */
+html {
+  scroll-behavior: smooth;
+}
 body {
   font-family: 'Oswald', sans-serif !important;
   margin: 0;
