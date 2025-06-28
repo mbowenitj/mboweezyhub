@@ -10,12 +10,16 @@
   width: 100%;
   top: 0;
   z-index: 1000;
+  padding: 0.5rem 0;
 }
 
 .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
 .logo {
@@ -23,13 +27,17 @@
   font-weight: 700;
   color: var(--primary);
   text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
 .navLink {
   color: var(--text);
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s;
+  transition: all 0.3s ease;
+  padding: 0.5rem 0;
+  position: relative;
 }
 
 .navLink:hover {
@@ -37,89 +45,154 @@
 }
 
 .active {
-  text-decoration: underline;
   color: var(--primary);
 }
 
 .links {
   display: flex;
   gap: 2rem;
+  align-items: center;
 }
 
 .links a {
   color: var(--text);
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s;
+  transition: all 0.3s ease;
 }
 
 .links a:hover {
   color: var(--primary);
 }
 
+.links a.active {
+  color: var(--primary);
+  position: relative;
+}
+
+.links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary);
+}
+
+/* HAMBURGER MENU STYLES */
 .toggle {
   display: none;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0.5rem;
+  position: relative;
+  width: 30px;
+  height: 24px;
+  z-index: 1001;
 }
 
 .toggle span {
   display: block;
-  width: 25px;
+  width: 100%;
   height: 2px;
   background: var(--dark);
-  margin: 5px 0;
-  transition: all 0.3s;
+  position: absolute;
+  left: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.links a.active {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
-  color: var(--primary);
+.toggle span:nth-child(1) {
+  top: 0;
+  transform-origin: left center;
 }
-/* @media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
-} */
+
+.toggle span:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+  transform-origin: left center;
+}
+
+.toggle span:nth-child(3) {
+  bottom: 0;
+  transform-origin: left center;
+}
+
+/* X ICON WHEN MENU IS OPEN */
+.toggle.open span:nth-child(1) {
+  transform: rotate(45deg) translate(1px, -1px);
+  width: 110%;
+}
+
+.toggle.open span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.toggle.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(1px, 1px);
+  width: 110%;
+}
+
+/* MOBILE MENU STYLES */
 @media (max-width: 768px) {
   .links {
     position: fixed;
-    top: 72px;
+    top: 80px;
     left: 0;
     width: 100%;
     background: white;
     flex-direction: column;
-    padding: 2rem 36px;  
+    padding: 2rem;
     gap: 1.5rem;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     transform: translateY(-150%);
-    transition: transform 0.3s;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
   }
 
   .links.open {
     transform: translateY(0);
   }
 
-  .floating {
-    width: 68px;
+  .links a {
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 0;
+    font-size: 15px;
   }
+
+  .links a.active::after {
+    width: 50%;
+    left: 25%;
+  }
+
   .toggle {
     display: block;
   }
 
-  .toggle.open span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+  .floating {
+    width: 60px;
+    height: auto;
   }
+}
 
-  .toggle.open span:nth-child(2) {
-    opacity: 0;
-  }
+/* ENHANCED ACTIVE STATE */
+.links a.active {
+  font-weight: 600;
+}
 
-  .toggle.open span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
-  }
+/* SMOOTH SCROLL BEHAVIOR */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ACCESSIBILITY FOCUS STATES */
+.toggle:focus-visible,
+.navLink:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
 }

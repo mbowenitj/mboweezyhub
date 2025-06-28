@@ -14,40 +14,39 @@ export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
 
-useEffect(() => {
-  if (!pathname) return;
+  useEffect(() => {
+    if (!pathname) return;
 
-  if (pathname === '/') {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
-      for (const sectionId of sectionIds) {
-        const section = document.getElementById(sectionId);
-        if (!section) continue;
-        const { offsetTop, offsetHeight } = section;
-        if (
-          scrollPosition >= offsetTop &&
-          scrollPosition < offsetTop + offsetHeight
-        ) {
-          setActiveSection(sectionId);
-          break;
+    if (pathname === '/') {
+      const handleScroll = () => {
+        const scrollPosition = window.scrollY + window.innerHeight / 3;
+        for (const sectionId of sectionIds) {
+          const section = document.getElementById(sectionId);
+          if (!section) continue;
+          const { offsetTop, offsetHeight } = section;
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
+            setActiveSection(sectionId);
+            break;
+          }
         }
-      }
-    };
+      };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  } else {
-    if (pathname.startsWith('/projects')) {
-      setActiveSection('projects');
-    } else if (pathname.startsWith('/services')) {
-      setActiveSection('services');
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll();
+      return () => window.removeEventListener('scroll', handleScroll);
     } else {
-      setActiveSection('');
+      if (pathname.startsWith('/projects')) {
+        setActiveSection('projects');
+      } else if (pathname.startsWith('/services')) {
+        setActiveSection('services');
+      } else {
+        setActiveSection('');
+      }
     }
-  }
-}, [pathname]);
-
+  }, [pathname]);
 
   const handleNavigation = (sectionId: string) => {
     if (pathname === '/') {
@@ -116,7 +115,7 @@ useEffect(() => {
         </div>
 
         <button
-          className={styles.toggle}
+          className={`${styles.toggle} ${isOpen ? styles.open : ''}`}
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >

@@ -14,7 +14,7 @@ const cardAnimation: Variants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeInOut" // replace array with a predefined string
+      ease: "easeInOut"
     }
   },
   hidden: {
@@ -28,6 +28,7 @@ const hoverEffect: TargetAndTransition = {
   y: -10,
   transition: { type: "spring", stiffness: 400, damping: 10 }
 }
+
 export default function ProjectCard() {
   const [visibleProjects, setVisibleProjects] = useState(4);
   const sectionRef = useRef<HTMLElement>(null);
@@ -97,47 +98,73 @@ export default function ProjectCard() {
 
 function ProjectCardItem({ project, index, isNew }: { project: Project; index: number; isNew?: boolean }) {
   const isExternal = !!project.externalUrl;
-  const isCurrentSite = typeof window !== 'undefined' &&
-    project.externalUrl &&
-    new URL(project.externalUrl).hostname === window.location.hostname;
+  
+  const isCurrentSite = () => {
+    if (typeof window === 'undefined' || !project.externalUrl) return false;
+    
+    try {
+      const externalUrl = new URL(project.externalUrl);
+      const currentUrl = new URL(window.location.href);
+      
+      return (externalUrl.hostname === 'localhost' && externalUrl.port === '3000' && 
+              currentUrl.hostname === 'localhost' && currentUrl.port === '3000') ||
+             externalUrl.hostname === currentUrl.hostname;
+    } catch {
+      return false;
+    }
+  };
 
   const href = isExternal ? project.externalUrl! : `/projects/${project.slug}`;
 
-  const card = (
+  const cardContent = (
     <motion.div
       initial={isNew ? "hidden" : "visible"}
       animate="visible"
       variants={cardAnimation}
-      whileHover={hoverEffect}
+      whileHover={isCurrentSite() ? undefined : hoverEffect}
       className={styles.cardWrapper}
     >
-      <CardContent project={project} index={index} />
+      <CardContent 
+        project={project} 
+        index={index} 
+        showActionText={!isCurrentSite()}
+      />
     </motion.div>
   );
 
   if (isExternal) {
-    return isCurrentSite ? (
+    return isCurrentSite() ? (
       <div className={`${styles.projectCard} ${styles.disabledCard}`}>
-        {card}
+        {cardContent}
         <div className={styles.disabledNote}>
           You&apos;re already here - no need to click 😄
         </div>
       </div>
     ) : (
-      <a href={href} target={project.linkTarget || '_blank'} rel="noopener noreferrer" className={styles.projectCard} aria-label={`View ${project.title} project`}>
-        {card}
+      <a 
+        href={href} 
+        target={project.linkTarget || '_blank'} 
+        rel="noopener noreferrer" 
+        className={styles.projectCard} 
+        aria-label={`View ${project.title} project`}
+      >
+        {cardContent}
       </a>
     );
   }
 
   return (
     <Link href={href} className={styles.projectCard} aria-label={`View ${project.title} project`}>
-      {card}
+      {cardContent}
     </Link>
   );
 }
 
-function CardContent({ project, index }: { project: Project; index?: number }) {
+function CardContent({ project, index, showActionText = true }: { 
+  project: Project; 
+  index?: number;
+  showActionText?: boolean;
+}) {
   const aspectClass = project.aspectRatio ? styles[project.aspectRatio] : styles.landscape;
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -153,7 +180,6 @@ function CardContent({ project, index }: { project: Project; index?: number }) {
     loop: true,
   });
 
-  // Auto-rotate slides every 5 seconds
   useEffect(() => {
     if (!loaded || !instanceRef.current) return;
 
@@ -168,14 +194,13 @@ function CardContent({ project, index }: { project: Project; index?: number }) {
 
   const handleDotClick = (idx: number) => {
     if (!instanceRef.current) return;
-    
     instanceRef.current.moveToIdx(idx);
   };
 
   const hasSlides = project.slideImages && project.slideImages.length > 0;
 
   return (
-    <>
+    <div className={styles.cardContentWrapper}>
       <div className={`${styles.imageContainer} ${aspectClass}`}>
         {project.isVideo ? (
           project.youtubeId ? (
@@ -246,13 +271,17 @@ function CardContent({ project, index }: { project: Project; index?: number }) {
 
       <div className={styles.content}>
         <div className={styles.contentInner}>
-          <h3>{project.title}</h3>
-          <p>{project.description}</p>
+          <h3 className={styles.projectTitle}>{project.title}</h3>
+          <p className={styles.projectDescription}>{project.description}</p>
         </div>
-        {project.externalUrl && (
-          <span className={styles.cardAction}>Visit Live ↗</span>
+        {project.externalUrl && showActionText && (
+          <div className={styles.actionContainer}>
+            <span className={styles.cardAction}>
+              Visit Live <span aria-hidden="true">↗</span>
+            </span>
+          </div>
         )}
       </div>
-    </>
+    </div>
   );
 }
