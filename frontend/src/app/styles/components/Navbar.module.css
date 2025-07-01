@@ -1,16 +1,109 @@
 /*////////////////////////////////////////////////////
 //////////////// NAVBAR STYLING //////////////////////
-/////////////////////////////////////////////////////
-*/
+////////////////////////////////////////////////////*/
+
+:root {
+  --primary: #2563eb; /* Blue color - change as needed */
+  --text: #1a1a1a;
+  --white: #ffffff;
+  --dark: #333333;
+}
 
 .navbar {
-  background: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 1000;
   padding: 9px;
+  transition: all 0.3s ease;
+}
+
+/* Transparent state (initial) */
+.navbar.transparent {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Scrolled state */
+.navbar.scrolled {
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Projects page specific styles */
+.navbar.projectsPage .navLink,
+.navbar.projectsPage .logo {
+  color: var(--text);
+}
+
+.navbar.projectsPage .toggle span {
+  background: var(--text);
+}
+
+.navbar.projectsPage .navLink:hover {
+  color: var(--primary);
+}
+
+.navbar.projectsPage .navLink.active {
+  color: var(--primary);
+}
+
+.navbar.projectsPage .navLink.active::after {
+  background-color: var(--primary);
+}
+
+/* SPECIFIC TARGETING FOR PROJECTS LINK ON /PROJECTS PAGE WHEN NOT SCROLLED */
+.navbar.projectsPage.transparent .navLink[href="/projects"] {
+  color: var(--primary);
+}
+
+.navbar.projectsPage.transparent .navLink[href="/projects"]:hover {
+  color: var(--primary);
+  opacity: 0.9;
+}
+
+.navbar.projectsPage.transparent .navLink[href="/projects"].active {
+  color: var(--primary);
+}
+
+.navbar.projectsPage.transparent .navLink[href="/projects"].active::after {
+  background-color: var(--primary);
+}
+
+/* Scrolled state on projects page */
+.navbar.projectsPage.scrolled {
+  background: white;
+}
+
+.navbar.projectsPage.scrolled .navLink,
+.navbar.projectsPage.scrolled .logo {
+  color: var(--text);
+}
+
+.navbar.projectsPage.scrolled .toggle span {
+  background: var(--text);
+}
+
+/* Text colors for transparent state (other pages) */
+.navbar.transparent .navLink,
+.navbar.transparent .logo {
+  color: var(--white);
+}
+
+.navbar.transparent .toggle span {
+  /* background: white; */
+  background: var(--bg-dark);
+}
+
+/* Specific elements that should use #2563eb */
+.navbar .navLink.special-blue,
+.navbar.projectsPage .navLink.special-blue {
+  color: #2563eb;
+}
+
+.navbar.scrolled .navLink.special-blue,
+.navbar.projectsPage.scrolled .navLink.special-blue {
+  color: #2563eb;
 }
 
 .container {
@@ -71,7 +164,7 @@
 }
 
 .links a.active::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -134,14 +227,21 @@
   transform: rotate(-45deg) translate(1px, 1px);
   width: 110%;
 }
+
 .sectionTarget {
-  scroll-margin-top: 100px; /* Desktop navbar height */
+  scroll-margin-top: 100px;
 }
-.sectionTarget-FAQ {
-  scroll-margin-top: 120px;
+
+.floating {
+  border-radius: 50%;
+  padding: 10px;
 }
+
 /* MOBILE MENU STYLES */
 @media (max-width: 768px) {
+  .navbar.transparent {
+    background: white;
+  }
   .links {
     position: fixed;
     top: 80px;
@@ -157,11 +257,13 @@
     z-index: 1000;
     height: calc(100vh - 80px);
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
   }
+
   .sectionTarget {
-    scroll-margin-top: 80px; /* Mobile navbar height */
+    scroll-margin-top: 80px;
   }
+
   .links.open {
     transform: translateY(0);
   }
@@ -186,14 +288,50 @@
     width: 60px;
     height: auto;
   }
+
+  /* Projects link specific styles for mobile */
+  .navbar.projectsPage.transparent .links a[href="/projects"],
+  .navbar.projectsPage.transparent .links a[href="/projects"]:hover,
+  .navbar.projectsPage.transparent .links a[href="/projects"].active {
+    color: var(--primary);
+  }
+
+  .navbar.transparent .links {
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  .navbar.transparent .links a {
+    color: white;
+  }
+
+  .navbar.transparent .links a.active {
+    color: var(--primary);
+  }
+
+  /* Mobile styles for projects page */
+  .navbar.projectsPage.transparent .links {
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  .navbar.projectsPage.transparent .links a {
+    color: var(--text);
+  }
+
+  .navbar.projectsPage.transparent .links a.active {
+    color: var(--primary);
+  }
+
+  /* Special blue items in mobile */
+  .navbar .links a.special-blue,
+  .navbar.projectsPage .links a.special-blue {
+    color: #2563eb;
+  }
 }
 
 /* ENHANCED ACTIVE STATE */
 .links a.active {
   font-weight: 600;
 }
-
-
 
 /* ACCESSIBILITY FOCUS STATES */
 .toggle:focus-visible,

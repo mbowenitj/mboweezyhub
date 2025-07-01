@@ -13,8 +13,12 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState('');
   const pathname = usePathname();
   const router = useRouter();
+  const [isScrolled, setIsScrolled] = useState(false);
 
-    useEffect(() => {
+  // Check if current path is /projects (with null check)
+  const isProjectsPage = pathname?.startsWith('/projects') ?? false;
+
+  useEffect(() => {
     // Store the scroll position when menu opens
     let scrollPosition = 0;
     
@@ -40,6 +44,16 @@ export default function Navbar() {
       document.body.style.top = '';
     };
   }, [isOpen]);
+
+  // Add scroll listener for navbar background change
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     if (!pathname) return;
@@ -75,7 +89,6 @@ export default function Navbar() {
     }
   }, [pathname]);
 
-  // New effect to handle scroll after navigation
   useEffect(() => {
     if (pathname === '/' && typeof window !== 'undefined') {
       const hash = window.location.hash.substring(1);
@@ -85,11 +98,10 @@ export default function Navbar() {
           const navbar = document.querySelector('.navbar');
           const navbarHeight = navbar?.clientHeight || 80;
           
-          // Small timeout to ensure DOM is ready
           setTimeout(() => {
             window.scrollTo({
               top: element.offsetTop - navbarHeight,
-              behavior: 'auto' // Instant scroll after page load
+              behavior: 'auto'
             });
           }, 50);
         }
@@ -97,9 +109,9 @@ export default function Navbar() {
     }
   }, [pathname]);
 
-    const handleNavigation = (sectionId: string) => {
+  const handleNavigation = (sectionId: string) => {
     if (pathname === '/') {
-      setIsOpen(false); // Close menu first
+      setIsOpen(false);
       
       setTimeout(() => {
         const element = document.getElementById(sectionId);
@@ -119,13 +131,13 @@ export default function Navbar() {
       router.push(`/#${sectionId}`);
     }
   };
-  
+
   return (
-    <nav className={styles.navbar}>
+    <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : styles.transparent} ${isProjectsPage ? styles.projectsPage : ''}`}>
       <div className={`container ${styles.container}`}>
         <Link href="/" className={styles.logo}>
           <Image
-            src="/images/logo-white.svg"
+            src={isScrolled ? "/images/logo-white.svg" : "/images/logo.svg"}
             alt="Mboweezy Hub logo"
             width={100}
             height={100}
@@ -143,8 +155,7 @@ export default function Navbar() {
                 e.preventDefault();
                 handleNavigation(section);
               }}
-              className={`${styles.navLink} ${activeSection === section ? styles.active : ''
-                }`}
+              className={`${styles.navLink} ${activeSection === section ? styles.active : ''}`}
             >
               {section.charAt(0).toUpperCase() + section.slice(1)}
             </a>
@@ -155,8 +166,7 @@ export default function Navbar() {
                 <Link
                   key="projects"
                   href="/projects"
-                  className={`${styles.navLink} ${activeSection === 'projects' ? styles.active : ''
-                    }`}
+                  className={`${styles.navLink} ${activeSection === 'projects' ? styles.active : ''}`}
                   onClick={() => setIsOpen(false)}
                 >
                   Projects
