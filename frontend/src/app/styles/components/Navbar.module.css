@@ -2,12 +2,6 @@
 //////////////// NAVBAR STYLING //////////////////////
 ////////////////////////////////////////////////////*/
 
-:root {
-  --primary: #2563eb; /* Blue color - change as needed */
-  --text: #1a1a1a;
-  --white: #ffffff;
-  --dark: #333333;
-}
 
 .navbar {
   position: fixed;

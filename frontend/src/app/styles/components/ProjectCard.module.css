@@ -2,18 +2,6 @@
 //////////////// PROJECT CARD STYLING ////////////////
 ////////////////////////////////////////////////////*/
 
-:root {
-  --primary: #6366f1;
-  --primary-dark: #4f46e5;
-  --primary-rgb: 99, 102, 241;
-  --text: #1a1a1a;
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --white: #ffffff;
-  --dark: #333333;
-  --card-bg: rgba(15, 23, 42, 0.7);
-}
-
 .workSection {
   padding: 8rem 1.5rem;
   position: relative;
