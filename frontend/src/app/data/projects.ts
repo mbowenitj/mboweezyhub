@@ -391,4 +391,48 @@ We don’t escape the problem — we step into it, together. This is emotional r
       "/images/projects/koena-profile-slide3.jpg",
     ],
   },
+  {
+    id: 14,
+    title: "Phulumutsa ARC Presentation",
+    description:
+      "Transformative media and communications for reshaping workplace culture through embodied theatre methods.",
+    tags: [
+      "Media Production",
+      "Communications",
+      "Corporate Culture",
+      "Team Building",
+      "Storytelling",
+      "Theatre-Based Training",
+    ],
+    image: "/images/projects/phulumutsa-thumb.jpg",
+    imagePath: "/images/projects/phulumutsa-thumb.jpg",
+    externalUrl: "",
+    linkTarget: "_blank",
+    slug: "phulumutsa-arc-transformation",
+    aspectRatio: "landscape",
+    isVideo: false,
+    youtubeId: "",
+    slideImages: [
+      "/images/projects/phulumutsa-arc/1.jpg",
+      "/images/projects/phulumutsa-arc/2.jpg",
+      "/images/projects/phulumutsa-arc/3.jpg",
+      "/images/projects/phulumutsa-arc/4.jpg",
+      "/images/projects/phulumutsa-arc/5.jpg",
+      "/images/projects/phulumutsa-arc/6.jpg",
+      "/images/projects/phulumutsa-arc/7.jpg",
+    ],
+    content: `
+Phulumutsa isn't just another team-building service — it's a cultural transformation experience rooted in truth, theatre, and storytelling.
+
+Unlike traditional team-building that hides dysfunction under adrenaline and fun, Phulumutsa confronts workplace challenges head-on. Through embodied performance, participants explore real issues and rehearse real-world solutions.
+
+Key Elements:
+- Theatre-based facilitation using roleplay, storytelling, and improvisation
+- Cultural recalibration workshops for businesses and schools
+- Empathy-driven media campaigns and communications strategies
+- Team alignment through creative, embodied interaction
+
+We don’t escape the problem — we step into it, together. This is emotional rehearsal for lasting change — building workplaces that breathe, heal, and grow.
+  `,
+  },
 ]

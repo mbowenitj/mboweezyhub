@@ -183,7 +183,7 @@
   vertical-align: middle;
   border-radius: 50px;
 }
-.footerLogo{
+.footerLogo {
   border-radius: 50px;
 }
 .logoHighlight {
@@ -601,60 +601,71 @@
 }
 
 /* Responsive adjustments */
+/* Mobile styles (add to your existing media query) */
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2rem;
+    place-items: center; /* Centers all child elements */
+    text-align: center; /* Centers text content */
   }
 
-  .waveContainer {
-    height: 100px;
+  /* Center-align specific child containers */
+  .brandColumn,
+  .linksColumn,
+  .contactColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%; /* Prevents overflow */
   }
 
+  /* Center-align the contact chips */
   .contactChips {
-    flex-direction: column;
+    justify-content: center;
   }
 
+  /* Center-align the social icons */
+  .socialIcons {
+    justify-content: center;
+  }
+
+  /* Center-align list items */
+  .linksColumn ul {
+    padding-left: 0;
+    list-style-position: inside; /* Ensures bullets stay centered */
+  }
+
+  /* Adjust the hours card */
   .hoursCard {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .legalLinks {
-    gap: 1rem;
-  }
-
-  .backToTop {
-    width: 45px;
-    height: 45px;
-    bottom: 1.5rem;
-    right: 1.5rem;
-  }
-
-  .cookieBar {
-    padding: 0.8rem 1rem;
-  }
-
-  .cookieContent {
-    flex-direction: column;
-    gap: 0.8rem;
+    align-items: center !important;
     text-align: center;
   }
+  /* Centers all contact items as a group */
+.contactItemContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Horizontal centering */
+  gap: 1rem; /* Spacing between items */
+}
+/* Centers icon + text pairs */
+.contactItem {
+  display: flex;
+  align-items: center; /* Vertically centers icon with text */
+  gap: 0.5rem; /* Space between icon and text */
+  justify-content: center; /* Horizontally centers the pair */
+  text-align: center; /* Ensures text wraps neatly */
+}
 
-  .cookieButtons {
-    width: 100%;
-  }
-
-  .cookieButtonPrimary,
-  .cookieButtonSecondary {
-    flex: 1;
-    padding: 0.7rem;
-  }
 }
 
 @media (max-width: 480px) {
   .container {
-    padding: 0 1.5rem;
+    padding: 0;
+  }
+
+  .hoursCard {
+    padding: 30px 50px;
   }
 
   .logo {
